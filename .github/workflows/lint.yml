@@ -1,0 +1,20 @@
+name: ea-lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run the architecture consistency linter on the examples
+        run: python scripts/ea_lint.py docs/examples
+      - name: Smoke-test the linter against a single file
+        run: python scripts/ea_lint.py docs/examples/03-review.with-skill.md
