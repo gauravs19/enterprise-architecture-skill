@@ -13,3 +13,6 @@ Thumbs.db
 # Local scratch
 *.log
 tmp/
+
+# stray
+*.stackdump
