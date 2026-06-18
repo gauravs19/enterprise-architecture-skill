@@ -2,21 +2,17 @@
 name: enterprise-architecture
 description: >-
   Unified enterprise & software architecture skill grounded in four open-source standards —
-  the C4 model + Structurizr DSL, ArchiMate 3.x, TOGAF ADM, and arc42 + ADRs (MADR). Use it
-  whenever the user wants to: produce software or enterprise architecture diagrams as code
-  (C4 context/container/component, Structurizr, PlantUML, or Mermaid); write architecture
-  documentation or decision records (arc42 sections, ADRs/MADRs, design docs); review or
-  assess an existing architecture or design against quality attributes and EA principles;
-  or model an enterprise (business capabilities → applications → technology, application
-  landscapes, portfolio rationalization, TOGAF engagements). Trigger it even when no
-  framework is named — e.g. "draw the architecture of this service", "give me a container
-  diagram", "document how this system is built", "write an ADR for choosing Kafka", "is this
-  design sound?", "map our capabilities to our apps", "create a Structurizr workspace". This
-  is about system- and enterprise-level structure and decisions — do NOT trigger it for
-  writing application code or REST endpoints, infrastructure provisioning / IaC / cloud
-  deployment (Terraform, Kubernetes manifests), database or ER schema design, code-level
-  UML or sequence diagrams of functions/classes, reviewing a pull request for code bugs, or
-  API reference docs and project-management/Gantt charts.
+  C4 + Structurizr DSL, ArchiMate 3.x, TOGAF ADM, and arc42 + ADRs (MADR). Use it whenever the
+  user wants to: produce architecture diagrams as code (C4 context/container/component,
+  Structurizr, PlantUML, Mermaid); write architecture docs or decision records (arc42,
+  ADRs/MADRs, design docs); review or assess a design against quality attributes and EA
+  principles; or model an enterprise (capabilities → applications → technology, app landscapes,
+  portfolio rationalization). Trigger it even when no framework is named — e.g. "draw the
+  architecture of this service", "give me a container diagram", "write an ADR for choosing
+  Kafka", "is this design sound?", "map our capabilities to apps". Do NOT trigger it for writing
+  application code or REST endpoints, IaC / cloud deployment (Terraform, Kubernetes), database
+  or ER schema design, code-level UML or sequence diagrams, reviewing a pull request, or API
+  reference docs.
 ---
 
 # Enterprise Architecture
