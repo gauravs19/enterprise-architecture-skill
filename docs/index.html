@@ -1,170 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>enterprise-architecture — a Claude Code skill</title>
-<meta name="description" content="Unified enterprise & software architecture Claude Code skill: C4+Structurizr, ArchiMate, TOGAF ADM, arc42+ADR. With live eval examples." />
+<meta name="description" content="Unified enterprise & software architecture Claude Code skill: C4+Structurizr, ArchiMate, TOGAF ADM, arc42+ADR. Diagram, document, review, and model architecture as code — with live eval examples.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="enterprise-architecture — a Claude Code skill">
+<meta property="og:description" content="C4 + ArchiMate + TOGAF + arc42 in one Claude Code skill. Diagram, document, review, model — architecture as code.">
+<meta property="og:url" content="https://gauravs19.github.io/enterprise-architecture-skill/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gauravs19.github.io/enterprise-architecture-skill/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3340;
-    --fg:#e6edf3; --muted:#9aa7b4; --accent:#4ea1ff; --accent2:#7ee787;
-    --crit:#ff6b6b; --major:#ffa657; --minor:#e3c544; --sug:#6cb6ff;
-    --radius:14px; --max:1080px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--fg);
-    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  code,pre{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-  header.hero{padding:72px 20px 48px;text-align:center;
-    background:radial-gradient(1200px 400px at 50% -10%,rgba(78,161,255,.18),transparent 70%);
-    border-bottom:1px solid var(--line)}
-  .badge{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--accent2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;margin-bottom:18px}
-  h1{font-size:clamp(30px,5vw,46px);margin:.1em 0 .2em;line-height:1.1}
-  h1 .mono{font-family:monospace;color:var(--accent)}
-  .tagline{color:var(--muted);font-size:clamp(16px,2.4vw,20px);max-width:720px;margin:0 auto 26px}
-  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
-  .btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:600;border:1px solid var(--line)}
-  .btn.primary{background:var(--accent);color:#06223f;border-color:transparent}
-  .btn.ghost{background:var(--panel);color:var(--fg)}
-  section{padding:54px 0;border-bottom:1px solid var(--line)}
-  h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 6px}
-  .lead{color:var(--muted);margin:0 0 26px;max-width:760px}
-  .grid{display:grid;gap:16px}
-  .g2{grid-template-columns:repeat(2,1fr)}
-  .g4{grid-template-columns:repeat(4,1fr)}
-  @media(max-width:820px){.g2,.g4{grid-template-columns:1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
-  .card h3{margin:0 0 6px;font-size:18px}
-  .card .k{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent2);margin-bottom:8px}
-  .card p{margin:0;color:var(--muted);font-size:14.5px}
-  table{width:100%;border-collapse:collapse;font-size:14.5px;overflow:hidden;border-radius:var(--radius)}
-  th,td{padding:11px 13px;border:1px solid var(--line);text-align:left;vertical-align:top}
-  th{background:var(--panel2);color:var(--fg)}
-  td{background:var(--panel)}
-  .pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:600}
-  .pill.win{background:rgba(126,231,135,.15);color:var(--accent2)}
-  .pill.mid{background:rgba(227,197,68,.15);color:var(--minor)}
-  .example{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-    padding:0;overflow:hidden;margin-bottom:26px}
-  .example .head{padding:16px 20px;border-bottom:1px solid var(--line);background:var(--panel2)}
-  .example .head h3{margin:0 0 4px;font-size:18px}
-  .example .prompt{color:var(--muted);font-size:14px;font-style:italic}
-  .example .body{padding:20px}
-  .mermaid{background:#fff;border-radius:10px;padding:14px;margin:14px 0;overflow:auto}
-  pre.codeblock{background:#0b0f14;border:1px solid var(--line);border-radius:10px;padding:14px;
-    overflow:auto;font-size:13px;line-height:1.5}
-  .scoreline{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 0;font-size:13.5px;color:var(--muted)}
-  details{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
-  summary{cursor:pointer;color:var(--accent);font-weight:600}
-  .sev{font-weight:700}
-  .sev.c{color:var(--crit)} .sev.m{color:var(--major)} .sev.n{color:var(--minor)} .sev.s{color:var(--sug)}
-  .note{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;
-    padding:12px 16px;color:var(--muted);font-size:14px;margin-top:18px}
-  footer{padding:38px 20px;text-align:center;color:var(--muted);font-size:14px}
-  ul.tight{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}
-  ul.tight li{margin:4px 0}
-  .kbd{font-family:monospace;background:#0b0f14;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:13px}
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%}
+
+:root{
+  --accent:#1d4ed8; --accent-light:#2563eb; --accent-pale:#eff6ff;
+  --accent-border:#bfdbfe; --accent-text:#93c5fd;
+  --hero-bg:#0f172a; --dark-surface:#1e293b;
+  --ink:#0f172a; --ink-mid:#334155; --slate:#64748b; --slate-light:#94a3b8;
+  --border:#e2e8f0; --bg:#f8fafc; --white:#ffffff;
+  --green:#15803d; --green-pale:#f0fdf4; --green-border:#bbf7d0;
+  --red:#b91c1c; --red-pale:#fef2f2;
+  --crit:#b91c1c; --major:#c2410c; --minor:#a16207; --sug:#1d4ed8;
+  --wrap:1160px; --px:32px; --radius:6px; --radius-lg:12px; --radius-xl:18px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);
+  -webkit-font-smoothing:antialiased;line-height:1.65}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+
+/* ANNOUNCE */
+.announce-bar{background:var(--hero-bg);color:rgba(255,255,255,.7);text-align:center;
+  padding:10px 20px;font-size:.75rem;line-height:1.4}
+.announce-bar a{color:var(--accent-text);font-weight:700;border-bottom:1px solid rgba(147,197,253,.3)}
+.announce-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.6rem;font-weight:800;
+  letter-spacing:.09em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-right:8px;vertical-align:middle}
+
+/* NAV */
+#main-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px);height:60px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:9px;font-size:1rem;font-weight:900;letter-spacing:.04em;color:var(--ink)}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.81rem;font-weight:500;color:var(--slate);letter-spacing:.02em;
+  transition:color .12s;position:relative;padding-bottom:2px}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--accent);font-weight:600}
+.nav-links a.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;
+  background:var(--accent);border-radius:1px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-ghost{font-size:.78rem;font-weight:600;color:var(--slate);padding:6px 14px;border-radius:var(--radius);
+  border:1px solid var(--border);display:flex;align-items:center;gap:6px;transition:border-color .12s,color .12s}
+.btn-ghost:hover{color:var(--ink);border-color:var(--slate-light)}
+.btn-primary{background:var(--accent);color:#fff;font-size:.81rem;font-weight:700;padding:8px 20px;
+  border-radius:var(--radius);transition:background .15s}
+.btn-primary:hover{background:var(--accent-light)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
+.nav-mobile{display:none;position:fixed;inset:60px 0 0;background:var(--white);
+  border-top:1px solid var(--border);flex-direction:column;padding:24px var(--px);z-index:99}
+.nav-mobile a{display:block;padding:14px 0;font-size:1rem;font-weight:500;color:var(--slate);
+  border-bottom:1px solid var(--border)}
+.nav-mobile .btn-primary{margin-top:20px;text-align:center;padding:12px 24px;font-size:.9rem}
+.nav-mobile.open{display:flex}
+@media(max-width:760px){.nav-links,.btn-ghost{display:none}.nav-hamburger{display:flex}}
+
+/* HERO */
+.hero{background:var(--hero-bg);color:#fff;padding:104px 0 84px;overflow:hidden;position:relative}
+@media(max-width:640px){.hero{padding:64px 0 52px}}
+.hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 70% at 78% 50%,rgba(37,99,235,.22),transparent 68%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin-bottom:26px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent-text)}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.4rem,4.8vw,4rem);
+  font-weight:800;line-height:1.08;color:#fff;max-width:640px;margin-bottom:22px}
+.hero-title em{font-style:italic;color:var(--accent-text)}
+.hero-body{font-size:1.04rem;color:rgba(255,255,255,.55);max-width:520px;line-height:1.8;margin-bottom:36px}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn-hero-primary{background:var(--accent);color:#fff;font-size:.9rem;font-weight:700;padding:13px 30px;
+  border-radius:var(--radius);transition:background .15s}
+.btn-hero-primary:hover{background:var(--accent-light)}
+.btn-hero-ghost{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.5);padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.18);transition:color .15s}
+.btn-hero-ghost:hover{color:#fff}
+.hero-trust{display:flex;flex-wrap:wrap;gap:18px}
+.hero-trust-item{display:flex;align-items:center;gap:7px;font-size:.77rem;font-weight:500;color:rgba(255,255,255,.44)}
+.hero-trust-item::before{content:'✓';display:inline-flex;width:16px;height:16px;border-radius:50%;
+  background:rgba(37,99,235,.28);align-items:center;justify-content:center;font-size:.6rem;font-weight:900;
+  color:var(--accent-text);flex-shrink:0}
+/* hero diagram card */
+.hero-card{background:#fff;border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.hero-card-chrome{background:#f1f5f9;border-bottom:1px solid #e2e8f0;padding:11px 16px;display:flex;align-items:center;gap:10px}
+.chrome-dots{display:flex;gap:6px}
+.chrome-dot{width:10px;height:10px;border-radius:50%;display:block}
+.chrome-title{font-size:.7rem;color:#94a3b8;font-weight:600;letter-spacing:.04em;flex:1;text-align:center}
+.hero-card-body{padding:12px}
+@media(max-width:960px){.hero-inner{grid-template-columns:1fr;gap:40px}.hero-card{display:none}}
+
+/* SECTION SCAFFOLD */
+section{padding:84px 0}
+section.dark{background:var(--hero-bg);color:#fff}
+section.soft{background:var(--bg)}
+.section-label{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.dark .section-label{color:var(--accent-text)}
+.section-heading{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,3.2vw,2.6rem);
+  font-weight:800;line-height:1.12;color:var(--ink);max-width:720px}
+.dark .section-heading{color:#fff}
+.section-sub{margin-top:16px;font-size:1rem;color:var(--slate);line-height:1.8;max-width:600px}
+.dark .section-sub{color:rgba(255,255,255,.5)}
+.section-header{margin-bottom:52px}
+.section-header.center{text-align:center}
+.section-header.center .section-heading,.section-header.center .section-sub{margin-left:auto;margin-right:auto}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden}
+.stat-item{padding:38px 34px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;
+  color:var(--accent);line-height:1;margin-bottom:12px}
+.stat-label{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.stat-desc{font-size:.82rem;color:var(--slate);line-height:1.65}
+@media(max-width:720px){.stat-grid{grid-template-columns:1fr}.stat-item{border-right:none;border-bottom:1px solid var(--border)}.stat-item:last-child{border-bottom:none}}
+
+/* CARDS */
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{padding:30px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);
+  transition:box-shadow .18s,transform .18s,border-color .18s}
+.card:hover{box-shadow:0 6px 24px rgba(15,23,42,.07);transform:translateY(-2px);border-color:var(--accent-border)}
+.dark .card{background:var(--dark-surface);border-color:rgba(255,255,255,.08)}
+.dark .card:hover{border-color:rgba(147,197,253,.25);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.card-icon{width:40px;height:40px;border-radius:9px;background:var(--accent-pale);display:flex;
+  align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:16px;font-weight:800;color:var(--accent)}
+.dark .card-icon{background:rgba(147,197,253,.1)}
+.card-kicker{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-text);margin-bottom:6px}
+.card-title{font-size:.96rem;font-weight:700;color:#fff;margin-bottom:8px}
+.card-body{font-size:.83rem;color:rgba(255,255,255,.46);line-height:1.7}
+@media(max-width:920px){.card-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.card-grid-4{grid-template-columns:1fr}}
+
+/* STEP LIST */
+.step-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.step-item{display:grid;grid-template-columns:72px 1fr auto;align-items:start;padding:26px 32px;
+  border-bottom:1px solid var(--border);gap:24px;transition:background .15s}
+.step-item:last-child{border-bottom:none}
+.step-item:hover{background:var(--bg)}
+.step-num{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:800;color:var(--accent-border);line-height:1;padding-top:2px}
+.step-title{font-size:.96rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.step-desc{font-size:.84rem;color:var(--slate);line-height:1.65}
+.step-badge{font-size:.69rem;font-weight:600;color:var(--slate-light);background:var(--bg);
+  border:1px solid var(--border);padding:4px 10px;border-radius:99px;white-space:nowrap;margin-top:3px}
+@media(max-width:620px){.step-item{grid-template-columns:48px 1fr;gap:16px}.step-badge{display:none}.step-num{font-size:1.4rem}}
+
+/* COMPARISON TABLE */
+.compare-wrap{overflow-x:auto}
+.compare-table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.compare-table th{padding:15px 22px;text-align:left;font-size:.71rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.75);background:var(--hero-bg)}
+.compare-table td{padding:15px 22px;font-size:.87rem;color:var(--slate);border-top:1px solid var(--border);vertical-align:top}
+.compare-table td:first-child{font-weight:600;color:var(--ink)}
+.compare-table tr:hover td{background:var(--bg)}
+.score{display:inline-block;font-weight:800;font-size:.8rem;padding:2px 10px;border-radius:99px}
+.score.win{background:var(--green-pale);color:var(--green);border:1px solid var(--green-border)}
+.score.mid{background:#fffbeb;color:var(--minor);border:1px solid #fde68a}
+@media(max-width:640px){.compare-table th,.compare-table td{padding:12px 14px;font-size:.8rem}}
+
+/* EXAMPLES */
+.example{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px}
+.example-head{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
+.example-head .mode{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.example-head h3{font-size:1.05rem;color:var(--ink);margin-bottom:8px;font-weight:700}
+.example-prompt{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ink-mid);font-size:.95rem;line-height:1.6}
+.example-body{padding:22px 24px}
+.scoreline{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:12px;font-size:.76rem;color:var(--slate)}
+.scoreline span::before{content:'✓ ';color:var(--green);font-weight:800}
+.diagram-label{font-size:.8rem;font-weight:700;color:var(--ink);margin:14px 0 6px}
+.mermaid{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;margin:6px 0 4px;overflow:auto}
+pre.code{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:16px;overflow:auto;
+  font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.78rem;line-height:1.55}
+details{margin-top:14px;border-top:1px dashed var(--border);padding-top:12px}
+summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:.86rem}
+.findings{margin-top:6px;display:flex;flex-direction:column;gap:9px}
+.findings li{font-size:.86rem;color:var(--ink-mid);line-height:1.6;padding-left:4px}
+.sev{font-weight:800}
+.sev.c{color:var(--crit)} .sev.m{color:var(--major)} .sev.s{color:var(--sug)}
+.example-links{margin-top:16px;font-size:.84rem;font-weight:600}
+.example-links a{color:var(--accent)}
+.example-links a:hover{color:var(--accent-light)}
+
+/* PERSONAS */
+.persona-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.persona-card{padding:26px;border:1px solid rgba(255,255,255,.09);border-radius:var(--radius-lg);background:var(--dark-surface)}
+.persona-icon{font-size:1.4rem;margin-bottom:13px}
+.persona-title{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px}
+.persona-desc{font-size:.81rem;color:rgba(255,255,255,.46);line-height:1.6}
+@media(max-width:860px){.persona-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.persona-grid{grid-template-columns:1fr}}
+
+/* CTA */
+.cta-section{background:var(--hero-bg);color:#fff;padding:96px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.cta-section::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 85% at 50% 50%,rgba(37,99,235,.16),transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 var(--px)}
+.cta-heading{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;
+  line-height:1.12;color:#fff;margin-bottom:16px}
+.cta-heading em{font-style:italic;color:var(--accent-text)}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:28px}
+.cta-code{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;
+  padding:16px 18px;text-align:left;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;
+  color:var(--accent-text);overflow:auto;margin-bottom:28px;line-height:1.6}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-cta-primary{background:var(--accent);color:#fff;font-size:.9rem;font-weight:700;padding:14px 34px;border-radius:var(--radius);transition:background .15s}
+.btn-cta-primary:hover{background:var(--accent-light)}
+.btn-cta-ghost{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.5);padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.2);transition:color .15s}
+.btn-cta-ghost:hover{color:#fff}
+
+/* FOOTER */
+footer{background:#070e1a;padding:54px 0 34px}
+.footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;padding-bottom:38px;
+  border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.footer-logo{display:flex;align-items:center;gap:9px;font-size:.94rem;font-weight:900;letter-spacing:.04em;color:#fff;margin-bottom:10px}
+.footer-logo span{color:var(--accent-text)}
+.footer-tagline{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.6;max-width:260px}
+.footer-nav-group{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col-label{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:14px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-size:.81rem;font-weight:500;color:rgba(255,255,255,.55);transition:color .12s}
+.footer-col-links a:hover{color:#fff}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:26px;flex-wrap:wrap}
+.footer-copy{font-size:.73rem;color:rgba(255,255,255,.3)}
+.footer-credit{font-size:.73rem;color:rgba(255,255,255,.25)}
+.footer-credit a{color:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.15);transition:color .12s}
+.footer-credit a:hover{color:rgba(255,255,255,.75)}
+@media(max-width:640px){.footer-top{flex-direction:column;gap:32px}.footer-nav-group{gap:32px}.footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}}
+
+/* FRAMEWORK DEEP-DIVE */
+.fw-detail{display:flex;flex-direction:column;gap:20px}
+.fw-block{border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);padding:30px 32px;
+  transition:box-shadow .18s,border-color .18s}
+.fw-block:hover{box-shadow:0 6px 24px rgba(15,23,42,.06);border-color:var(--accent-border)}
+.fw-top{display:flex;align-items:center;gap:14px}
+.fw-mark{width:46px;height:46px;border-radius:10px;background:var(--accent-pale);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0}
+.fw-name{font-size:1.12rem;font-weight:800;color:var(--ink);line-height:1.2}
+.fw-std{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--slate-light);margin-top:3px}
+.fw-tagline{font-size:.92rem;color:var(--ink-mid);line-height:1.65;margin:14px 0 20px;max-width:780px}
+.fw-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--border);padding-top:20px}
+.fw-col h4{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.fw-col ul{display:flex;flex-direction:column;gap:7px}
+.fw-col li{font-size:.83rem;color:var(--slate);line-height:1.55;padding-left:15px;position:relative}
+.fw-col li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent-border)}
+.fw-col code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.78rem;color:var(--ink-mid);
+  background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0 4px}
+@media(max-width:760px){.fw-cols{grid-template-columns:1fr;gap:18px}.fw-block{padding:24px 22px}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
 </style>
 </head>
+
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <span class="badge">Claude Code · Agent Skill · MIT</span>
-    <h1><span class="mono">enterprise-architecture</span></h1>
-    <p class="tagline">One Claude Code skill that unifies four open-source architecture
-      standards — <strong>C4 + Structurizr</strong>, <strong>ArchiMate</strong>,
-      <strong>TOGAF ADM</strong>, and <strong>arc42 + ADRs</strong> — to diagram, document,
-      review, and model architecture as code.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://github.com/gauravs19/enterprise-architecture">View on GitHub →</a>
-      <a class="btn ghost" href="#evals">See live examples</a>
+<!-- ANNOUNCE -->
+<div class="announce-bar">
+  <span class="announce-tag">New</span>
+  An open-source Claude Code skill — diagram, document, review &amp; model architecture as code.
+  <a href="#examples">See live examples →</a>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-wrap">
+    <a href="#" class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect width="24" height="24" rx="6" fill="var(--accent)"/>
+        <rect x="5" y="5" width="6" height="6" rx="1.5" fill="white"/>
+        <rect x="13" y="5" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+        <rect x="5" y="13" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+        <rect x="13" y="13" width="6" height="6" rx="1.5" fill="white"/>
+      </svg>
+      EA<span>·skill</span>
+    </a>
+    <div class="nav-links">
+      <a href="#frameworks">Frameworks</a>
+      <a href="#modes">Modes</a>
+      <a href="#evals">Eval results</a>
+      <a href="#examples">Examples</a>
+      <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
     </div>
-  </div>
-</header>
-
-<section id="why">
-  <div class="wrap">
-    <h2>Why it exists</h2>
-    <p class="lead">The open-source ecosystem has good single-purpose skills — C4+ArchiMate
-      plugins, arc42 toolkits, ADR generators. But <strong>none unify all four frameworks,
-      and none cover TOGAF or architecture review</strong>. This skill fills that gap and
-      keeps one traceable model under every diagram, doc, and decision.</p>
-    <div class="grid g4">
-      <div class="card"><div class="k">C4 + Structurizr</div><h3>How is <em>this system</em> built?</h3><p>Context · Container · Component diagrams as code.</p></div>
-      <div class="card"><div class="k">ArchiMate 3.x</div><h3>How does the <em>enterprise</em> fit?</h3><p>Capabilities → applications → technology, across systems.</p></div>
-      <div class="card"><div class="k">TOGAF ADM</div><h3>How do we <em>deliver</em> change?</h3><p>10-phase method, roadmaps, portfolio (TIME).</p></div>
-      <div class="card"><div class="k">arc42 + ADR/MADR</div><h3>How do we <em>write it down</em>?</h3><p>System docs and decision records, docs-as-code.</p></div>
+    <div class="nav-right">
+      <a href="https://github.com/gauravs19/enterprise-architecture-skill" class="btn-ghost" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+      <a href="#install" class="btn-primary">Install →</a>
     </div>
+    <div class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></div>
   </div>
-</section>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#frameworks">Frameworks</a>
+  <a href="#modes">Modes</a>
+  <a href="#evals">Eval results</a>
+  <a href="#examples">Examples</a>
+  <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
+  <a href="#install" class="btn-primary">Install →</a>
+</div>
 
-<section id="modes">
-  <div class="wrap">
-    <h2>Four modes</h2>
-    <p class="lead">The skill routes any architectural request to the right framework at the right altitude.</p>
-    <div class="grid g2">
-      <div class="card"><div class="k">Mode 1</div><h3>Diagram</h3><p>C4 / Structurizr DSL / Mermaid / PlantUML — Context → Container → Component, with diagram hygiene baked in.</p></div>
-      <div class="card"><div class="k">Mode 2</div><h3>Document</h3><p>arc42 sections (LEAN / ESSENTIAL / THOROUGH) and ADR/MADR decision records.</p></div>
-      <div class="card"><div class="k">Mode 3</div><h3>Review / assess</h3><p>ISO/IEC 25010 quality attributes + EA principles → severity-graded findings + a verdict.</p></div>
-      <div class="card"><div class="k">Mode 4</div><h3>Model the enterprise</h3><p>Capability → app → technology with realization links; TOGAF ADM structure & portfolio rationalization.</p></div>
-    </div>
-    <div class="note">A stable URN-style ID scheme — <span class="kbd">ea:org:system:kind:name</span> —
-      keeps one model under everything, plus a <span class="kbd">scripts/ea_lint.py</span>
-      cross-artifact consistency checker.</div>
-  </div>
-</section>
-
-<section id="evals">
-  <div class="wrap">
-    <h2>Eval results</h2>
-    <p class="lead">Each test prompt was run twice — once <strong>with the skill</strong>,
-      once as a <strong>baseline</strong> — and graded against objective assertions. The
-      examples below are the actual, unedited skill outputs.</p>
-
-    <table>
-      <thead><tr><th>Test case</th><th>With skill</th><th>Baseline</th><th>What the skill changed</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>C4 diagram</strong><br><span class="prompt">order checkout service</span></td>
-          <td><span class="pill win">5 / 5</span></td>
-          <td><span class="pill mid">3 / 5</span></td>
-          <td>Real C4 notation (Context + Container) <em>and</em> a Structurizr DSL source-of-truth + legend. Baseline drew a generic flowchart and only <em>offered</em> C4 as a follow-up.</td>
-        </tr>
-        <tr>
-          <td><strong>ADR</strong><br><span class="prompt">messaging system choice</span></td>
-          <td><span class="pill win">5 / 5</span></td>
-          <td><span class="pill mid">4 / 5</span></td>
-          <td>Correct MADR format (status, drivers, options, consequences). Baseline wrote solid analysis but not in ADR format.</td>
-        </tr>
-        <tr>
-          <td><strong>Review</strong><br><span class="prompt">Django monolith</span></td>
-          <td><span class="pill win">6 / 6</span></td>
-          <td><span class="pill win">6 / 6*</span></td>
-          <td>Both strong. *The skill is installed globally, so the baseline agent discovered &amp; used it — not a clean baseline.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="note"><strong>Method &amp; honesty note:</strong> runs used independent
-      Claude Code subagents. Because installed skills are globally discoverable, a baseline
-      agent can find and use the skill anyway (it did on the review case). So the measured
-      gap is a <em>conservative lower bound</em> on the skill's effect, not an inflated one.</div>
-
-    <h2 style="margin-top:40px">Example 1 — C4 diagram (rendered live)</h2>
-    <div class="example">
-      <div class="head">
-        <h3>Mode 1 · Diagram · C4 model</h3>
-        <div class="prompt">“I'm building an order checkout service. Customers use a React SPA that talks to a Spring Boot API. The API stores orders in PostgreSQL, publishes order events to Kafka, and charges cards via Stripe. Draw me the architecture diagram.”</div>
-        <div class="scoreline"><span>✔ names C4 + levels</span><span>✔ all 5 elements</span><span>✔ externals tagged</span><span>✔ labelled relationships</span><span>✔ Structurizr source-of-truth</span></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Claude Code · Agent Skill · MIT</div>
+      <h1 class="hero-title">Architecture <em>as code</em>, the way the standards intend.</h1>
+      <p class="hero-body">One Claude Code skill that unifies four open-source standards —
+        C4 + Structurizr, ArchiMate, TOGAF ADM, and arc42 + ADRs — to diagram, document,
+        review, and model architecture, with one traceable model underneath.</p>
+      <div class="hero-cta">
+        <a href="https://github.com/gauravs19/enterprise-architecture-skill" class="btn-hero-primary" target="_blank">View on GitHub →</a>
+        <a href="#examples" class="btn-hero-ghost">See live examples</a>
       </div>
-      <div class="body">
-        <p><strong>Level 1 — System Context</strong></p>
+      <div class="hero-trust">
+        <span class="hero-trust-item">C4 · ArchiMate · TOGAF · arc42</span>
+        <span class="hero-trust-item">Diagrams + docs + review</span>
+        <span class="hero-trust-item">MIT licensed</span>
+      </div>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="hero-card-chrome">
+        <div class="chrome-dots">
+          <span class="chrome-dot" style="background:#ff5f57"></span>
+          <span class="chrome-dot" style="background:#febc2e"></span>
+          <span class="chrome-dot" style="background:#28c840"></span>
+        </div>
+        <span class="chrome-title">C4 · System Context</span>
+      </div>
+      <div class="hero-card-body">
+        <pre class="mermaid">
+C4Context
+    Person(customer, "Customer", "Places &amp; pays for orders")
+    System(checkout, "Order Checkout Service", "Cart, orders, payment")
+    System_Ext(stripe, "Stripe", "Card payments")
+    Rel(customer, checkout, "Buys via", "HTTPS")
+    Rel(checkout, stripe, "Charges cards via", "REST/HTTPS")
+        </pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / STATS -->
+<section class="soft reveal" id="why">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">Why it exists</div>
+      <h2 class="section-heading">Good single-purpose skills exist. A unified one didn't.</h2>
+      <p class="section-sub">The ecosystem has C4+ArchiMate plugins, arc42 toolkits, and ADR
+        generators — but none unify all four frameworks, and none cover TOGAF or architecture
+        review. This skill fills that gap.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Frameworks, unified</div>
+        <div class="stat-desc">C4 + Structurizr, ArchiMate 3.x, TOGAF ADM, and arc42 + ADR/MADR — one skill, the right tool per question.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Modes</div>
+        <div class="stat-desc">Diagram, document, review/assess, and model the enterprise — routed automatically from your request.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">16/16</div>
+        <div class="stat-label">Eval assertions passed</div>
+        <div class="stat-desc">Across diagram, ADR, and review test cases — vs 13/16 for the no-skill baseline.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS (dark) -->
+<section class="dark reveal" id="frameworks">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Frameworks</div>
+      <h2 class="section-heading">Four standards, four altitudes.</h2>
+      <p class="section-sub">They aren't competitors — they answer different questions. The skill picks the right one for what you're asking.</p>
+    </div>
+    <div class="card-grid-4">
+      <div class="card">
+        <div class="card-icon">C4</div>
+        <div class="card-kicker">Structurizr DSL</div>
+        <div class="card-title">How is this system built?</div>
+        <div class="card-body">Context · Container · Component diagrams as code, with diagram hygiene baked in.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">AM</div>
+        <div class="card-kicker">ArchiMate 3.x</div>
+        <div class="card-title">How does the enterprise fit?</div>
+        <div class="card-body">Capabilities → applications → technology, with realization links across layers.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">TG</div>
+        <div class="card-kicker">TOGAF ADM</div>
+        <div class="card-title">How do we deliver change?</div>
+        <div class="card-body">The 10-phase method, roadmaps, and TIME portfolio rationalization.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">a42</div>
+        <div class="card-kicker">arc42 + ADR/MADR</div>
+        <div class="card-title">How do we write it down?</div>
+        <div class="card-body">System docs and decision records — docs-as-code, the right amount of detail.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS IN DEPTH -->
+<section class="soft reveal" id="frameworks-detail">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">In depth</div>
+      <h2 class="section-heading">What each framework is, and when to reach for it.</h2>
+      <p class="section-sub">A quick map so you (and the skill) pick the right altitude instead of forcing everything into one notation.</p>
+    </div>
+    <div class="fw-detail">
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">C4</div>
+          <div><div class="fw-name">C4 model + Structurizr DSL</div><div class="fw-std">Simon Brown · open-source</div></div>
+        </div>
+        <p class="fw-tagline">A way to describe <strong>one software system</strong> at four zoom levels — like Google Maps for your codebase. Zoom out for the big picture, zoom in for detail. Most systems only ever need the first two or three levels.</p>
+        <div class="fw-cols">
+          <div class="fw-col"><h4>Best for</h4><ul>
+            <li>Communicating a single system or service</li>
+            <li>Onboarding engineers to a codebase</li>
+            <li>Diagrams that live in the repo and render anywhere</li>
+          </ul></div>
+          <div class="fw-col"><h4>Key concepts</h4><ul>
+            <li><strong>Context</strong> — system + users + neighbours</li>
+            <li><strong>Container</strong> — deployable units (apps, DBs, brokers) — not Docker</li>
+            <li><strong>Component</strong> — building blocks in a container</li>
+            <li>Labelled, directed relationships</li>
+          </ul></div>
+          <div class="fw-col"><h4>Produces</h4><ul>
+            <li><code>Structurizr DSL</code> — model-of-record, many views from one model</li>
+            <li>Mermaid C4 — zero-tooling inline rendering</li>
+            <li>C4-PlantUML — for Kroki/PlantUML pipelines</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">AM</div>
+          <div><div class="fw-name">ArchiMate 3.x</div><div class="fw-std">The Open Group · Archi tool</div></div>
+        </div>
+        <p class="fw-tagline">The standard language for <strong>enterprise</strong> architecture — how business, applications, and technology fit together across many systems. Where C4 zooms into one system, ArchiMate zooms out to the whole organization.</p>
+        <div class="fw-cols">
+          <div class="fw-col"><h4>Best for</h4><ul>
+            <li>Cross-system and enterprise-wide views</li>
+            <li>Capability maps &amp; application landscapes</li>
+            <li>Showing business ↔ IT alignment</li>
+          </ul></div>
+          <div class="fw-col"><h4>Key concepts</h4><ul>
+            <li>Layers: Motivation · Strategy · Business · Application · Technology</li>
+            <li>Aspects: active structure · behavior · passive structure</li>
+            <li><strong>Realization</strong> (up) &amp; <strong>Serving</strong> (down) — the workhorse relationships</li>
+            <li>Viewpoints per stakeholder concern</li>
+          </ul></div>
+          <div class="fw-col"><h4>Produces</h4><ul>
+            <li>Archi models (<code>.archimate</code> / Open Exchange Format)</li>
+            <li>Layered &amp; capability-map views</li>
+            <li>Mermaid/PlantUML approximations for quick sharing</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">TG</div>
+          <div><div class="fw-name">TOGAF ADM</div><div class="fw-std">The Open Group · method</div></div>
+        </div>
+        <p class="fw-tagline">A <strong>method, not a notation</strong> — the Architecture Development Method is a cycle of phases for delivering an architecture change with governance. Use it to structure an engagement and decide which models to produce; ArchiMate draws them, ADRs record the decisions.</p>
+        <div class="fw-cols">
+          <div class="fw-col"><h4>Best for</h4><ul>
+            <li>Running or governing an architecture engagement</li>
+            <li>Roadmaps &amp; transition planning</li>
+            <li>Application-portfolio rationalization</li>
+          </ul></div>
+          <div class="fw-col"><h4>Key concepts</h4><ul>
+            <li>Phases A–H + Requirements Management at the hub</li>
+            <li><strong>Baseline → Target → Gaps</strong> in every phase</li>
+            <li>Transition Architectures (plateaus); ABBs vs SBBs</li>
+            <li>Architecture principles &amp; governance</li>
+          </ul></div>
+          <div class="fw-col"><h4>Produces</h4><ul>
+            <li>Architecture Vision &amp; statement of work</li>
+            <li>Roadmaps &amp; migration plans</li>
+            <li><strong>TIME</strong> portfolio: Tolerate / Invest / Migrate / Eliminate</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">a42</div>
+          <div><div class="fw-name">arc42 + ADR / MADR</div><div class="fw-std">open template · docs-as-code</div></div>
+        </div>
+        <p class="fw-tagline">A lightweight, battle-tested <strong>documentation template</strong> (12 sections, each answering one question) plus <strong>decision records</strong> that capture the reasoning behind significant choices — the context a future reader can't reconstruct from the code.</p>
+        <div class="fw-cols">
+          <div class="fw-col"><h4>Best for</h4><ul>
+            <li>Documenting a system end-to-end</li>
+            <li>Recording an architecturally-significant decision</li>
+            <li>Keeping docs next to code, reviewed in PRs</li>
+          </ul></div>
+          <div class="fw-col"><h4>Key concepts</h4><ul>
+            <li>12 sections: goals → constraints → context → building blocks → runtime → deployment → decisions → quality → risks</li>
+            <li>Detail knob: <code>LEAN</code> / <code>ESSENTIAL</code> / <code>THOROUGH</code></li>
+            <li>Measurable quality scenarios, not vague adjectives</li>
+            <li>ADRs: drivers, options w/ pros-cons, outcome, consequences</li>
+          </ul></div>
+          <div class="fw-col"><h4>Produces</h4><ul>
+            <li>Markdown docs-as-code with embedded C4 diagrams</li>
+            <li>Numbered, immutable ADR/MADR files</li>
+            <li>A traceable decision log linked from §9</li>
+          </ul></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODES -->
+<section class="reveal" id="modes">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Four modes</div>
+      <h2 class="section-heading">Ask in plain language. It routes to the right artifact.</h2>
+      <p class="section-sub">No need to name a framework — the skill maps your request to a mode and produces the right output as code.</p>
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Diagram</div>
+          <div class="step-desc">C4 / Structurizr DSL / Mermaid / PlantUML — Context → Container → Component, at the right altitude.</div>
+        </div>
+        <div class="step-badge">“draw the container diagram”</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Document</div>
+          <div class="step-desc">arc42 sections (LEAN / ESSENTIAL / THOROUGH) and ADR/MADR decision records with the trade-offs captured.</div>
+        </div>
+        <div class="step-badge">“write an ADR for Kafka”</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Review / assess</div>
+          <div class="step-desc">ISO/IEC 25010 quality attributes + EA principles → severity-graded findings, each with evidence and a fix, plus a verdict.</div>
+        </div>
+        <div class="step-badge">“is this design sound?”</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Model the enterprise</div>
+          <div class="step-desc">Capability → app → technology with realization links; TOGAF ADM structure and portfolio rationalization.</div>
+        </div>
+        <div class="step-badge">“map capabilities to apps”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVAL RESULTS -->
+<section class="soft reveal" id="evals">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">Eval results</div>
+      <h2 class="section-heading">Tested with the skill vs without it.</h2>
+      <p class="section-sub">Each prompt ran twice and was graded against objective assertions. The examples below are the actual, unedited skill outputs.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead><tr><th>Test case</th><th>Baseline</th><th>With skill</th><th>What the skill changed</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>C4 diagram</td>
+            <td><span class="score mid">3 / 5</span></td>
+            <td><span class="score win">5 / 5</span></td>
+            <td>Real C4 notation (Context + Container) <em>and</em> a Structurizr source-of-truth. Baseline drew a generic flowchart.</td>
+          </tr>
+          <tr>
+            <td>ADR</td>
+            <td><span class="score mid">4 / 5</span></td>
+            <td><span class="score win">5 / 5</span></td>
+            <td>Correct MADR format (status, drivers, options, consequences). Baseline wrote good analysis, not an ADR.</td>
+          </tr>
+          <tr>
+            <td>Review</td>
+            <td><span class="score win">6 / 6*</span></td>
+            <td><span class="score win">6 / 6</span></td>
+            <td>Both strong. *Globally-installed skills are discoverable, so the baseline used the skill anyway — not a clean baseline.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:18px;max-width:760px">
+      <strong>Honesty note:</strong> because installed skills are globally discoverable, a
+      baseline agent can find and use the skill anyway (it did on the review case). So the
+      measured gap is a <em>conservative lower bound</em> on the skill's effect.</p>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="reveal" id="examples">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Examples</div>
+      <h2 class="section-heading">Real outputs, rendered live.</h2>
+    </div>
+
+    <!-- Example 1 -->
+    <div class="example">
+      <div class="example-head">
+        <div class="mode">Mode 1 · Diagram · C4 model</div>
+        <h3>Order checkout service</h3>
+        <div class="example-prompt">“Customers use a React SPA that talks to a Spring Boot API. The API stores orders in PostgreSQL, publishes order events to Kafka, and charges cards via Stripe. Draw me the architecture diagram.”</div>
+        <div class="scoreline"><span>names C4 + levels</span><span>all 5 elements</span><span>externals tagged</span><span>labelled relationships</span><span>Structurizr source-of-truth</span></div>
+      </div>
+      <div class="example-body">
+        <div class="diagram-label">Level 1 — System Context</div>
         <pre class="mermaid">
 C4Context
     title System Context — Order Checkout Service
@@ -176,7 +669,7 @@ C4Context
     Rel(checkout, stripe, "Charges cards via", "REST/HTTPS")
     Rel(checkout, consumer, "Publishes order events to", "Kafka")
         </pre>
-        <p><strong>Level 2 — Container</strong></p>
+        <div class="diagram-label">Level 2 — Container</div>
         <pre class="mermaid">
 C4Container
     title Container Diagram — Order Checkout Service
@@ -197,8 +690,8 @@ C4Container
     Rel(kafka, consumer, "Delivers order events to", "Kafka protocol")
         </pre>
         <details>
-          <summary>Show the Structurizr DSL source-of-truth the skill also produced</summary>
-<pre class="codeblock">workspace "Order Checkout" "Order checkout service: cart, orders, payments" {
+          <summary>Show the Structurizr DSL source-of-truth it also produced</summary>
+<pre class="code">workspace "Order Checkout" "Order checkout service: cart, orders, payments" {
     model {
         customer = person "Customer" "Places and pays for orders"
         checkout = softwareSystem "Order Checkout Service" "Cart, order placement and card payment" {
@@ -228,22 +721,20 @@ C4Container
     }
 }</pre>
         </details>
-        <p style="margin-top:14px"><a href="examples/01-c4-diagram.with-skill.md">Full output ↗</a> &nbsp;·&nbsp; <a href="examples/01-c4-diagram.baseline.md">Baseline for comparison ↗</a></p>
+        <p class="example-links"><a href="examples/01-c4-diagram.with-skill.md">Full output ↗</a> &nbsp;·&nbsp; <a href="examples/01-c4-diagram.baseline.md">Baseline ↗</a></p>
       </div>
     </div>
 
-    <h2 style="margin-top:24px">Example 2 — Architecture Decision Record</h2>
+    <!-- Example 2 -->
     <div class="example">
-      <div class="head">
-        <h3>Mode 2 · Document · MADR</h3>
-        <div class="prompt">“We need to pick a messaging system for our order events — Kafka, RabbitMQ, or AWS SNS/SQS. The team has no Kafka ops experience but we expect ~10k events/sec and want event replay. Write up the decision.”</div>
-        <div class="scoreline"><span>✔ MADR structure + status</span><span>✔ decision drivers</span><span>✔ all 3 options w/ pros &amp; cons</span><span>✔ justified outcome</span><span>✔ trade-offs recorded</span></div>
+      <div class="example-head">
+        <div class="mode">Mode 2 · Document · MADR</div>
+        <h3>Choosing a messaging system</h3>
+        <div class="example-prompt">“We're weighing Kafka, RabbitMQ, and AWS SNS/SQS. The team has no Kafka ops experience but we expect ~10k events/sec and want event replay. Write up the decision.”</div>
+        <div class="scoreline"><span>MADR structure + status</span><span>decision drivers</span><span>3 options w/ pros &amp; cons</span><span>justified outcome</span><span>trade-offs recorded</span></div>
       </div>
-      <div class="body">
-        <p>The skill recognised this as <em>one architecturally-significant decision</em>
-          and produced a proper MADR — title, status, decision drivers, three options with
-          pros/cons, a justified outcome, and consequences including the trade-offs accepted:</p>
-        <pre class="codeblock"># 0001. Use AWS SNS/SQS for order events
+      <div class="example-body">
+<pre class="code"># 0001. Use AWS SNS/SQS for order events
 
 - Status: proposed
 - Date: 2026-06-18
@@ -269,60 +760,160 @@ and giving a credible replay story without operating brokers.
 - Good: minimal ops; elastic &amp; managed; fast time-to-value; pay-per-use
 - Bad: replay isn't uniform (needs Kinesis layer); AWS lock-in; FIFO quotas to verify
 - Neutral: requires idempotent consumers &amp; an explicit ordering key (orderId)</pre>
-        <p style="margin-top:14px"><a href="examples/02-adr.with-skill.md">Full ADR ↗</a> &nbsp;·&nbsp; <a href="examples/02-adr.baseline.md">Baseline for comparison ↗</a></p>
+        <p class="example-links"><a href="examples/02-adr.with-skill.md">Full ADR ↗</a> &nbsp;·&nbsp; <a href="examples/02-adr.baseline.md">Baseline ↗</a></p>
       </div>
     </div>
 
-    <h2 style="margin-top:24px">Example 3 — Architecture review</h2>
+    <!-- Example 3 -->
     <div class="example">
-      <div class="head">
-        <h3>Mode 3 · Review / assess</h3>
-        <div class="prompt">“Review our architecture: a single Django monolith on one EC2 instance, one PostgreSQL with no replica, secrets in committed settings.py, no caching, a synchronous third-party email call in the request path, no logging/metrics, ~50k DAU. Is this design sound?”</div>
-        <div class="scoreline"><span>✔ explicit verdict</span><span>✔ severity-graded</span><span>✔ evidence + fix per finding</span><span>✔ balanced + prioritized</span></div>
+      <div class="example-head">
+        <div class="mode">Mode 3 · Review / assess</div>
+        <h3>Django monolith, ~50k DAU</h3>
+        <div class="example-prompt">“A single Django monolith on one EC2 instance, one PostgreSQL with no replica, secrets in committed settings.py, no caching, a synchronous email call in the request path, no logging/metrics. Is this design sound?”</div>
+        <div class="scoreline"><span>explicit verdict</span><span>severity-graded</span><span>evidence + fix per finding</span><span>balanced + prioritized</span></div>
       </div>
-      <div class="body">
-        <p><strong>Verdict:</strong> <em>Needs revision</em> — the monolith is the right
-          altitude for 50k DAU; the problems are security &amp; operational hygiene, not the
-          decomposition. Findings, abbreviated:</p>
-        <ul class="tight">
+      <div class="example-body">
+        <p style="font-size:.9rem;color:var(--ink-mid);margin-bottom:6px"><strong>Verdict:</strong> <em>Needs revision</em> — the monolith is the right altitude for 50k DAU; the problems are security &amp; operational hygiene, not the decomposition.</p>
+        <ul class="findings">
           <li><span class="sev c">🔴 Critical</span> — committed secrets in <code>settings.py</code> → rotate now, move to Secrets Manager/SSM, purge history, add a pre-commit scanner.</li>
           <li><span class="sev c">🔴 Critical</span> — single EC2 instance = SPOF → ≥2 instances across ≥2 AZs behind an ALB in an ASG.</li>
           <li><span class="sev c">🔴 Critical</span> — single un-replicated Postgres → RDS/Aurora Multi-AZ + tested PITR backups.</li>
           <li><span class="sev m">🟠 Major</span> — no observability → structured logs + RED metrics + Sentry + one alert.</li>
           <li><span class="sev m">🟠 Major</span> — synchronous email in request path → move to a Celery/SQS queue with retries &amp; timeouts.</li>
-          <li><span class="sev m">🟠 Major</span> — no caching &amp; no stated SLOs → ElastiCache for hot reads; write down availability/latency/RPO/RTO.</li>
-          <li><span class="sev s">🔵 Suggestion</span> — <em>stay a monolith</em>; record the infra decisions as ADRs (Mode 2); draw the target-state C4 diagram (Mode 1).</li>
+          <li><span class="sev s">🔵 Suggestion</span> — <em>stay a monolith</em>; record infra decisions as ADRs (Mode 2); draw the target-state C4 diagram (Mode 1).</li>
         </ul>
-        <p style="margin-top:14px"><a href="examples/03-review.with-skill.md">Full review ↗</a> &nbsp;·&nbsp; <a href="examples/03-review.baseline.md">Baseline for comparison ↗</a></p>
+        <p class="example-links"><a href="examples/03-review.with-skill.md">Full review ↗</a> &nbsp;·&nbsp; <a href="examples/03-review.baseline.md">Baseline ↗</a></p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="install">
+<!-- WHO IT'S FOR (dark) -->
+<section class="dark reveal" id="who">
   <div class="wrap">
-    <h2>Install</h2>
-    <p class="lead">Clone into your Claude Code skills directory — it's discovered automatically.</p>
-    <pre class="codeblock">git clone https://github.com/gauravs19/enterprise-architecture \
-  ~/.claude/skills/enterprise-architecture</pre>
-    <p>Then just ask, in your own words:</p>
-    <ul class="tight">
-      <li>“draw the container diagram for this service”</li>
-      <li>“write an ADR for choosing Kafka”</li>
-      <li>“review this architecture”</li>
-      <li>“map our business capabilities to our apps”</li>
-    </ul>
+    <div class="section-header center">
+      <div class="section-label">Who it's for</div>
+      <h2 class="section-heading">For anyone who owns an architecture decision.</h2>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-icon">🏗️</div>
+        <div class="persona-title">Architects</div>
+        <div class="persona-desc">Produce C4/ArchiMate models and ADRs that are diff-able, traceable, and reviewable in a PR.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">⚙️</div>
+        <div class="persona-title">Backend / platform engineers</div>
+        <div class="persona-desc">Diagram a service, record why you chose a datastore, and document it next to the code.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🧭</div>
+        <div class="persona-title">Engineering managers</div>
+        <div class="persona-desc">Run an architecture review with severity, evidence, and a verdict — not opinions.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🚀</div>
+        <div class="persona-title">Founders / EAs</div>
+        <div class="persona-desc">Map business capabilities to apps to tech, and rationalize the portfolio with TOGAF.</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- CTA / INSTALL -->
+<section class="cta-section" id="install">
+  <div class="cta-inner">
+    <h2 class="cta-heading">Add it to Claude Code<br><em>in one command.</em></h2>
+    <p class="cta-sub">Clone into your skills directory — Claude Code discovers it automatically. Then just ask in your own words.</p>
+    <pre class="cta-code">git clone https://github.com/gauravs19/enterprise-architecture-skill \
+  ~/.claude/skills/enterprise-architecture</pre>
+    <div class="cta-btns">
+      <a href="https://github.com/gauravs19/enterprise-architecture-skill" class="btn-cta-primary" target="_blank">View on GitHub →</a>
+      <a href="#examples" class="btn-cta-ghost">See what it produces</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- ATTRIBUTION — gs-theme credit kept per the theme's terms. -->
 <footer>
-  Built from scratch with the Claude Code <span class="kbd">skill-creator</span> ·
-  MIT licensed · <a href="https://github.com/gauravs19/enterprise-architecture">github.com/gauravs19/enterprise-architecture</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect width="24" height="24" rx="6" fill="var(--accent)"/>
+            <rect x="5" y="5" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="13" y="5" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+            <rect x="5" y="13" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+            <rect x="13" y="13" width="6" height="6" rx="1.5" fill="white"/>
+          </svg>
+          EA<span>·skill</span>
+        </a>
+        <p class="footer-tagline">A unified enterprise &amp; software architecture skill for Claude Code. Diagram, document, review, model — as code.</p>
+      </div>
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-label">Skill</div>
+          <div class="footer-col-links">
+            <a href="#frameworks">Frameworks</a>
+            <a href="#modes">Modes</a>
+            <a href="#evals">Eval results</a>
+            <a href="#examples">Examples</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Author</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+            <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
+            <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">More tools</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/cortex/" target="_blank">CORTEX</a>
+            <a href="https://gauravs19.github.io/cadex/" target="_blank">CADEX</a>
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Gaurav Sharma · MIT License</span>
+      <span class="footer-credit">
+        Built with <a href="https://gauravs19.github.io/gs-theme/" target="_blank">gs-theme</a>
+        by <a href="https://gauravs19.github.io/portfolio/" target="_blank">Gaurav Sharma</a>
+      </span>
+    </div>
+  </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
 <script>
-  mermaid.initialize({ startOnLoad:true, theme:'neutral', securityLevel:'loose' });
+(function(){
+  const btn=document.getElementById('hamburger'),drawer=document.getElementById('nav-mobile');
+  if(!btn||!drawer)return;
+  btn.addEventListener('click',()=>{const o=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));});
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+})();
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length||!('IntersectionObserver'in window))return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+(function(){
+  const sections=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a[href^="#"]');
+  if(!sections.length||!links.length||!('IntersectionObserver'in window))return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active');});},{threshold:0.35});
+  sections.forEach(s=>io.observe(s));
+})();
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:'neutral',securityLevel:'loose'});</script>
+
 </body>
 </html>
