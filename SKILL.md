@@ -115,9 +115,8 @@ technology", "enterprise architecture model", "rationalize our app portfolio".*
 
 ## Traceability — keep one model under everything
 
-Borrowed from the strongest open-source EA plugins: give every architectural element a
-**stable, human-readable ID** and reuse it across diagrams, docs, and ADRs. This is what
-turns a pile of pictures into an actual model.
+Give every architectural element a **stable, human-readable ID** and reuse it across
+diagrams, docs, and ADRs. This is what turns a pile of pictures into an actual model.
 
 - Recommended ID scheme (URN-style): `ea:{org}:{system}:{kind}:{name}`
   - e.g. `ea:acme:checkout:container:payment-api`, `ea:acme:enterprise:capability:billing`

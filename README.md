@@ -72,13 +72,6 @@ python scripts/ea_lint.py path/to/docs/architecture --strict   # exit 1 on Major
 
 It's advisory — it reports, it doesn't rewrite your intent.
 
-## Credit / prior art
-
-Patterns studied and adapted from the open-source community:
-- [kristjanakkermann/archimate-c4-plugin](https://github.com/kristjanakkermann/archimate-c4-plugin) — URN artifact registry, Mermaid C4/ArchiMate generation
-- [MSiccDev/arc42-toolkit](https://github.com/MSiccDev/arc42-toolkit) — per-section discover→generate→validate loop, consistency linting, a dedicated review skill
-- [bitsmuggler/arc42-c4-...-example](https://github.com/bitsmuggler/arc42-c4-software-architecture-documentation-example) — Structurizr-DSL-as-source-of-truth + ADR docs-as-code pipeline
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
