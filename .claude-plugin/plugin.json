@@ -1,0 +1,21 @@
+{
+  "name": "enterprise-architecture",
+  "description": "Unified enterprise & software architecture skill: C4 + Structurizr DSL, ArchiMate 3.x, TOGAF ADM, and arc42 + ADRs. Four modes — diagram (diagrams-as-code), document (arc42 + ADRs), review (ISO/IEC 25010 assessment), and model the enterprise (capability → application → technology).",
+  "version": "0.1.0",
+  "author": { "name": "Gaurav Sharma" },
+  "homepage": "https://gauravs19.github.io/enterprise-architecture-skill/",
+  "repository": "https://github.com/gauravs19/enterprise-architecture-skill",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "enterprise-architecture",
+    "c4",
+    "structurizr",
+    "archimate",
+    "togaf",
+    "arc42",
+    "adr",
+    "diagrams-as-code",
+    "software-architecture"
+  ]
+}

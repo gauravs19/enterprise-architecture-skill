@@ -1,0 +1,12 @@
+{
+  "name": "gauravs19-skills",
+  "owner": { "name": "Gaurav Sharma" },
+  "description": "Enterprise & software architecture skills for Claude Code.",
+  "plugins": [
+    {
+      "name": "enterprise-architecture",
+      "source": ".",
+      "description": "Unified enterprise & software architecture skill: C4 + Structurizr DSL, ArchiMate, TOGAF ADM, and arc42 + ADRs. Diagram, document, review, and model the enterprise."
+    }
+  ]
+}

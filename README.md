@@ -188,7 +188,14 @@ git clone https://github.com/<you>/enterprise-architecture-skill \
   ~/.claude/skills/enterprise-architecture
 ```
 
-**Option B — download the packaged skill:** grab
+**Option B — plugin marketplace** (no clone needed). In Claude Code:
+
+```
+/plugin marketplace add gauravs19/enterprise-architecture-skill
+/plugin install enterprise-architecture@gauravs19-skills
+```
+
+**Option C — download the packaged skill:** grab
 [`enterprise-architecture.skill`](https://gauravs19.github.io/enterprise-architecture-skill/enterprise-architecture.skill)
 (or from the [latest release](https://github.com/gauravs19/enterprise-architecture-skill/releases))
 and install it through Claude Code.
