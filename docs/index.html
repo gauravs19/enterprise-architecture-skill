@@ -282,13 +282,6 @@ footer{background:#070e1a;padding:54px 0 34px}
 
 <body>
 
-<!-- ANNOUNCE -->
-<div class="announce-bar">
-  <span class="announce-tag">New</span>
-  An open-source Claude Code skill — diagram, document, review &amp; model architecture as code.
-  <a href="#examples">See live examples →</a>
-</div>
-
 <!-- NAV -->
 <nav id="main-nav">
   <div class="nav-wrap">
@@ -370,187 +363,44 @@ C4Context
   </div>
 </section>
 
-<!-- WHY / STATS -->
-<section class="soft reveal" id="why">
-  <div class="wrap">
-    <div class="section-header center">
-      <div class="section-label">Why it exists</div>
-      <h2 class="section-heading">Good single-purpose skills exist. A unified one didn't.</h2>
-      <p class="section-sub">The ecosystem has C4+ArchiMate plugins, arc42 toolkits, and ADR
-        generators — but none unify all four frameworks, and none cover TOGAF or architecture
-        review. This skill fills that gap.</p>
-    </div>
-    <div class="stat-grid">
-      <div class="stat-item">
-        <div class="stat-number">4</div>
-        <div class="stat-label">Frameworks, unified</div>
-        <div class="stat-desc">C4 + Structurizr, ArchiMate 3.x, TOGAF ADM, and arc42 + ADR/MADR — one skill, the right tool per question.</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">4</div>
-        <div class="stat-label">Modes</div>
-        <div class="stat-desc">Diagram, document, review/assess, and model the enterprise — routed automatically from your request.</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">16/16</div>
-        <div class="stat-label">Eval assertions passed</div>
-        <div class="stat-desc">Across diagram, ADR, and review test cases — vs 13/16 for the no-skill baseline.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FRAMEWORKS (dark) -->
-<section class="dark reveal" id="frameworks">
+<!-- FRAMEWORKS -->
+<section class="soft reveal" id="frameworks">
   <div class="wrap">
     <div class="section-header">
       <div class="section-label">Frameworks</div>
       <h2 class="section-heading">Four standards, four altitudes.</h2>
-      <p class="section-sub">They aren't competitors — they answer different questions. The skill picks the right one for what you're asking.</p>
+      <p class="section-sub">They aren't competitors — they answer different questions. The skill picks the right one.</p>
     </div>
-    <div class="card-grid-4">
-      <div class="card">
-        <div class="card-icon">C4</div>
-        <div class="card-kicker">Structurizr DSL</div>
-        <div class="card-title">How is this system built?</div>
-        <div class="card-body">Context · Container · Component diagrams as code, with diagram hygiene baked in.</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">AM</div>
-        <div class="card-kicker">ArchiMate 3.x</div>
-        <div class="card-title">How does the enterprise fit?</div>
-        <div class="card-body">Capabilities → applications → technology, with realization links across layers.</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">TG</div>
-        <div class="card-kicker">TOGAF ADM</div>
-        <div class="card-title">How do we deliver change?</div>
-        <div class="card-body">The 10-phase method, roadmaps, and TIME portfolio rationalization.</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">a42</div>
-        <div class="card-kicker">arc42 + ADR/MADR</div>
-        <div class="card-title">How do we write it down?</div>
-        <div class="card-body">System docs and decision records — docs-as-code, the right amount of detail.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FRAMEWORKS IN DEPTH -->
-<section class="soft reveal" id="frameworks-detail">
-  <div class="wrap">
-    <div class="section-header">
-      <div class="section-label">In depth</div>
-      <h2 class="section-heading">What each framework is, and when to reach for it.</h2>
-      <p class="section-sub">A quick map so you (and the skill) pick the right altitude instead of forcing everything into one notation.</p>
-    </div>
-    <div class="fw-detail">
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">C4</div>
-          <div><div class="fw-name">C4 model + Structurizr DSL</div><div class="fw-std">Simon Brown · open-source</div></div>
-        </div>
-        <p class="fw-tagline">A way to describe <strong>one software system</strong> at four zoom levels — like Google Maps for your codebase. Zoom out for the big picture, zoom in for detail. Most systems only ever need the first two or three levels.</p>
-        <div class="fw-cols">
-          <div class="fw-col"><h4>Best for</h4><ul>
-            <li>Communicating a single system or service</li>
-            <li>Onboarding engineers to a codebase</li>
-            <li>Diagrams that live in the repo and render anywhere</li>
-          </ul></div>
-          <div class="fw-col"><h4>Key concepts</h4><ul>
-            <li><strong>Context</strong> — system + users + neighbours</li>
-            <li><strong>Container</strong> — deployable units (apps, DBs, brokers) — not Docker</li>
-            <li><strong>Component</strong> — building blocks in a container</li>
-            <li>Labelled, directed relationships</li>
-          </ul></div>
-          <div class="fw-col"><h4>Produces</h4><ul>
-            <li><code>Structurizr DSL</code> — model-of-record, many views from one model</li>
-            <li>Mermaid C4 — zero-tooling inline rendering</li>
-            <li>C4-PlantUML — for Kroki/PlantUML pipelines</li>
-          </ul></div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">AM</div>
-          <div><div class="fw-name">ArchiMate 3.x</div><div class="fw-std">The Open Group · Archi tool</div></div>
-        </div>
-        <p class="fw-tagline">The standard language for <strong>enterprise</strong> architecture — how business, applications, and technology fit together across many systems. Where C4 zooms into one system, ArchiMate zooms out to the whole organization.</p>
-        <div class="fw-cols">
-          <div class="fw-col"><h4>Best for</h4><ul>
-            <li>Cross-system and enterprise-wide views</li>
-            <li>Capability maps &amp; application landscapes</li>
-            <li>Showing business ↔ IT alignment</li>
-          </ul></div>
-          <div class="fw-col"><h4>Key concepts</h4><ul>
-            <li>Layers: Motivation · Strategy · Business · Application · Technology</li>
-            <li>Aspects: active structure · behavior · passive structure</li>
-            <li><strong>Realization</strong> (up) &amp; <strong>Serving</strong> (down) — the workhorse relationships</li>
-            <li>Viewpoints per stakeholder concern</li>
-          </ul></div>
-          <div class="fw-col"><h4>Produces</h4><ul>
-            <li>Archi models (<code>.archimate</code> / Open Exchange Format)</li>
-            <li>Layered &amp; capability-map views</li>
-            <li>Mermaid/PlantUML approximations for quick sharing</li>
-          </ul></div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">TG</div>
-          <div><div class="fw-name">TOGAF ADM</div><div class="fw-std">The Open Group · method</div></div>
-        </div>
-        <p class="fw-tagline">A <strong>method, not a notation</strong> — the Architecture Development Method is a cycle of phases for delivering an architecture change with governance. Use it to structure an engagement and decide which models to produce; ArchiMate draws them, ADRs record the decisions.</p>
-        <div class="fw-cols">
-          <div class="fw-col"><h4>Best for</h4><ul>
-            <li>Running or governing an architecture engagement</li>
-            <li>Roadmaps &amp; transition planning</li>
-            <li>Application-portfolio rationalization</li>
-          </ul></div>
-          <div class="fw-col"><h4>Key concepts</h4><ul>
-            <li>Phases A–H + Requirements Management at the hub</li>
-            <li><strong>Baseline → Target → Gaps</strong> in every phase</li>
-            <li>Transition Architectures (plateaus); ABBs vs SBBs</li>
-            <li>Architecture principles &amp; governance</li>
-          </ul></div>
-          <div class="fw-col"><h4>Produces</h4><ul>
-            <li>Architecture Vision &amp; statement of work</li>
-            <li>Roadmaps &amp; migration plans</li>
-            <li><strong>TIME</strong> portfolio: Tolerate / Invest / Migrate / Eliminate</li>
-          </ul></div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">a42</div>
-          <div><div class="fw-name">arc42 + ADR / MADR</div><div class="fw-std">open template · docs-as-code</div></div>
-        </div>
-        <p class="fw-tagline">A lightweight, battle-tested <strong>documentation template</strong> (12 sections, each answering one question) plus <strong>decision records</strong> that capture the reasoning behind significant choices — the context a future reader can't reconstruct from the code.</p>
-        <div class="fw-cols">
-          <div class="fw-col"><h4>Best for</h4><ul>
-            <li>Documenting a system end-to-end</li>
-            <li>Recording an architecturally-significant decision</li>
-            <li>Keeping docs next to code, reviewed in PRs</li>
-          </ul></div>
-          <div class="fw-col"><h4>Key concepts</h4><ul>
-            <li>12 sections: goals → constraints → context → building blocks → runtime → deployment → decisions → quality → risks</li>
-            <li>Detail knob: <code>LEAN</code> / <code>ESSENTIAL</code> / <code>THOROUGH</code></li>
-            <li>Measurable quality scenarios, not vague adjectives</li>
-            <li>ADRs: drivers, options w/ pros-cons, outcome, consequences</li>
-          </ul></div>
-          <div class="fw-col"><h4>Produces</h4><ul>
-            <li>Markdown docs-as-code with embedded C4 diagrams</li>
-            <li>Numbered, immutable ADR/MADR files</li>
-            <li>A traceable decision log linked from §9</li>
-          </ul></div>
-        </div>
-      </div>
-
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead><tr><th>Framework</th><th>Answers</th><th>Best for</th><th>Produces</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>C4 + Structurizr</td>
+            <td>How is <em>this system</em> built?</td>
+            <td>A single service or system</td>
+            <td>Context / Container / Component — Structurizr DSL, Mermaid or PlantUML</td>
+          </tr>
+          <tr>
+            <td>ArchiMate 3.x</td>
+            <td>How does the <em>enterprise</em> fit?</td>
+            <td>Cross-system: capabilities → apps → tech</td>
+            <td>Layered &amp; capability views (Archi / Mermaid)</td>
+          </tr>
+          <tr>
+            <td>TOGAF ADM</td>
+            <td>How do we <em>deliver</em> change?</td>
+            <td>Running an engagement; portfolio</td>
+            <td>Vision, roadmaps, TIME portfolio (Tolerate/Invest/Migrate/Eliminate)</td>
+          </tr>
+          <tr>
+            <td>arc42 + ADR/MADR</td>
+            <td>How do we <em>write it down</em>?</td>
+            <td>Documenting a system; decisions</td>
+            <td>arc42 docs + decision records, docs-as-code</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -657,71 +507,25 @@ C4Context
         <div class="scoreline"><span>names C4 + levels</span><span>all 5 elements</span><span>externals tagged</span><span>labelled relationships</span><span>Structurizr source-of-truth</span></div>
       </div>
       <div class="example-body">
-        <div class="diagram-label">Level 1 — System Context</div>
-        <pre class="mermaid">
-C4Context
-    title System Context — Order Checkout Service
-    Person(customer, "Customer", "Places and pays for orders")
-    System(checkout, "Order Checkout Service", "Cart, order placement and card payment")
-    System_Ext(stripe, "Stripe", "Card payment processing")
-    System_Ext(consumer, "Downstream Consumers", "Services subscribing to order events")
-    Rel(customer, checkout, "Places &amp; pays for orders", "HTTPS")
-    Rel(checkout, stripe, "Charges cards via", "REST/HTTPS")
-    Rel(checkout, consumer, "Publishes order events to", "Kafka")
-        </pre>
-        <div class="diagram-label">Level 2 — Container</div>
+        <div class="diagram-label">C4 Container view</div>
         <pre class="mermaid">
 C4Container
-    title Container Diagram — Order Checkout Service
-    Person(customer, "Customer", "Places and pays for orders")
+    Person(customer, "Customer", "Buys")
     System_Boundary(checkout, "Order Checkout Service") {
-        Container(spa, "Checkout SPA", "React", "Cart, checkout &amp; payment UI")
-        Container(api, "Checkout API", "Spring Boot", "Order orchestration, persistence, payment, events")
-        ContainerDb(db, "Orders Database", "PostgreSQL", "Stores orders and order state")
-        ContainerQueue(kafka, "Order Event Bus", "Kafka", "Publishes order lifecycle events")
+        Container(spa, "SPA", "React")
+        Container(api, "Checkout API", "Spring Boot")
+        ContainerDb(db, "Orders DB", "PostgreSQL")
+        Container(kafka, "Event Bus", "Kafka")
     }
-    System_Ext(stripe, "Stripe", "Card payment processing")
-    System_Ext(consumer, "Downstream Consumers", "Subscribe to order events")
+    System_Ext(stripe, "Stripe", "Payments")
     Rel(customer, spa, "Uses", "HTTPS")
-    Rel(spa, api, "Makes API calls to", "JSON/HTTPS")
-    Rel(api, db, "Reads from &amp; writes to", "JDBC")
-    Rel(api, kafka, "Publishes order events to", "Kafka protocol")
-    Rel(api, stripe, "Charges cards via", "REST/HTTPS")
-    Rel(kafka, consumer, "Delivers order events to", "Kafka protocol")
+    Rel(spa, api, "Calls", "JSON/HTTPS")
+    Rel(api, db, "Reads/writes", "JDBC")
+    Rel(api, kafka, "Publishes events", "Kafka")
+    Rel(api, stripe, "Charges via", "REST")
+    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
         </pre>
-        <details>
-          <summary>Show the Structurizr DSL source-of-truth it also produced</summary>
-<pre class="code">workspace "Order Checkout" "Order checkout service: cart, orders, payments" {
-    model {
-        customer = person "Customer" "Places and pays for orders"
-        checkout = softwareSystem "Order Checkout Service" "Cart, order placement and card payment" {
-            spa   = container "Checkout SPA" "Cart, checkout &amp; payment UI" "React"
-            api   = container "Checkout API" "Order orchestration, persistence, payment, events" "Spring Boot"
-            db    = container "Orders Database" "Stores orders and order state" "PostgreSQL" { tags "Database" }
-            kafka = container "Order Event Bus" "Publishes order lifecycle events" "Kafka" { tags "Queue" }
-            spa -> api   "Makes API calls to" "JSON/HTTPS"
-            api -> db    "Reads from &amp; writes to" "JDBC"
-            api -> kafka "Publishes order events to" "Kafka protocol"
-        }
-        stripe   = softwareSystem "Stripe" "Card payment processing" { tags "External" }
-        consumer = softwareSystem "Downstream Consumers" "Subscribe to order events" { tags "External" }
-        customer -> spa "Uses" "HTTPS"
-        api -> stripe "Charges cards via" "REST/HTTPS"
-        kafka -> consumer "Delivers order events to" "Kafka protocol"
-    }
-    views {
-        systemContext checkout "Context" { include * ; autolayout lr }
-        container checkout "Containers" { include * ; autolayout lr }
-        styles {
-            element "Person"   { shape person ; background #08427b ; color #ffffff }
-            element "External" { background #999999 ; color #ffffff }
-            element "Database" { shape cylinder }
-            element "Queue"    { shape pipe }
-        }
-    }
-}</pre>
-        </details>
-        <p class="example-links"><a href="examples/01-c4-diagram.with-skill.md">Full output ↗</a> &nbsp;·&nbsp; <a href="examples/01-c4-diagram.baseline.md">Baseline ↗</a></p>
+        <p class="example-links">The full output also includes the System Context view and a Structurizr DSL source-of-truth → <a href="examples/01-c4-diagram.with-skill.md">Full output ↗</a> &nbsp;·&nbsp; <a href="examples/01-c4-diagram.baseline.md">Baseline ↗</a></p>
       </div>
     </div>
 
@@ -783,38 +587,6 @@ and giving a credible replay story without operating brokers.
           <li><span class="sev s">🔵 Suggestion</span> — <em>stay a monolith</em>; record infra decisions as ADRs (Mode 2); draw the target-state C4 diagram (Mode 1).</li>
         </ul>
         <p class="example-links"><a href="examples/03-review.with-skill.md">Full review ↗</a> &nbsp;·&nbsp; <a href="examples/03-review.baseline.md">Baseline ↗</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR (dark) -->
-<section class="dark reveal" id="who">
-  <div class="wrap">
-    <div class="section-header center">
-      <div class="section-label">Who it's for</div>
-      <h2 class="section-heading">For anyone who owns an architecture decision.</h2>
-    </div>
-    <div class="persona-grid">
-      <div class="persona-card">
-        <div class="persona-icon">🏗️</div>
-        <div class="persona-title">Architects</div>
-        <div class="persona-desc">Produce C4/ArchiMate models and ADRs that are diff-able, traceable, and reviewable in a PR.</div>
-      </div>
-      <div class="persona-card">
-        <div class="persona-icon">⚙️</div>
-        <div class="persona-title">Backend / platform engineers</div>
-        <div class="persona-desc">Diagram a service, record why you chose a datastore, and document it next to the code.</div>
-      </div>
-      <div class="persona-card">
-        <div class="persona-icon">🧭</div>
-        <div class="persona-title">Engineering managers</div>
-        <div class="persona-desc">Run an architecture review with severity, evidence, and a verdict — not opinions.</div>
-      </div>
-      <div class="persona-card">
-        <div class="persona-icon">🚀</div>
-        <div class="persona-title">Founders / EAs</div>
-        <div class="persona-desc">Map business capabilities to apps to tech, and rationalize the portfolio with TOGAF.</div>
       </div>
     </div>
   </div>
