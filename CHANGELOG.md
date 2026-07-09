@@ -3,6 +3,22 @@
 All notable changes to this skill are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added (docs & tooling — no skill content change)
+- **Frameworks-in-practice guide** (`docs/frameworks-in-practice.html`, nav: *Guide*):
+  long-form theory-then-practice write-up — Zachman 6×6 grid and seven rules, all TOGAF
+  ADM phases with governance mechanics, ArchiMate layers/relationships/viewpoints,
+  C4 + a worked Structurizr DSL example, arc42's twelve sections + ADR conventions,
+  FEAF/DoDAF/Gartner/BIZBOK — followed by honest verdicts, five pay-off situations,
+  four worked case studies, and six anti-patterns. Four inline SVG diagrams (ADM cycle,
+  ArchiMate stack, C4 zoom strip, capability heat map). Left TOC sidebar on wide screens.
+- **README**: condensed "The theory — frameworks in practice" section linking to the guide.
+- **Evals**: Mode 4 coverage (capability map, TOGAF engagement) and three
+  negative-trigger cases guarding the description's negative scope (#1).
+- **CI**: `scripts/check_docs_links.py` — internal link/anchor checker for the docs
+  site, wired into the lint workflow (#2).
+
 ## [0.1.0] — 2026-06-18
 
 First public release.
