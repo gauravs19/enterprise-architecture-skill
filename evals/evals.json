@@ -24,6 +24,46 @@
       "expected_output": "A structured architecture review: a verdict, severity-categorized findings (the plaintext secrets = Critical, the DB single-point-of-failure + synchronous email call + no observability = Major, etc.), each with evidence and a concrete fix, plus what's done well and prioritized follow-ups.",
       "files": [],
       "assertions": []
+    },
+    {
+      "id": 3,
+      "name": "mode4-capability-map",
+      "prompt": "We're an online insurance company. Our main business functions are selling policies, underwriting risk, handling claims, billing customers, and managing agents. Our systems are: PolicyCenter (policy admin), a custom underwriting rules engine, ClaimCenter, two separate billing systems (legacy SAP and a newer Stripe-based one), and an agent portal. Map our business capabilities to the applications that realize them.",
+      "expected_output": "An ArchiMate-grounded Mode 4 output: a business capability map (capabilities named as what-the-business-does, org/system-independent) with each application linked to the capability it realizes via explicit realization relationships. Should flag the two billing systems realizing one capability as a rationalization candidate, use stable element IDs, and state the framework/viewpoint (capability map / application landscape).",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 4,
+      "name": "mode4-togaf-engagement",
+      "prompt": "Our data-center contract ends in 24 months and leadership wants a credible plan to move our ~40 applications to the cloud. How should we structure this architecture effort end to end, and what should we produce at each stage?",
+      "expected_output": "A TOGAF ADM-structured engagement plan: vision/scope (Phase A), baseline -> target -> gap analysis across business/data/application/technology (B-D), work packages and transition architectures (E), a migration roadmap (F), and implementation governance (G), with named deliverables per stage and rigor scaled to the stakes (no ceremonial full-ADM). Should mention per-app disposition (e.g. TIME or 6R-style) feeding the roadmap.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 5,
+      "name": "negative-terraform-iac",
+      "prompt": "Write me a Terraform module for an AWS VPC with three private subnets, a NAT gateway per AZ, and an EKS cluster with two managed node groups.",
+      "expected_output": "NEGATIVE CASE - the enterprise-architecture skill must NOT trigger. This is IaC/cloud deployment work (explicitly out of scope per the skill description). Correct behavior: answer as normal Terraform code (or route to an IaC-focused skill), with no C4/ArchiMate/TOGAF/arc42 framing imposed on the response.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 6,
+      "name": "negative-db-schema",
+      "prompt": "Design the database schema for a multi-tenant SaaS invoicing app: tenants, users, invoices, line items, payments. Give me the tables, keys, and indexes.",
+      "expected_output": "NEGATIVE CASE - the enterprise-architecture skill must NOT trigger. Database/ER schema design is explicitly out of scope. Correct behavior: a normal schema design answer (DDL/ER reasoning), not an arc42 document or C4 diagram.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 7,
+      "name": "negative-code-sequence-diagram",
+      "prompt": "Draw a UML sequence diagram for the login flow in this Spring controller: AuthController.login() calls AuthService.authenticate(), which calls UserRepository.findByEmail() and then JwtProvider.generateToken().",
+      "expected_output": "NEGATIVE CASE - the enterprise-architecture skill must NOT trigger. Code-level UML/sequence diagrams are explicitly out of scope. Correct behavior: a plain Mermaid/PlantUML sequence diagram of the method calls, without invoking C4 levels or architecture-documentation framing.",
+      "files": [],
+      "assertions": []
     }
   ]
 }
