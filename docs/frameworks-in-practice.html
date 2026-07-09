@@ -35,6 +35,7 @@ img{display:block;max-width:100%}
   --wrap:1160px; --px:32px; --radius:6px; --radius-lg:12px; --radius-xl:18px;
 }
 html{scroll-behavior:smooth}
+[id]{scroll-margin-top:76px}
 body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);
   -webkit-font-smoothing:antialiased;line-height:1.65}
 a{color:inherit;text-decoration:none}
@@ -267,6 +268,26 @@ footer{background:#070e1a;padding:54px 0 34px}
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
 .reveal.in-view{opacity:1;transform:translateY(0)}
+
+/* GUIDE TOC (left sidebar, wide screens only) */
+.guide-toc{display:none;position:fixed;left:0;top:0;bottom:0;width:250px;overflow-y:auto;
+  background:var(--bg);border-right:1px solid var(--border);padding:24px 22px 40px;z-index:120}
+.guide-toc .toc-title{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:800;
+  color:var(--ink);margin-bottom:4px}
+.guide-toc .toc-sub{font-size:.7rem;color:var(--slate-light);margin-bottom:22px}
+.guide-toc .toc-group{font-size:.62rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--slate-light);margin:18px 0 8px}
+.guide-toc nav{display:flex;flex-direction:column}
+.guide-toc nav a{display:block;font-size:.8rem;font-weight:500;color:var(--slate);padding:5px 10px;
+  border-left:2px solid var(--border);transition:color .12s,border-color .12s,background .12s;line-height:1.4}
+.guide-toc nav a:hover{color:var(--ink)}
+.guide-toc nav a.active{color:var(--accent);font-weight:600;border-left-color:var(--accent);background:var(--accent-pale)}
+.guide-toc .toc-back{margin-top:26px;font-size:.74rem;font-weight:600;color:var(--slate-light)}
+.guide-toc .toc-back a{color:var(--accent)}
+@media(min-width:1400px){
+  body{padding-left:250px}
+  .guide-toc{display:block}
+}
 </style>
 </head>
 
@@ -285,12 +306,11 @@ footer{background:#070e1a;padding:54px 0 34px}
       <b>EA</b><span>skill</span>
     </a>
     <div class="nav-links">
-      <a href="index.html">Overview</a>
-      <a href="#frameworks">Theory</a>
-      <a href="#landscape">Verdicts</a>
-      <a href="#cases">Case studies</a>
-      <a href="#antipatterns">Anti-patterns</a>
-      <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
+      <a href="index.html#frameworks">Frameworks</a>
+      <a href="index.html#modes">Modes</a>
+      <a href="index.html#evals">Eval results</a>
+      <a href="index.html#examples">Examples</a>
+      <a href="frameworks-in-practice.html" class="active">Guide</a>
     </div>
     <div class="nav-right">
       <a href="https://github.com/gauravs19/enterprise-architecture-skill" class="btn-ghost" target="_blank">
@@ -303,14 +323,46 @@ footer{background:#070e1a;padding:54px 0 34px}
   </div>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
-  <a href="index.html">Overview</a>
-  <a href="#frameworks">Theory</a>
-  <a href="#landscape">Verdicts</a>
-  <a href="#cases">Case studies</a>
-  <a href="#antipatterns">Anti-patterns</a>
-  <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
+  <a href="index.html#frameworks">Frameworks</a>
+  <a href="index.html#modes">Modes</a>
+  <a href="index.html#evals">Eval results</a>
+  <a href="index.html#examples">Examples</a>
+  <a href="frameworks-in-practice.html">Guide</a>
+  <a href="#frameworks">— Theory</a>
+  <a href="#landscape">— Verdicts</a>
+  <a href="#cases">— Case studies</a>
+  <a href="#antipatterns">— Anti-patterns</a>
   <a href="index.html#install" class="btn-primary">Install →</a>
 </div>
+
+<!-- GUIDE TOC (left sidebar) -->
+<aside class="guide-toc" aria-label="Guide table of contents">
+  <div class="toc-title">
+    <svg width="20" height="20" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+      <rect width="26" height="26" rx="7" fill="var(--accent)"/>
+      <rect x="6" y="6.5" width="14" height="3.4" rx="1.7" fill="#fff"/>
+      <rect x="6" y="11.3" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".6"/>
+      <rect x="6" y="16.1" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".32"/>
+    </svg>
+    Frameworks Guide
+  </div>
+  <div class="toc-sub">Theory in full, then practice</div>
+  <nav>
+    <div class="toc-group">The theory</div>
+    <a href="#fw-zachman">Zachman Framework</a>
+    <a href="#fw-togaf">TOGAF</a>
+    <a href="#fw-archimate">ArchiMate 3.x</a>
+    <a href="#fw-c4">C4 + Structurizr</a>
+    <a href="#fw-arc42">arc42 + ADR / MADR</a>
+    <a href="#fw-rest">FEAF · DoDAF · Gartner · BIZBOK</a>
+    <div class="toc-group">The practice</div>
+    <a href="#reality">The honest reality</a>
+    <a href="#landscape">Verdicts, condensed</a>
+    <a href="#cases">Where they pay off + cases</a>
+    <a href="#antipatterns">Anti-patterns</a>
+  </nav>
+  <div class="toc-back">← <a href="index.html">Back to the skill overview</a></div>
+</aside>
 
 <!-- HERO -->
 <section class="hero">
@@ -1860,7 +1912,7 @@ footer{background:#070e1a;padding:54px 0 34px}
             <a href="index.html#modes">Modes</a>
             <a href="index.html#evals">Eval results</a>
             <a href="index.html#examples">Examples</a>
-            <a href="frameworks-in-practice.html">In Practice</a>
+            <a href="frameworks-in-practice.html">Guide</a>
           </div>
         </div>
         <div class="footer-col">
@@ -1908,10 +1960,18 @@ footer{background:#070e1a;padding:54px 0 34px}
   requestAnimationFrame(()=>{els.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in-view');});});
 })();
 (function(){
-  const sections=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a[href^="#"]');
-  if(!sections.length||!links.length||!('IntersectionObserver'in window))return;
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active');});},{threshold:0.35});
-  sections.forEach(s=>io.observe(s));
+  // TOC scrollspy: highlight the entry whose target was most recently scrolled past
+  const links=[...document.querySelectorAll('.guide-toc nav a[href^="#"]')];
+  if(!links.length)return;
+  const targets=links.map(l=>document.querySelector(l.getAttribute('href'))).filter(Boolean);
+  function update(){
+    const y=window.scrollY+90;
+    let current=targets[0];
+    for(const t of targets){if(t.offsetTop<=y)current=t;else break;}
+    links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+current.id));
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
 })();
 </script>
 
