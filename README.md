@@ -21,7 +21,7 @@ as records, and one traceable model underneath.**
 - [Why this exists](#why-this-exists)
 - [The theory — frameworks in practice](#the-theory--frameworks-in-practice)
 - [The mental model — four frameworks, four altitudes](#the-mental-model--four-frameworks-four-altitudes)
-- [The four frameworks in depth](#the-four-frameworks-in-depth)
+- [The four frameworks](#the-four-frameworks)
 - [The four modes](#the-four-modes)
 - [Traceability — one model under everything](#traceability--one-model-under-everything)
 - [Install](#install)
@@ -83,90 +83,19 @@ ArchiMate models and ADRs as deliverables.
 
 ---
 
-## The four frameworks in depth
+## The four frameworks
 
-### C4 model + Structurizr DSL
-*Simon Brown's model — open source.*
+| Framework | Zoom level | The one habit it gives you | Skill reference |
+|---|---|---|---|
+| **C4 + Structurizr DSL** | One system: Context → Container → Component (→ Code) | Diagrams as code in the repo; 5–20 elements per view, every arrow labelled | [`references/c4-structurizr.md`](references/c4-structurizr.md) |
+| **ArchiMate 3.x** | The enterprise: capabilities → apps → technology | Realization/serving links that answer "what breaks if we retire this app?" | [`references/archimate.md`](references/archimate.md) |
+| **TOGAF ADM** | The engagement: phases + governance | Baseline → Target → Gap → Roadmap; TIME portfolio scoring; tailor rigor to stakes | [`references/togaf-adm.md`](references/togaf-adm.md) |
+| **arc42 + ADR/MADR** | The documentation: 12 sections + decision log | ADRs at decision time with options *and trade-offs*; LEAN/ESSENTIAL/THOROUGH detail knob | [`references/arc42.md`](references/arc42.md) · [`references/adr-madr.md`](references/adr-madr.md) |
 
-Describes **one software system** at four zoom levels, like Google Maps for your codebase.
-Most systems only need the first two or three.
-
-- **Best for:** communicating a single system/service, onboarding engineers, diagrams that
-  live in the repo and render anywhere.
-- **Levels:** **Context** (system + users + neighbours) → **Container** (deployable units:
-  apps, DBs, brokers — *not* Docker containers) → **Component** (building blocks inside a
-  container) → **Code** (rarely needed; the IDE does it better).
-- **Hygiene built in:** 5–20 elements per view, every external dependency shown, every
-  relationship labelled with intent + protocol, a title and a legend.
-- **Produces:** **Structurizr DSL** (the model-of-record — define elements once, render many
-  views), **Mermaid C4** (zero-tooling inline rendering), or **C4-PlantUML** (for
-  Kroki/PlantUML pipelines).
-
-→ Reference: [`references/c4-structurizr.md`](references/c4-structurizr.md)
-
-### ArchiMate 3.x
-*The Open Group standard — modelled in the free Archi tool.*
-
-The standard language for **enterprise** architecture: how business, applications, and
-technology fit together across many systems.
-
-- **Best for:** cross-system and enterprise-wide views, capability maps, application
-  landscapes, business ↔ IT alignment.
-- **Layers:** Motivation · Strategy · Business · Application · Technology (+ Implementation
-  & Migration), each crossed with **aspects** (active structure / behavior / passive
-  structure).
-- **The two relationships you'll use constantly:** **Realization** (up across layers — "X
-  makes Y real") and **Serving** (down — "X is used by Y"). Getting these right is what
-  makes a model read correctly.
-- **Viewpoints:** pick the predefined selection for the stakeholder's concern — Layered,
-  Capability Map, Application Cooperation, Application Usage, Technology, Motivation.
-- **Produces:** Archi models (`.archimate` / Open Group Exchange Format); Mermaid/PlantUML
-  approximations for quick sharing (clearly labelled as approximations).
-
-→ Reference: [`references/archimate.md`](references/archimate.md)
-
-### TOGAF ADM
-*The Open Group — a method, not a notation.*
-
-The **Architecture Development Method** is a cycle of phases for delivering an architecture
-change with governance. Use it to *structure an engagement* and decide *which* models to
-produce; ArchiMate draws them and ADRs record the decisions.
-
-- **Best for:** running/governing an architecture engagement, roadmaps and transition
-  planning, application-portfolio rationalization.
-- **Phases:** Preliminary → A. Vision → B. Business → C. Information Systems (Data + App) →
-  D. Technology → E. Opportunities & Solutions → F. Migration Planning → G. Implementation
-  Governance → H. Change Management, with **Requirements Management** at the hub.
-- **Core idea:** every phase is **Baseline → Target → Gaps**; the gaps feed a roadmap of
-  **Transition Architectures** (plateaus).
-- **Portfolio rationalization (TIME):** score each app on business value × technical fit →
-  **Tolerate / Invest / Migrate / Eliminate** with a recommended next step.
-- **Tailor it.** Don't ceremonially run all phases for a small change — scale the rigor to
-  the stakes.
-
-→ Reference: [`references/togaf-adm.md`](references/togaf-adm.md)
-
-### arc42 + ADR / MADR
-*Open documentation template + decision records, docs-as-code.*
-
-A lightweight, battle-tested **template** (12 sections, each answering one question) plus
-**decision records** that capture the *reasoning* behind significant choices.
-
-- **arc42's 12 sections:** Introduction & Goals · Constraints · Context & Scope ·
-  Solution Strategy · Building Block View · Runtime View · Deployment View · Crosscutting
-  Concepts · **Architecture Decisions** · Quality Requirements · Risks & Technical Debt ·
-  Glossary.
-- **Detail knob:** write to **LEAN / ESSENTIAL / THOROUGH** so you produce the right amount
-  — a 40-page doc nobody reads is a failure, not thoroughness.
-- **Measurable quality goals:** "fast" becomes "place-order responds in <200ms p95 at 1000
-  concurrent users." Vague adjectives are rejected.
-- **ADR / MADR:** one architecturally-significant decision per record — context, decision
-  drivers, options *with pros & cons*, the chosen outcome justified against the drivers, and
-  consequences (good **and** bad). Immutable; superseded by new ADRs, never rewritten.
-- **Produces:** Markdown docs-as-code with embedded C4 diagrams, numbered ADR files, and a
-  decision log linked from §9.
-
-→ References: [`references/arc42.md`](references/arc42.md) · [`references/adr-madr.md`](references/adr-madr.md)
+Each framework is explained in full — origin, structure, worked examples, what practitioners
+actually keep — in the **[frameworks-in-practice guide](https://gauravs19.github.io/enterprise-architecture-skill/frameworks-in-practice.html)**.
+For "which framework should I use?" questions, the skill itself loads
+[`references/choosing-frameworks.md`](references/choosing-frameworks.md).
 
 ---
 
@@ -297,7 +226,8 @@ enterprise-architecture/
 │   ├── togaf-adm.md               # 10 ADM phases, deliverables, TIME portfolio model
 │   ├── arc42.md                   # 12 sections + LEAN/ESSENTIAL/THOROUGH detail knob
 │   ├── adr-madr.md                # ADR & MADR templates and conventions
-│   └── review-rubric.md           # quality attributes, severity scheme, verdict format
+│   ├── review-rubric.md           # quality attributes, severity scheme, verdict format
+│   └── choosing-frameworks.md     # "which framework?" — verdicts, pay-off situations, anti-patterns
 ├── assets/templates/              # ADR, arc42 section, Structurizr workspace starters
 ├── scripts/
 │   └── ea_lint.py                 # cross-artifact consistency checker
