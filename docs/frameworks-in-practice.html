@@ -162,6 +162,29 @@ section.soft{background:var(--bg)}
   background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0 4px}
 @media(max-width:760px){.fw-cols{grid-template-columns:1fr;gap:18px}.fw-block{padding:24px 22px}}
 
+/* DETAIL TABLES (framework explainers) */
+.dt-wrap{overflow-x:auto;margin:18px 0 4px}
+.dt{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--white)}
+.dt th{padding:10px 16px;text-align:left;font-size:.63rem;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--slate);background:var(--bg);border-bottom:1px solid var(--border)}
+.dt td{padding:10px 16px;font-size:.82rem;color:var(--slate);border-top:1px solid var(--border);vertical-align:top;line-height:1.55}
+.dt td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.dt tr:hover td{background:var(--bg)}
+@media(max-width:640px){.dt th,.dt td{padding:8px 10px;font-size:.75rem}.dt td:first-child{white-space:normal}}
+/* Zachman mini-grid */
+.zg-wrap{overflow-x:auto;margin:18px 0 4px}
+.zg{width:100%;min-width:720px;border-collapse:collapse;border:1px solid var(--border)}
+.zg th{padding:8px 8px;font-size:.6rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--hero-bg);color:rgba(255,255,255,.85);text-align:left;border:1px solid rgba(255,255,255,.08)}
+.zg th.rowhead{background:var(--bg);color:var(--ink);font-size:.66rem;letter-spacing:.02em;text-transform:none;
+  border:1px solid var(--border);white-space:nowrap}
+.zg th.rowhead small{display:block;font-weight:500;color:var(--slate-light);font-size:.58rem;text-transform:uppercase;letter-spacing:.07em}
+.zg td{padding:8px 8px;font-size:.68rem;color:var(--slate);border:1px solid var(--border);line-height:1.4;background:var(--white)}
+.fw-origin{font-size:.78rem;color:var(--slate-light);margin-top:-14px;margin-bottom:18px}
+.fw-h4{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:22px 0 10px}
+.fw-cols.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.fw-cols.three{grid-template-columns:1fr}}
+
 /* CASE STUDIES */
 .case{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px}
 .case-head{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
@@ -255,10 +278,10 @@ footer{background:#070e1a;padding:54px 0 34px}
     </a>
     <div class="nav-links">
       <a href="index.html">Overview</a>
+      <a href="#frameworks">Frameworks</a>
       <a href="#landscape">Landscape</a>
-      <a href="#four">The four</a>
+      <a href="#four">In practice</a>
       <a href="#cases">Case studies</a>
-      <a href="#antipatterns">Anti-patterns</a>
       <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
     </div>
     <div class="nav-right">
@@ -273,8 +296,9 @@ footer{background:#070e1a;padding:54px 0 34px}
 </nav>
 <div class="nav-mobile" id="nav-mobile">
   <a href="index.html">Overview</a>
+  <a href="#frameworks">Frameworks</a>
   <a href="#landscape">Landscape</a>
-  <a href="#four">The four</a>
+  <a href="#four">In practice</a>
   <a href="#cases">Case studies</a>
   <a href="#antipatterns">Anti-patterns</a>
   <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
@@ -286,11 +310,402 @@ footer{background:#070e1a;padding:54px 0 34px}
   <div class="wrap hero-inner">
     <div class="hero-eyebrow">Theory, grounded · Frameworks in practice</div>
     <h1 class="hero-title">What architects <em>actually use</em> — and what they quietly skip.</h1>
-    <p class="hero-body">There's a large gap between how EA frameworks are marketed and how
-      they're used. Almost no organization runs TOGAF or Zachman by the book; what survives
-      contact with reality is selective borrowing. This page maps the landscape honestly —
-      which parts of each framework earn their keep, where frameworks pay off at all, and
-      four worked case studies showing which artifacts get produced when.</p>
+    <p class="hero-body">This page does two things. First, the <strong>theory in full</strong>:
+      what each framework actually is — Zachman's 6×6 grid, every TOGAF ADM phase, ArchiMate's
+      layers and relationships, C4's four levels, arc42's twelve sections. Then the
+      <strong>practice</strong>: which parts earn their keep, where frameworks pay off at all,
+      and four worked case studies showing which artifacts get produced when.</p>
+  </div>
+</section>
+
+<!-- THE FRAMEWORKS, EXPLAINED -->
+<section class="reveal" id="frameworks">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">The theory, in full</div>
+      <h2 class="section-heading">The frameworks, explained properly.</h2>
+      <p class="section-sub">Before judging what's ceremony and what's value, you need to know
+        what each framework actually contains. Here is each one in detail — origin, structure,
+        core concepts, and what it produces.</p>
+    </div>
+    <div class="fw-detail">
+
+      <!-- ZACHMAN -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">ZF</div>
+          <div>
+            <div class="fw-name">Zachman Framework</div>
+            <div class="fw-std">John Zachman · IBM, 1987 · an ontology, not a method</div>
+          </div>
+        </div>
+        <p class="fw-tagline">The oldest EA framework, born from a 1987 IBM Systems Journal paper.
+          Zachman observed that complex engineering disciplines (aircraft, buildings) describe one
+          product from multiple perspectives, each answering different questions — and that
+          information systems needed the same discipline. The result is a <strong>6×6
+          classification matrix</strong>: it tells you <em>what kinds of descriptions exist</em>,
+          never <em>how or in what order to produce them</em>.</p>
+        <div class="fw-h4">The grid — six questions × six perspectives</div>
+        <p style="font-size:.85rem;color:var(--slate);line-height:1.7;max-width:820px">Columns are
+          the interrogatives — <strong>What</strong> (data), <strong>How</strong> (function),
+          <strong>Where</strong> (network), <strong>Who</strong> (people), <strong>When</strong>
+          (time), <strong>Why</strong> (motivation). Rows are audiences, from the executive setting
+          scope down to the running enterprise. Each cell holds one <em>primitive</em> model. The
+          key rule: moving down a row is a <em>transformation of perspective</em>, not just "more
+          detail" — the owner's business-entity model and the architect's logical data model are
+          different models of the same thing.</p>
+        <div class="zg-wrap">
+          <table class="zg">
+            <thead>
+              <tr>
+                <th class="rowhead" style="background:var(--hero-bg);color:rgba(255,255,255,.85)">Perspective ↓ / Question →</th>
+                <th>What (data)</th><th>How (function)</th><th>Where (network)</th>
+                <th>Who (people)</th><th>When (time)</th><th>Why (motivation)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="rowhead">Executive<small>scope contexts</small></th>
+                <td>List of things important to the business</td><td>List of processes</td>
+                <td>List of locations</td><td>List of organizations</td>
+                <td>List of events &amp; cycles</td><td>List of goals &amp; strategies</td>
+              </tr>
+              <tr>
+                <th class="rowhead">Business management<small>business concepts</small></th>
+                <td>Semantic / business entity model</td><td>Business process model</td>
+                <td>Business logistics network</td><td>Workflow &amp; org model</td>
+                <td>Master schedule</td><td>Business plan</td>
+              </tr>
+              <tr>
+                <th class="rowhead">Architect<small>system logic</small></th>
+                <td>Logical data model</td><td>Application architecture</td>
+                <td>Distributed system architecture</td><td>Human-interface architecture</td>
+                <td>Processing structure</td><td>Business rule model</td>
+              </tr>
+              <tr>
+                <th class="rowhead">Engineer<small>technology physics</small></th>
+                <td>Physical data model</td><td>System design</td>
+                <td>Technology architecture</td><td>Presentation architecture</td>
+                <td>Control structure</td><td>Rule design</td>
+              </tr>
+              <tr>
+                <th class="rowhead">Technician<small>tool components</small></th>
+                <td>Data definitions (DDL)</td><td>Programs</td>
+                <td>Network configuration</td><td>Security &amp; access definitions</td>
+                <td>Timing definitions</td><td>Rule specifications</td>
+              </tr>
+              <tr>
+                <th class="rowhead">Enterprise<small>the running instance</small></th>
+                <td>Actual data</td><td>Working functions</td>
+                <td>Physical networks</td><td>Trained people</td>
+                <td>Executed schedules</td><td>Enforced rules</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fw-cols three" style="margin-top:20px">
+          <div class="fw-col">
+            <h4>Core ideas</h4>
+            <ul>
+              <li>An <strong>ontology</strong> — a complete classification of architecture descriptions</li>
+              <li>Primitive models per cell; real deliverables are <em>composites</em> of several cells</li>
+              <li>Column traceability: every cell in a column describes the same thing at a different altitude</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Strengths</h4>
+            <ul>
+              <li>Complete — nothing about a system falls outside the grid</li>
+              <li>Audience-matching: explains <em>why</em> one diagram can't serve everyone</li>
+              <li>Framework-agnostic — every other framework's artifacts can be located in it</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Limits</h4>
+            <ul>
+              <li>No process, no deliverables, no guidance on <em>how</em> — by design</li>
+              <li>No notation — you bring your own modeling language</li>
+              <li>Filling all 36 cells is impractical and never the point</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOGAF -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">TG</div>
+          <div>
+            <div class="fw-name">TOGAF</div>
+            <div class="fw-std">The Open Group, 1995 (from US DoD's TAFIM) · current: TOGAF 10 · a method + governance</div>
+          </div>
+        </div>
+        <p class="fw-tagline">The most widely adopted EA framework. Where Zachman classifies,
+          TOGAF <strong>prescribes a process</strong>: the Architecture Development Method (ADM),
+          a repeatable cycle for taking an enterprise from a current state to a target state with
+          governance along the way. It covers four architecture domains — <strong>Business, Data,
+          Application, Technology (BDAT)</strong> — and TOGAF 10 restructured the content into a
+          small stable core plus extended guidance so it can be adopted piecemeal.</p>
+        <div class="fw-h4">The ADM — every phase, what it does, what it produces</div>
+        <div class="dt-wrap">
+          <table class="dt">
+            <thead><tr><th>Phase</th><th>Purpose</th><th>Key outputs</th></tr></thead>
+            <tbody>
+              <tr><td>Preliminary</td><td>Establish the architecture capability itself — scope, principles, tailoring, tools</td><td>Architecture principles, tailored framework, governance setup</td></tr>
+              <tr><td>A · Architecture Vision</td><td>Scope the engagement, identify stakeholders and their concerns, get sponsorship</td><td>Statement of Architecture Work, Architecture Vision, stakeholder map</td></tr>
+              <tr><td>B · Business Architecture</td><td>Baseline and target for the business layer: capabilities, processes, organization</td><td>Business architecture (baseline + target), gap analysis</td></tr>
+              <tr><td>C · Information Systems</td><td>Two sub-architectures: Data (what information, where mastered) and Application (which systems, how they interact)</td><td>Data &amp; application architectures (baseline + target), gaps</td></tr>
+              <tr><td>D · Technology Architecture</td><td>Platforms, infrastructure, networks that host the application layer</td><td>Technology architecture (baseline + target), gaps</td></tr>
+              <tr><td>E · Opportunities &amp; Solutions</td><td>Consolidate all gaps into work packages; define transition architectures (plateaus)</td><td>Work packages, transition architectures, high-level roadmap</td></tr>
+              <tr><td>F · Migration Planning</td><td>Cost, prioritize, and schedule — turn the roadmap into a funded plan</td><td>Implementation &amp; Migration Plan, finalized roadmap</td></tr>
+              <tr><td>G · Implementation Governance</td><td>Ensure delivery projects conform to the architecture</td><td>Architecture contracts, compliance reviews, dispensations (waivers)</td></tr>
+              <tr><td>H · Architecture Change Management</td><td>Watch for drift and changed conditions; decide when a new ADM cycle is needed</td><td>Change requests, updated architecture</td></tr>
+              <tr><td>Requirements Mgmt</td><td>The hub of the cycle — requirements flow into and out of every phase continuously</td><td>Requirements repository, impact assessments</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fw-cols three" style="margin-top:20px">
+          <div class="fw-col">
+            <h4>Beyond the ADM</h4>
+            <ul>
+              <li><strong>Content framework</strong> — metamodel of deliverables, artifacts, and building blocks</li>
+              <li><strong>Enterprise Continuum</strong> — organize assets from generic (industry) to specific (yours)</li>
+              <li><strong>Architecture Repository</strong> — where all of it lives</li>
+              <li><strong>Capability framework</strong> — ARB, contracts, skills, maturity models</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Strengths</h4>
+            <ul>
+              <li>Shared vocabulary across the industry — everyone knows what "Phase B" means</li>
+              <li>Baseline → target → gap is genuinely reusable on any transformation</li>
+              <li>Explicitly designed to be tailored, not adopted wholesale</li>
+              <li>Certification (Foundation / Practitioner) is a recognized hiring signal</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Limits</h4>
+            <ul>
+              <li>Document-heavy if followed literally; easy to mistake deliverables for outcomes</li>
+              <li>No notation of its own — pairs with ArchiMate for the actual models</li>
+              <li>Weak on modern delivery (agile, product teams) — the guidance exists but feels bolted on</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARCHIMATE -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">AM</div>
+          <div>
+            <div class="fw-name">ArchiMate 3.x</div>
+            <div class="fw-std">Telematica Instituut (NL), early 2000s → The Open Group since 2008 · a modeling language</div>
+          </div>
+        </div>
+        <p class="fw-tagline">The standard <strong>notation</strong> for enterprise architecture —
+          what UML is to software design, ArchiMate is to the enterprise. It defines a precise
+          vocabulary of elements and relationships across layers, so a model means the same thing
+          to every reader. TOGAF says <em>when</em> to model; ArchiMate says <em>how to draw it</em>.</p>
+        <div class="fw-h4">The layers</div>
+        <div class="dt-wrap">
+          <table class="dt">
+            <thead><tr><th>Layer</th><th>Question it answers</th><th>Typical elements</th></tr></thead>
+            <tbody>
+              <tr><td>Motivation</td><td>Why does the architecture exist?</td><td>Stakeholder, driver, goal, outcome, requirement, principle</td></tr>
+              <tr><td>Strategy</td><td>What courses of action and capabilities get us there?</td><td>Capability, resource, course of action, value stream</td></tr>
+              <tr><td>Business</td><td>How does the business operate?</td><td>Business actor, role, process, service, function, business object</td></tr>
+              <tr><td>Application</td><td>Which systems support the business?</td><td>Application component, application service, interface, data object</td></tr>
+              <tr><td>Technology</td><td>What infrastructure runs the applications?</td><td>Node, device, system software, network, artifact</td></tr>
+              <tr><td>Physical</td><td>What physical machinery and facilities are involved?</td><td>Equipment, facility, distribution network, material</td></tr>
+              <tr><td>Implementation &amp; Migration</td><td>How do we get from here to there?</td><td>Work package, deliverable, plateau, gap</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.85rem;color:var(--slate);line-height:1.7;max-width:820px;margin-top:4px">
+          Each layer is crossed with three <strong>aspects</strong>: active structure (who/what acts),
+          behavior (what happens), and passive structure (what is acted upon). This layer × aspect
+          grid is ArchiMate's quiet homage to Zachman.</p>
+        <div class="fw-h4">The relationships that carry the meaning</div>
+        <div class="fw-cols three">
+          <div class="fw-col">
+            <h4>Structural</h4>
+            <ul>
+              <li><strong>Composition / aggregation</strong> — part-of (strong / loose)</li>
+              <li><strong>Assignment</strong> — an active element is allocated to behavior ("this team runs this process")</li>
+              <li><strong>Realization</strong> — a more concrete element makes an abstract one real ("this app realizes this capability") — the single most important relationship for impact analysis</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Dependency &amp; dynamic</h4>
+            <ul>
+              <li><strong>Serving</strong> — provides functionality to ("the API serves the portal")</li>
+              <li><strong>Access</strong> — behavior reads/writes passive elements (data)</li>
+              <li><strong>Triggering / flow</strong> — temporal order and what passes between behaviors</li>
+              <li><strong>Influence</strong> — motivation elements affecting each other (+/−)</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>In practice</h4>
+            <ul>
+              <li><strong>Viewpoints</strong> — predefined element selections per stakeholder concern (Layered, Capability Map, Application Cooperation, Technology…)</li>
+              <li><strong>Archi</strong> — the free, de-facto modeling tool; Open Exchange Format for portability</li>
+              <li>A maintained model answers impact questions no diagram pile can</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- C4 -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">C4</div>
+          <div>
+            <div class="fw-name">C4 model + Structurizr DSL</div>
+            <div class="fw-std">Simon Brown, ~2011 · open source · system-level diagramming</div>
+          </div>
+        </div>
+        <p class="fw-tagline">Born as a reaction to two failure modes: meaningless
+          boxes-and-lines on whiteboards, and heavyweight UML nobody maintains. C4 describes
+          <strong>one software system</strong> at four zoom levels — "Google Maps for your
+          codebase" — with strict notation hygiene so every diagram is self-explanatory.</p>
+        <div class="fw-h4">The four levels</div>
+        <div class="dt-wrap">
+          <table class="dt">
+            <thead><tr><th>Level</th><th>Shows</th><th>Audience</th><th>Elements</th></tr></thead>
+            <tbody>
+              <tr><td>1 · System Context</td><td>The system as one box, its users, and neighboring systems</td><td>Everyone, including non-technical</td><td>Person, software system, external system</td></tr>
+              <tr><td>2 · Container</td><td>The deployable/runnable units inside the system — web app, SPA, API, database, message broker (<em>not</em> Docker containers)</td><td>Technical people, in and around the team</td><td>Container (with technology stated)</td></tr>
+              <tr><td>3 · Component</td><td>The major building blocks inside one container and their responsibilities</td><td>Developers working on that container</td><td>Component</td></tr>
+              <tr><td>4 · Code</td><td>Classes/functions inside one component</td><td>Rarely drawn — the IDE generates it better</td><td>UML class diagram, etc.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fw-cols three" style="margin-top:20px">
+          <div class="fw-col">
+            <h4>Supplementary diagrams</h4>
+            <ul>
+              <li><strong>System Landscape</strong> — all systems in an enterprise scope</li>
+              <li><strong>Dynamic</strong> — numbered interactions for one scenario</li>
+              <li><strong>Deployment</strong> — containers mapped onto infrastructure</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Notation rules</h4>
+            <ul>
+              <li>Every element: name, type, technology, one-line description</li>
+              <li>Every relationship labelled with intent + protocol ("Reads orders from · JDBC")</li>
+              <li>Title and legend on every diagram; 5–20 elements per view</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Structurizr DSL</h4>
+            <ul>
+              <li>Define the <strong>model once</strong> as text; generate many views from it</li>
+              <li>Lives in Git next to the code it describes — diffable, reviewable</li>
+              <li>Renders via Structurizr, Mermaid, or PlantUML (C4-PlantUML)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARC42 + ADR -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">A4</div>
+          <div>
+            <div class="fw-name">arc42 + ADR / MADR</div>
+            <div class="fw-std">Gernot Starke &amp; Peter Hruschka (arc42) · Michael Nygard, 2011 (ADR) · docs &amp; decisions as code</div>
+          </div>
+        </div>
+        <p class="fw-tagline">Two complementary open templates. <strong>arc42</strong> answers
+          "how do we document a system?" with twelve sections, each answering exactly one
+          question. <strong>ADRs</strong> (Architecture Decision Records) answer "why is it built
+          this way?" — one significant decision per file, written when the decision is made,
+          immutable afterwards.</p>
+        <div class="fw-h4">arc42's twelve sections</div>
+        <div class="dt-wrap">
+          <table class="dt">
+            <thead><tr><th>§</th><th>Section</th><th>The question it answers</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Introduction &amp; Goals</td><td>What is this system for, and what are the top 3–5 quality goals?</td></tr>
+              <tr><td>2</td><td>Constraints</td><td>What is fixed and non-negotiable (tech, org, regulation)?</td></tr>
+              <tr><td>3</td><td>Context &amp; Scope</td><td>What's inside vs. outside, and who/what do we talk to?</td></tr>
+              <tr><td>4</td><td>Solution Strategy</td><td>What are the fundamental decisions and approaches, in half a page?</td></tr>
+              <tr><td>5</td><td>Building Block View</td><td>How is the system statically decomposed? (embed the C4 diagrams here)</td></tr>
+              <tr><td>6</td><td>Runtime View</td><td>How do the blocks interact in the important scenarios?</td></tr>
+              <tr><td>7</td><td>Deployment View</td><td>Where does it run — hardware, environments, mapping?</td></tr>
+              <tr><td>8</td><td>Crosscutting Concepts</td><td>What patterns apply everywhere (security, persistence, logging)?</td></tr>
+              <tr><td>9</td><td>Architecture Decisions</td><td>Which significant decisions were made? (the ADR log lives here)</td></tr>
+              <tr><td>10</td><td>Quality Requirements</td><td>What does "good" mean, as measurable scenarios?</td></tr>
+              <tr><td>11</td><td>Risks &amp; Technical Debt</td><td>What could hurt us, and what do we already owe?</td></tr>
+              <tr><td>12</td><td>Glossary</td><td>What do our terms mean? (the ubiquitous-language contract)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fw-cols" style="margin-top:20px">
+          <div class="fw-col">
+            <h4>Anatomy of an ADR (MADR format)</h4>
+            <ul>
+              <li><strong>Title + status</strong> — proposed / accepted / superseded, plus date</li>
+              <li><strong>Context</strong> — the forces at play when the decision was needed</li>
+              <li><strong>Decision drivers</strong> — what actually mattered (throughput, team skills, cost…)</li>
+              <li><strong>Options considered</strong> — each with honest pros and cons; this is the part future readers can't reconstruct</li>
+              <li><strong>Outcome + consequences</strong> — the choice, justified against the drivers, with the bad consequences stated too</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>The conventions that make it work</h4>
+            <ul>
+              <li>ADRs are <strong>immutable</strong> — superseded by new ADRs, never rewritten; the log is the history</li>
+              <li>arc42 has a <strong>detail knob</strong> — LEAN / ESSENTIAL / THOROUGH; write the amount the stakes justify</li>
+              <li>Quality goals must be <strong>measurable</strong> — "fast" becomes "&lt;200 ms p95 at 1,000 concurrent users"</li>
+              <li>Everything is Markdown in Git — reviewed, diffed, and versioned like code</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE REST OF THE LANDSCAPE -->
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">+</div>
+          <div>
+            <div class="fw-name">The rest of the landscape</div>
+            <div class="fw-std">FEAF / DoDAF / MODAF · Gartner · BIZBOK</div>
+          </div>
+        </div>
+        <p class="fw-tagline">Three more names you'll meet in job specs and RFPs — each real,
+          each with a legitimate niche.</p>
+        <div class="fw-cols three">
+          <div class="fw-col">
+            <h4>FEAF / DoDAF / MODAF</h4>
+            <ul>
+              <li>Government reference models: <strong>FEAF</strong> (US federal agencies) defines shared reference models — performance, business, service, data, technical — so agencies can be compared and consolidated</li>
+              <li><strong>DoDAF</strong> (US defense) defines viewpoint sets — OV (operational), SV (systems), TV (technical standards) — mandated in defense procurement; <strong>MODAF</strong> is the UK sibling</li>
+              <li>Learn them when a government/defense RFP names them; skip otherwise</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>Gartner / "pragmatic EA"</h4>
+            <ul>
+              <li>Not a published framework — an advisory <strong>stance</strong>: EA exists to influence business outcomes, not to produce documentation</li>
+              <li>Emphasizes "just enough architecture", business-outcome metrics, and EA as an internal consultancy</li>
+              <li>The takeaway is the attitude: measure EA by decisions influenced and money saved, not models produced</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>BIZBOK</h4>
+            <ul>
+              <li>The Business Architecture Guild's body of knowledge — business architecture as its own discipline</li>
+              <li>Core artifacts: <strong>capability maps</strong>, value streams, information maps, organization maps</li>
+              <li>The one-page capability map — what the business <em>does</em>, independent of org chart or systems — is its gift to the rest of EA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -334,8 +749,9 @@ footer{background:#070e1a;padding:54px 0 34px}
     <div class="section-header">
       <div class="section-label">The landscape</div>
       <h2 class="section-heading">Every framework, one honest verdict.</h2>
-      <p class="section-sub">Beyond the four standards this skill is built on, you'll meet these
-        names in job specs, RFPs, and consulting decks. Here's what each is actually for.</p>
+      <p class="section-sub">Now that you've seen what each framework contains, here's the whole
+        landscape condensed — what each one is really for, and the verdict practitioners
+        eventually arrive at.</p>
     </div>
     <div class="compare-wrap">
       <table class="compare-table">
