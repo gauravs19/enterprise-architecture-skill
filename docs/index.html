@@ -629,6 +629,40 @@ and giving a credible replay story without operating brokers.
         <p class="example-links"><a href="examples/03-review.with-skill.md">Full review ↗</a> &nbsp;·&nbsp; <a href="examples/03-review.baseline.md">Baseline ↗</a></p>
       </div>
     </div>
+
+    <!-- Example 4 -->
+    <div class="example">
+      <div class="example-head">
+        <div class="mode">Mode 4 · Model the enterprise · ArchiMate</div>
+        <h3>Insurance capability → application map</h3>
+        <div class="example-prompt">“We're an online insurance company. Our business functions: selling policies, underwriting risk, handling claims, billing customers, managing agents. Our systems: PolicyCenter, a custom underwriting rules engine, ClaimCenter, two separate billing systems (legacy SAP + Stripe-based), and an agent portal. Map our capabilities to the applications that realize them.”</div>
+        <div class="scoreline"><span>capability map (what, not who)</span><span>explicit realization links</span><span>stable EA IDs</span><span>duplication flagged → TIME</span><span>cross-mode follow-ups</span></div>
+      </div>
+      <div class="example-body">
+        <div class="diagram-label">Capability map with realization links (Mermaid approximation of the ArchiMate viewpoint)</div>
+        <pre class="mermaid">
+flowchart TB
+  subgraph CAP["Business capabilities"]
+    sales["Policy Sales"]
+    uw["Underwriting"]
+    claims["Claims Handling"]
+    bill["Customer Billing"]
+    agents["Agent Management"]
+  end
+  pc["PolicyCenter"] -- realizes --> sales
+  rules["UW Rules Engine"] -- realizes --> uw
+  cc["ClaimCenter"] -- realizes --> claims
+  sap["Legacy SAP Billing"] -- realizes --> bill
+  stripe["Stripe Billing"] -- realizes --> bill
+  portal["Agent Portal"] -- realizes --> agents
+  portal -. serves .-> sales
+  style sap fill:#fef2f2,stroke:#fecaca
+  style stripe fill:#fef2f2,stroke:#fecaca
+        </pre>
+        <p style="font-size:.9rem;color:var(--ink-mid);margin-top:10px">The model surfaces what a system list can't: <strong>Customer Billing is realized twice</strong> (rationalization candidate → TIME assessment + an ADR), the rules engine is a single-owner risk, and the portal crosses two capabilities.</p>
+        <p class="example-links"><a href="examples/04-capability-map.with-skill.md">Full output ↗</a> &nbsp;·&nbsp; <em style="color:var(--slate-light);font-weight:500">illustrative skill output — added after the eval run, not eval-scored</em></p>
+      </div>
+    </div>
   </div>
 </section>
 
