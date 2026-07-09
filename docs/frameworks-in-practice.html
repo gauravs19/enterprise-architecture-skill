@@ -1774,8 +1774,10 @@ footer{background:#070e1a;padding:54px 0 34px}
 (function(){
   const els=document.querySelectorAll('.reveal');
   if(!els.length||!('IntersectionObserver'in window))return;
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
   els.forEach(el=>io.observe(el));
+  // Fallback: any section already in or above the viewport reveals immediately
+  requestAnimationFrame(()=>{els.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in-view');});});
 })();
 (function(){
   const sections=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a[href^="#"]');
