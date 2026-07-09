@@ -18,3 +18,5 @@ jobs:
         run: python scripts/ea_lint.py docs/examples
       - name: Smoke-test the linter against a single file
         run: python scripts/ea_lint.py docs/examples/03-review.with-skill.md
+      - name: Check internal links and anchors on the docs site
+        run: python scripts/check_docs_links.py docs
