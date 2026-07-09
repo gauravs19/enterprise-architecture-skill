@@ -43,6 +43,10 @@ ArchiMate models and ADRs as deliverables.
 
 1. **Pick the mode** (below) from what the user is asking for. If ambiguous, ask one
    short clarifying question rather than guessing — architecture work is expensive to redo.
+   If the question is *which framework / how should we approach this* rather than a request
+   for an artifact ("is TOGAF worth it?", "Zachman vs TOGAF?", "how do we structure this
+   effort?"), read `references/choosing-frameworks.md` and answer with a grounded
+   recommendation that routes into the right mode.
 2. **Read the matching reference file(s)** in `references/` before producing output. They
    contain the real notation, element catalogs, templates, and gotchas. Do not work from
    memory of the standards — load the reference so the output is correct and idiomatic.
@@ -163,5 +167,6 @@ hard gate — explain findings to the user rather than silently "fixing" their i
 | `references/arc42.md` | Whole-system documentation (Mode 2) |
 | `references/adr-madr.md` | Writing a decision record (Mode 2) |
 | `references/review-rubric.md` | Reviewing/assessing an architecture (Mode 3) |
+| `references/choosing-frameworks.md` | "Which framework should I use?", framework comparisons, EA-approach strategy questions |
 
 Templates live in `assets/templates/`; the consistency linter in `scripts/ea_lint.py`.

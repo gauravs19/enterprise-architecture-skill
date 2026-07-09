@@ -3,7 +3,14 @@
 All notable changes to this skill are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.2.0] — 2026-07-09
+
+### Added
+- **`references/choosing-frameworks.md`** — practical framework-selection guidance
+  distilled from the [frameworks-in-practice guide](https://gauravs19.github.io/enterprise-architecture-skill/frameworks-in-practice.html):
+  selection table, one honest verdict per framework (incl. Zachman, FEAF/DoDAF, Gartner,
+  BIZBOK), the five situations where EA pays off, composition stacks, and anti-patterns.
+  `SKILL.md` now routes "which framework should I use?" questions to it.
 
 ### Added (docs & tooling — no skill content change)
 - **Frameworks-in-practice guide** (`docs/frameworks-in-practice.html`, nav: *Guide*):
@@ -43,4 +50,5 @@ First public release.
   review, ArchiMate capability-mapping, and TOGAF-engagement test cases. With-skill runs
   produced the correct artifact in the correct format in every case.
 
+[0.2.0]: https://github.com/gauravs19/enterprise-architecture-skill/releases/tag/v0.2.0
 [0.1.0]: https://github.com/gauravs19/enterprise-architecture-skill/releases/tag/v0.1.0
