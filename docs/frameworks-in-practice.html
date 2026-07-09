@@ -188,6 +188,10 @@ pre.code{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:16px;overfl
   font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.76rem;line-height:1.55;margin:14px 0 4px}
 .fw-note{font-size:.85rem;color:var(--slate);line-height:1.7;max-width:820px}
 .fw-note strong{color:var(--ink)}
+.fw-fig{margin:18px 0 6px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);padding:22px 18px 14px}
+.fw-fig svg{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+.fw-fig.wide svg{max-width:820px}
+.fw-caption{font-size:.74rem;color:var(--slate-light);margin-top:12px;text-align:center}
 
 /* CASE STUDIES */
 .case{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px}
@@ -282,10 +286,10 @@ footer{background:#070e1a;padding:54px 0 34px}
     </a>
     <div class="nav-links">
       <a href="index.html">Overview</a>
-      <a href="#frameworks">Frameworks</a>
-      <a href="#landscape">Landscape</a>
-      <a href="#four">In practice</a>
+      <a href="#frameworks">Theory</a>
+      <a href="#landscape">Verdicts</a>
       <a href="#cases">Case studies</a>
+      <a href="#antipatterns">Anti-patterns</a>
       <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
     </div>
     <div class="nav-right">
@@ -300,9 +304,8 @@ footer{background:#070e1a;padding:54px 0 34px}
 </nav>
 <div class="nav-mobile" id="nav-mobile">
   <a href="index.html">Overview</a>
-  <a href="#frameworks">Frameworks</a>
-  <a href="#landscape">Landscape</a>
-  <a href="#four">In practice</a>
+  <a href="#frameworks">Theory</a>
+  <a href="#landscape">Verdicts</a>
   <a href="#cases">Case studies</a>
   <a href="#antipatterns">Anti-patterns</a>
   <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
@@ -335,7 +338,7 @@ footer{background:#070e1a;padding:54px 0 34px}
     <div class="fw-detail">
 
       <!-- ZACHMAN -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-zachman">
         <div class="fw-top">
           <div class="fw-mark">ZF</div>
           <div>
@@ -517,7 +520,7 @@ footer{background:#070e1a;padding:54px 0 34px}
       </div>
 
       <!-- TOGAF -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-togaf">
         <div class="fw-top">
           <div class="fw-mark">TG</div>
           <div>
@@ -531,6 +534,54 @@ footer{background:#070e1a;padding:54px 0 34px}
           governance along the way. It covers four architecture domains — <strong>Business, Data,
           Application, Technology (BDAT)</strong> — and TOGAF 10 restructured the content into a
           small stable core plus extended guidance so it can be adopted piecemeal.</p>
+        <div class="fw-fig">
+          <svg viewBox="0 0 460 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TOGAF ADM cycle diagram">
+            <circle cx="230" cy="215" r="150" fill="none" stroke="#bfdbfe" stroke-width="1.5" stroke-dasharray="5 5"/>
+            <!-- center hub -->
+            <circle cx="230" cy="215" r="52" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+            <text x="230" y="209" font-size="10.5" font-weight="700" fill="#1d4ed8" text-anchor="middle" font-family="Inter,sans-serif">Requirements</text>
+            <text x="230" y="223" font-size="10.5" font-weight="700" fill="#1d4ed8" text-anchor="middle" font-family="Inter,sans-serif">Management</text>
+            <text x="230" y="238" font-size="7.5" fill="#64748b" text-anchor="middle" font-family="Inter,sans-serif">feeds every phase</text>
+            <!-- phase pills (clockwise from top) -->
+            <g font-family="Inter,sans-serif" text-anchor="middle">
+              <rect x="180" y="48" width="100" height="30" rx="15" fill="#0f172a"/>
+              <text x="230" y="67" font-size="9.5" font-weight="700" fill="#fff">Preliminary</text>
+              <rect x="278" y="82" width="96" height="30" rx="15" fill="#1d4ed8"/>
+              <text x="326" y="101" font-size="9.5" font-weight="700" fill="#fff">A · Vision</text>
+              <rect x="330" y="172" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="378" y="191" font-size="9.5" font-weight="700" fill="#1d4ed8">B · Business</text>
+              <rect x="312" y="272" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="360" y="291" font-size="9.5" font-weight="700" fill="#1d4ed8">C · Info Systems</text>
+              <rect x="233" y="338" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="281" y="357" font-size="9.5" font-weight="700" fill="#1d4ed8">D · Technology</text>
+              <rect x="131" y="338" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="179" y="357" font-size="9.5" font-weight="700" fill="#1d4ed8">E · Opportunities</text>
+              <rect x="52" y="272" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="100" y="291" font-size="9.5" font-weight="700" fill="#1d4ed8">F · Migration</text>
+              <rect x="34" y="172" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="82" y="191" font-size="9.5" font-weight="700" fill="#1d4ed8">G · Governance</text>
+              <rect x="86" y="82" width="96" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="134" y="101" font-size="9.5" font-weight="700" fill="#1d4ed8">H · Change Mgmt</text>
+            </g>
+            <!-- flow arrows -->
+            <defs>
+              <marker id="adm-ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0 0 L6 3 L0 6 Z" fill="#94a3b8"/>
+              </marker>
+            </defs>
+            <path d="M 284 78 Q 300 82 310 92" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 356 116 Q 370 138 376 166" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 380 206 Q 378 240 368 268" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 344 306 Q 328 326 306 340" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 262 372 Q 230 384 198 372" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 154 340 Q 132 326 116 306" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 92 268 Q 82 240 80 206" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 84 166 Q 90 138 104 116" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+            <path d="M 150 92 Q 160 82 176 78" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#adm-ah)"/>
+          </svg>
+          <div class="fw-caption">The ADM cycle: nine phases around a continuous Requirements Management hub. In practice the loops nest and repeat — nobody runs it once, clockwise, to completion.</div>
+        </div>
+
         <div class="fw-h4">The ADM — every phase, what it does, what it produces</div>
         <div class="dt-wrap">
           <table class="dt">
@@ -671,10 +722,31 @@ footer{background:#070e1a;padding:54px 0 34px}
           detail), <strong>segment</strong> (one business area), <strong>capability</strong>
           (one capability increment, high detail) — and a full ADM cycle can run at any of the
           three. A two-week capability-level cycle is still TOGAF.</p>
+
+        <div class="fw-h4">In practice — the ceremony vs. what survives</div>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony (skip deliberately)</h4>
+            <ul>
+              <li>Running all ten phases sequentially with full deliverable sets</li>
+              <li>Exhaustive Architecture Repository &amp; Enterprise Continuum curation</li>
+              <li>Heavyweight document templates for every phase output</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>ADM as a scoping checklist</strong> — “have I forgotten anything?”, never a linear process</li>
+              <li><strong>The spine</strong> — baseline → target → gap → roadmap, on any transformation</li>
+              <li><strong>TIME portfolio scoring</strong> — rate each application on business value × technical fit → <em>Tolerate / Invest / Migrate / Eliminate</em>, with a next step per app</li>
+              <li><strong>The vocabulary</strong> — “Phase B”, “ARB”, “waiver” mean the same thing in every large org; that shared language is half the certification's value</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- ARCHIMATE -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-archimate">
         <div class="fw-top">
           <div class="fw-mark">AM</div>
           <div>
@@ -687,6 +759,52 @@ footer{background:#070e1a;padding:54px 0 34px}
           vocabulary of elements and relationships across layers, so a model means the same thing
           to every reader. TOGAF says <em>when</em> to model; ArchiMate says <em>how to draw it</em>.</p>
         <div class="fw-h4">The layers</div>
+        <div class="fw-fig">
+          <svg viewBox="0 0 460 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ArchiMate layer stack">
+            <defs>
+              <marker id="am-up" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#1d4ed8"/></marker>
+              <marker id="am-dn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#94a3b8"/></marker>
+            </defs>
+            <g font-family="Inter,sans-serif">
+              <!-- motivation side panel -->
+              <rect x="352" y="58" width="94" height="212" rx="10" fill="#f5f3ff" stroke="#ddd6fe"/>
+              <text x="399" y="80" font-size="10" font-weight="800" fill="#7c3aed" text-anchor="middle">MOTIVATION</text>
+              <text x="399" y="98" font-size="8" fill="#7c3aed" text-anchor="middle">goals · drivers</text>
+              <text x="399" y="110" font-size="8" fill="#7c3aed" text-anchor="middle">requirements</text>
+              <text x="399" y="128" font-size="8.5" fill="#8b5cf6" text-anchor="middle">“why?” — crosses</text>
+              <text x="399" y="140" font-size="8.5" fill="#8b5cf6" text-anchor="middle">all layers</text>
+              <!-- strategy -->
+              <rect x="14" y="14" width="290" height="40" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+              <text x="28" y="33" font-size="10.5" font-weight="800" fill="#c2410c">STRATEGY</text>
+              <text x="28" y="46" font-size="8.5" fill="#9a3412">capability · resource · course of action</text>
+              <!-- business -->
+              <rect x="14" y="66" width="290" height="52" rx="8" fill="#fefce8" stroke="#fde68a"/>
+              <text x="28" y="86" font-size="10.5" font-weight="800" fill="#a16207">BUSINESS</text>
+              <text x="28" y="99" font-size="8.5" fill="#854d0e">actor · role · process · business service · object</text>
+              <!-- application -->
+              <rect x="14" y="130" width="290" height="52" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="28" y="150" font-size="10.5" font-weight="800" fill="#1d4ed8">APPLICATION</text>
+              <text x="28" y="163" font-size="8.5" fill="#1e40af">component · application service · interface · data object</text>
+              <!-- technology -->
+              <rect x="14" y="194" width="290" height="52" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="28" y="214" font-size="10.5" font-weight="800" fill="#15803d">TECHNOLOGY</text>
+              <text x="28" y="227" font-size="8.5" fill="#166534">node · device · system software · network · artifact</text>
+              <!-- physical + impl -->
+              <rect x="14" y="258" width="139" height="40" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+              <text x="28" y="276" font-size="9.5" font-weight="800" fill="#475569">PHYSICAL</text>
+              <text x="28" y="289" font-size="8" fill="#64748b">equipment · facility</text>
+              <rect x="165" y="258" width="139" height="40" rx="8" fill="#fdf2f8" stroke="#fbcfe8"/>
+              <text x="179" y="276" font-size="9.5" font-weight="800" fill="#be185d">IMPL. &amp; MIGRATION</text>
+              <text x="179" y="289" font-size="8" fill="#9d174d">work package · plateau</text>
+              <!-- arrow channel between bands and motivation panel -->
+              <path d="M 318 240 L 318 66" fill="none" stroke="#1d4ed8" stroke-width="1.6" marker-end="url(#am-up)"/>
+              <text transform="rotate(-90 318 153)" x="318" y="149" font-size="8.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">realization</text>
+              <path d="M 338 66 L 338 240" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#am-dn)"/>
+              <text transform="rotate(-90 338 153)" x="338" y="157" font-size="8.5" font-weight="700" fill="#64748b" text-anchor="middle">serving</text>
+            </g>
+          </svg>
+          <div class="fw-caption">The stack: each layer's services serve the layer above; concrete elements realize abstract ones. Motivation crosses everything — every element should trace to a “why”.</div>
+        </div>
         <div class="dt-wrap">
           <table class="dt">
             <thead><tr><th>Layer</th><th>Question it answers</th><th>Typical elements</th></tr></thead>
@@ -842,10 +960,28 @@ footer{background:#070e1a;padding:54px 0 34px}
             </tbody>
           </table>
         </div>
+
+        <div class="fw-h4">In practice — the ceremony vs. what survives</div>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony (skip deliberately)</h4>
+            <ul>
+              <li>Modeling every element type across all layers “for completeness”</li>
+              <li>An enterprise-wide model maintained by one team that nobody consults</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>A small subset carries the value</strong> — realization + serving links over a capability map and an application landscape; those two views are what executives and PMs actually request</li>
+              <li><strong>A maintained model beats stale wall art</strong> — one living Archi model outperforms a folder of Visio exports every time</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- C4 -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-c4">
         <div class="fw-top">
           <div class="fw-mark">C4</div>
           <div>
@@ -858,6 +994,67 @@ footer{background:#070e1a;padding:54px 0 34px}
           <strong>one software system</strong> at four zoom levels — "Google Maps for your
           codebase" — with strict notation hygiene so every diagram is self-explanatory.</p>
         <div class="fw-h4">The four levels</div>
+        <div class="fw-fig wide">
+          <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="C4 zoom levels: context, container, component, code">
+            <defs>
+              <marker id="c4-ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#94a3b8"/></marker>
+            </defs>
+            <g font-family="Inter,sans-serif">
+              <!-- L1 context -->
+              <rect x="10" y="20" width="130" height="130" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+              <circle cx="45" cy="55" r="12" fill="#0f172a"/>
+              <text x="45" y="80" font-size="7" fill="#64748b" text-anchor="middle">person</text>
+              <rect x="65" y="80" width="52" height="34" rx="6" fill="#1d4ed8"/>
+              <text x="91" y="99" font-size="7.5" font-weight="700" fill="#fff" text-anchor="middle">system</text>
+              <rect x="95" y="32" width="36" height="24" rx="5" fill="#94a3b8"/>
+              <text x="113" y="47" font-size="6.5" font-weight="700" fill="#fff" text-anchor="middle">ext</text>
+              <line x1="57" y1="60" x2="70" y2="80" stroke="#94a3b8" stroke-width="1.2"/>
+              <line x1="107" y1="56" x2="99" y2="80" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="75" y="170" font-size="9.5" font-weight="800" fill="#0f172a" text-anchor="middle">1 · CONTEXT</text>
+              <text x="75" y="184" font-size="7.5" fill="#64748b" text-anchor="middle">everyone</text>
+              <!-- arrow -->
+              <line x1="148" y1="85" x2="166" y2="85" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#c4-ah)"/>
+              <!-- L2 container -->
+              <rect x="174" y="20" width="130" height="130" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+              <rect x="186" y="34" width="106" height="102" rx="8" fill="none" stroke="#bfdbfe" stroke-dasharray="4 4"/>
+              <rect x="196" y="44" width="86" height="22" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="239" y="58" font-size="7" font-weight="700" fill="#1d4ed8" text-anchor="middle">SPA</text>
+              <rect x="196" y="72" width="86" height="22" rx="5" fill="#1d4ed8"/>
+              <text x="239" y="86" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">API</text>
+              <rect x="196" y="100" width="40" height="22" rx="5" fill="#fff" stroke="#e2e8f0"/>
+              <text x="216" y="114" font-size="6.5" fill="#0f172a" text-anchor="middle">DB</text>
+              <rect x="242" y="100" width="40" height="22" rx="5" fill="#fff" stroke="#e2e8f0"/>
+              <text x="262" y="114" font-size="6.5" fill="#0f172a" text-anchor="middle">queue</text>
+              <text x="239" y="170" font-size="9.5" font-weight="800" fill="#0f172a" text-anchor="middle">2 · CONTAINER</text>
+              <text x="239" y="184" font-size="7.5" fill="#64748b" text-anchor="middle">technical people</text>
+              <!-- arrow -->
+              <line x1="312" y1="85" x2="330" y2="85" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#c4-ah)"/>
+              <!-- L3 component -->
+              <rect x="338" y="20" width="130" height="130" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+              <rect x="350" y="34" width="106" height="102" rx="8" fill="none" stroke="#bfdbfe" stroke-dasharray="4 4"/>
+              <text x="403" y="47" font-size="6.5" fill="#64748b" text-anchor="middle">inside the API container</text>
+              <rect x="360" y="56" width="86" height="20" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="403" y="69" font-size="6.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">order controller</text>
+              <rect x="360" y="82" width="86" height="20" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="403" y="95" font-size="6.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">payment component</text>
+              <rect x="360" y="108" width="86" height="20" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+              <text x="403" y="121" font-size="6.5" font-weight="700" fill="#1d4ed8" text-anchor="middle">order repository</text>
+              <text x="403" y="170" font-size="9.5" font-weight="800" fill="#0f172a" text-anchor="middle">3 · COMPONENT</text>
+              <text x="403" y="184" font-size="7.5" fill="#64748b" text-anchor="middle">that container's devs</text>
+              <!-- arrow -->
+              <line x1="476" y1="85" x2="494" y2="85" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#c4-ah)"/>
+              <!-- L4 code -->
+              <rect x="502" y="20" width="130" height="130" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+              <text x="514" y="52" font-size="9" font-family="Consolas,monospace" fill="#64748b">class Order {</text>
+              <text x="524" y="68" font-size="9" font-family="Consolas,monospace" fill="#94a3b8">place()</text>
+              <text x="524" y="84" font-size="9" font-family="Consolas,monospace" fill="#94a3b8">cancel()</text>
+              <text x="514" y="100" font-size="9" font-family="Consolas,monospace" fill="#64748b">}</text>
+              <text x="567" y="170" font-size="9.5" font-weight="800" fill="#0f172a" text-anchor="middle">4 · CODE</text>
+              <text x="567" y="184" font-size="7.5" fill="#64748b" text-anchor="middle">the IDE draws this</text>
+            </g>
+          </svg>
+          <div class="fw-caption">Google-Maps zoom: each level opens one box from the level before. Most systems need only levels 1–2; draw 3 selectively, generate 4.</div>
+        </div>
         <div class="dt-wrap">
           <table class="dt">
             <thead><tr><th>Level</th><th>Shows</th><th>Audience</th><th>Elements</th></tr></thead>
@@ -992,10 +1189,28 @@ footer{background:#070e1a;padding:54px 0 34px}
             </ul>
           </div>
         </div>
+
+        <div class="fw-h4">In practice — the ceremony vs. what survives</div>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony (skip deliberately)</h4>
+            <ul>
+              <li>Component and Code diagrams for everything — the IDE renders code structure better than you can draw it</li>
+              <li>Diagrams as one-off pictures, redrawn (differently) for every meeting</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>Context + Container</strong> — the two diagrams developers actually read; they answer 90% of questions</li>
+              <li><strong>The model in the repo</strong> — one DSL file as source of truth, updated in the same pull request as the change it depicts</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- ARC42 + ADR -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-arc42">
         <div class="fw-top">
           <div class="fw-mark">A4</div>
           <div>
@@ -1044,7 +1259,7 @@ footer{background:#070e1a;padding:54px 0 34px}
             <ul>
               <li>ADRs are <strong>immutable</strong> — superseded by new ADRs, never rewritten; the log is the history</li>
               <li>arc42 has a <strong>detail knob</strong> — LEAN / ESSENTIAL / THOROUGH; write the amount the stakes justify</li>
-              <li>Quality goals must be <strong>measurable</strong> — "fast" becomes "&lt;200 ms p95 at 1,000 concurrent users"</li>
+              <li>Quality goals must be <strong>measurable</strong> — vague adjectives are rejected; see the scenario format below</li>
               <li>Everything is Markdown in Git — reviewed, diffed, and versioned like code</li>
             </ul>
           </div>
@@ -1139,10 +1354,28 @@ footer{background:#070e1a;padding:54px 0 34px}
             </ul>
           </div>
         </div>
+
+        <div class="fw-h4">In practice — the ceremony vs. what survives</div>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony (skip deliberately)</h4>
+            <ul>
+              <li>The 40-page document nobody reads — thoroughness as a failure mode</li>
+              <li>Filling all twelve sections because the template has twelve sections</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>ADRs written at decision time</strong> — the trade-offs a future reader can't reconstruct; the single highest-ROI habit in this whole page</li>
+              <li><strong>arc42 at LEAN / ESSENTIAL detail</strong> — sections 1, 3, 4, 5 and 9 carry most of the value for most systems; let readers' questions pull in the rest</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- THE REST OF THE LANDSCAPE -->
-      <div class="fw-block">
+      <div class="fw-block" id="fw-rest">
         <div class="fw-top">
           <div class="fw-mark">+</div>
           <div>
@@ -1244,259 +1477,164 @@ footer{background:#070e1a;padding:54px 0 34px}
           volume — and misalignment becomes visible to a board in seconds ("our most strategic
           capability has our weakest systems"). In TOGAF terms all of this slots into Phase B; in
           this skill it's Mode 4's foundation.</p>
+        <div class="fw-fig">
+          <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capability map heat-mapped by system health">
+            <g font-family="Inter,sans-serif">
+              <text x="14" y="20" font-size="10" font-weight="800" fill="#0f172a">CAPABILITY MAP — heat: supporting-system health</text>
+              <!-- row 1 -->
+              <rect x="14" y="34" width="104" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="66" y="53" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">Marketing</text>
+              <text x="66" y="66" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <rect x="126" y="34" width="104" height="44" rx="7" fill="#fef2f2" stroke="#fecaca"/>
+              <text x="178" y="53" font-size="8.5" font-weight="700" fill="#991b1b" text-anchor="middle">Customer Onboarding</text>
+              <text x="178" y="66" font-size="7" fill="#b91c1c" text-anchor="middle">4 overlapping apps</text>
+              <rect x="238" y="34" width="104" height="44" rx="7" fill="#fffbeb" stroke="#fde68a"/>
+              <text x="290" y="53" font-size="8.5" font-weight="700" fill="#92400e" text-anchor="middle">Order Management</text>
+              <text x="290" y="66" font-size="7" fill="#a16207" text-anchor="middle">aging platform</text>
+              <rect x="350" y="34" width="96" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="398" y="53" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">Fulfilment</text>
+              <text x="398" y="66" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <!-- row 2 -->
+              <rect x="14" y="86" width="104" height="44" rx="7" fill="#fef2f2" stroke="#fecaca"/>
+              <text x="66" y="105" font-size="8.5" font-weight="700" fill="#991b1b" text-anchor="middle">Billing ★</text>
+              <text x="66" y="118" font-size="7" fill="#b91c1c" text-anchor="middle">strategic + weakest</text>
+              <rect x="126" y="86" width="104" height="44" rx="7" fill="#fffbeb" stroke="#fde68a"/>
+              <text x="178" y="105" font-size="8.5" font-weight="700" fill="#92400e" text-anchor="middle">Collections</text>
+              <text x="178" y="118" font-size="7" fill="#a16207" text-anchor="middle">3 units doing it</text>
+              <rect x="238" y="86" width="104" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="290" y="105" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">Customer Service</text>
+              <text x="290" y="118" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <rect x="350" y="86" width="96" height="44" rx="7" fill="#fffbeb" stroke="#fde68a"/>
+              <text x="398" y="105" font-size="8.5" font-weight="700" fill="#92400e" text-anchor="middle">Risk &amp; Compliance</text>
+              <text x="398" y="118" font-size="7" fill="#a16207" text-anchor="middle">manual processes</text>
+              <!-- row 3 -->
+              <rect x="14" y="138" width="104" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="66" y="157" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">HR &amp; Talent</text>
+              <text x="66" y="170" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <rect x="126" y="138" width="104" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="178" y="157" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">Finance</text>
+              <text x="178" y="170" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <rect x="238" y="138" width="104" height="44" rx="7" fill="#fffbeb" stroke="#fde68a"/>
+              <text x="290" y="157" font-size="8.5" font-weight="700" fill="#92400e" text-anchor="middle">Data &amp; Analytics</text>
+              <text x="290" y="170" font-size="7" fill="#a16207" text-anchor="middle">under-invested</text>
+              <rect x="350" y="138" width="96" height="44" rx="7" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="398" y="157" font-size="8.5" font-weight="700" fill="#166534" text-anchor="middle">Procurement</text>
+              <text x="398" y="170" font-size="7" fill="#15803d" text-anchor="middle">healthy</text>
+              <!-- legend -->
+              <rect x="14" y="204" width="10" height="10" rx="2" fill="#f0fdf4" stroke="#bbf7d0"/>
+              <text x="30" y="213" font-size="7.5" fill="#64748b">healthy</text>
+              <rect x="80" y="204" width="10" height="10" rx="2" fill="#fffbeb" stroke="#fde68a"/>
+              <text x="96" y="213" font-size="7.5" fill="#64748b">needs attention</text>
+              <rect x="180" y="204" width="10" height="10" rx="2" fill="#fef2f2" stroke="#fecaca"/>
+              <text x="196" y="213" font-size="7.5" fill="#64748b">act now</text>
+              <text x="446" y="213" font-size="7.5" fill="#94a3b8" text-anchor="end">★ strategic capability</text>
+            </g>
+          </svg>
+          <div class="fw-caption">A level-1 capability map heat-mapped by system health — the board sees the argument (“Billing is strategic and weakest”) before anyone speaks.</div>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- THE HONEST REALITY -->
+<!-- THE HONEST REALITY + VERDICTS -->
 <section class="soft reveal" id="reality">
   <div class="wrap">
     <div class="section-header">
       <div class="section-label">The honest reality</div>
       <h2 class="section-heading">Frameworks are scaffolding, not the building.</h2>
-      <p class="section-sub">Full-ceremony adoption — every phase, every deliverable — is rare
-        and usually collapses under its own weight. The value is delivered through a handful of
-        living artifacts, not through framework compliance. Practitioners steal the useful parts
-        and quietly ignore the rest.</p>
+      <p class="section-sub">That's the theory. Now the practice: full-ceremony adoption — every
+        phase, every deliverable — is rare and usually collapses under its own weight. The value
+        is delivered through a handful of living artifacts, not through framework compliance.
+        Practitioners steal the useful parts and quietly ignore the rest.</p>
     </div>
     <div class="stat-grid">
       <div class="stat-item">
         <div class="stat-number">36</div>
-        <div class="stat-label">Zachman cells almost nobody fills</div>
-        <div class="stat-desc">Attempting the full 6×6 grid is a classic EA anti-pattern. What
-          survives is the mental model: match the artifact to the audience.</div>
+        <div class="stat-label">Zachman cells — used as a lens, not a to-do list</div>
+        <div class="stat-desc">What practitioners keep is one column traced when a question
+          demands it, and the audience-matching instinct.</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">10</div>
-        <div class="stat-label">ADM phases; one reusable backbone</div>
-        <div class="stat-desc">Nobody executes A–H linearly. What every real transformation deck
-          keeps is <em>Baseline → Target → Gaps → Roadmap</em>.</div>
+        <div class="stat-label">ADM phases — run as nested loops, never A–H</div>
+        <div class="stat-desc">The part that appears in every real transformation deck is the
+          spine: baseline, target, gaps, roadmap.</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">1</div>
         <div class="stat-label">Page executives actually read</div>
-        <div class="stat-desc">The business-capability map is probably the most-used single EA
-          artifact in real life. It anchors portfolio decisions in language the board understands.</div>
+        <div class="stat-desc">The business-capability map anchors portfolio decisions in
+          language the board understands — heat-map it and the argument makes itself.</div>
       </div>
+    </div>
+    <div id="landscape" style="margin-top:52px">
+      <div class="fw-h4" style="margin-top:0">Every framework, one honest verdict</div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead><tr><th>Framework</th><th>Practical value</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><a href="#fw-zachman" style="color:var(--accent)">Zachman</a></td>
+              <td>The mental model. When a stakeholder says “this diagram doesn't help me,” you've usually given a row-1 audience a row-4 artifact.</td>
+              <td><span class="verdict lens">30-min lens</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-togaf" style="color:var(--accent)">TOGAF ADM</a></td>
+              <td>ADM as a scoping checklist, the baseline→target→gap spine, the shared governance vocabulary — and, bluntly, the certification as a hiring filter.</td>
+              <td><span class="verdict keep">Borrow the spine</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-archimate" style="color:var(--accent)">ArchiMate 3.x</a></td>
+              <td>Arguably more useful day-to-day than TOGAF itself: realization links answer “which capabilities break if we retire this app?”</td>
+              <td><span class="verdict keep">Use in anger</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-c4" style="color:var(--accent)">C4 model</a></td>
+              <td>The diagrams developers actually read. Context + Container answer 90% of questions; stop there unless asked.</td>
+              <td><span class="verdict keep">Default choice</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-arc42" style="color:var(--accent)">arc42 + ADRs</a></td>
+              <td>The best value-to-ceremony ratio in the whole space. ADRs make decisions defensible two years later when someone asks “why Kafka?”</td>
+              <td><span class="verdict keep">Highest ROI</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-rest" style="color:var(--accent)">FEAF / DoDAF / MODAF</a></td>
+              <td>Essential if you sell into government or defense — the RFP will name them. Otherwise you will likely never touch them.</td>
+              <td><span class="verdict niche">Niche / mandated</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-rest" style="color:var(--accent)">Gartner / “pragmatic EA”</a></td>
+              <td>The attitude is the takeaway: measure EA by decisions influenced and money saved, not by models produced.</td>
+              <td><span class="verdict lens">Attitude, not artifact</span></td>
+            </tr>
+            <tr>
+              <td><a href="#fw-rest" style="color:var(--accent)">BIZBOK capability maps</a></td>
+              <td>The one-page capability map is the anchor artifact for portfolio rationalization: “we have four apps doing customer onboarding — why?”</td>
+              <td><span class="verdict keep">Steal the map</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-sub" style="margin-top:18px;max-width:760px">
+        <strong>Where this skill sits:</strong> it deliberately builds on the four with the highest
+        practical yield — <a href="index.html#frameworks" style="color:var(--accent);font-weight:600">C4, ArchiMate, TOGAF ADM, and arc42 + ADRs</a> —
+        and treats the rest as context you should recognize, not ceremony you should perform.</p>
     </div>
   </div>
 </section>
 
-<!-- LANDSCAPE -->
-<section class="reveal" id="landscape">
-  <div class="wrap">
-    <div class="section-header">
-      <div class="section-label">The landscape</div>
-      <h2 class="section-heading">Every framework, one honest verdict.</h2>
-      <p class="section-sub">Now that you've seen what each framework contains, here's the whole
-        landscape condensed — what each one is really for, and the verdict practitioners
-        eventually arrive at.</p>
-    </div>
-    <div class="compare-wrap">
-      <table class="compare-table">
-        <thead><tr><th>Framework</th><th>What it really is</th><th>Practical value</th><th>Verdict</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Zachman</td>
-            <td>A <em>classification schema</em>, not a method — six questions (what / how / where / who / when / why) × six audiences (executive → developer). It says <em>what</em> to describe, never <em>how</em>.</td>
-            <td>The mental model. When a stakeholder says “this diagram doesn't help me,” you've usually given a row-1 audience a row-4 artifact. That insight alone is worth knowing.</td>
-            <td><span class="verdict lens">30-min lens</span></td>
-          </tr>
-          <tr>
-            <td>TOGAF ADM</td>
-            <td>A delivery <em>method</em> with governance — the closest thing EA has to a shared process vocabulary (ADM, ARB, principles, waivers).</td>
-            <td>ADM as a scoping checklist, Baseline→Target→Gap as the transformation backbone, and — bluntly — the certification as a hiring filter for EA roles.</td>
-            <td><span class="verdict keep">Borrow the spine</span></td>
-          </tr>
-          <tr>
-            <td>ArchiMate 3.x</td>
-            <td>A modeling <em>notation</em> for business → application → technology, with free tooling (Archi).</td>
-            <td>Arguably more useful day-to-day than TOGAF itself: realization links answer real questions like “which capabilities break if we retire this app?”</td>
-            <td><span class="verdict keep">Use in anger</span></td>
-          </tr>
-          <tr>
-            <td>C4 model</td>
-            <td>Four zoom levels for <em>one software system</em> — the pragmatic winner at solution level.</td>
-            <td>The diagrams developers actually read. Context + Container answer 90% of questions; stop there unless asked.</td>
-            <td><span class="verdict keep">Default choice</span></td>
-          </tr>
-          <tr>
-            <td>arc42 + ADRs</td>
-            <td>A 12-section documentation template plus one-decision-per-file records (MADR).</td>
-            <td>The best value-to-ceremony ratio in the whole space. ADRs make decisions defensible two years later when someone asks “why Kafka?”</td>
-            <td><span class="verdict keep">Highest ROI</span></td>
-          </tr>
-          <tr>
-            <td>FEAF / DoDAF / MODAF</td>
-            <td>Government & defense reference models and viewpoint catalogs, mandated in procurement.</td>
-            <td>Essential if you sell into government or defense — the RFP will name them. Otherwise you will likely never touch them.</td>
-            <td><span class="verdict niche">Niche / mandated</span></td>
-          </tr>
-          <tr>
-            <td>Gartner / “pragmatic EA”</td>
-            <td>Not a published framework — an advisory stance: EA as a business-outcome practice, not a documentation exercise.</td>
-            <td>The attitude is the takeaway: measure EA by decisions influenced and money saved, not by models produced.</td>
-            <td><span class="verdict lens">Attitude, not artifact</span></td>
-          </tr>
-          <tr>
-            <td>BIZBOK capability maps</td>
-            <td>Business-architecture practice centered on <em>what the business does</em> (capabilities), independent of org chart or systems.</td>
-            <td>The one-page capability map is the anchor artifact for portfolio rationalization: “we have four apps doing customer onboarding — why?”</td>
-            <td><span class="verdict keep">Steal the map</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="section-sub" style="margin-top:18px;max-width:760px">
-      <strong>Where this skill sits:</strong> it deliberately builds on the four with the highest
-      practical yield — <a href="index.html#frameworks" style="color:var(--accent);font-weight:600">C4, ArchiMate, TOGAF ADM, and arc42 + ADRs</a> —
-      and treats the rest as context you should recognize, not ceremony you should perform.</p>
-  </div>
-</section>
-
-<!-- THE FOUR IN PRACTICE -->
-<section class="soft reveal" id="four">
-  <div class="wrap">
-    <div class="section-header">
-      <div class="section-label">The four, in practice</div>
-      <h2 class="section-heading">The ceremony vs. what survives contact.</h2>
-      <p class="section-sub">Each of the skill's four standards ships with more ritual than you
-        need. Here's the honest split — what the book says, and what practitioners actually keep.</p>
-    </div>
-    <div class="fw-detail">
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">TG</div>
-          <div>
-            <div class="fw-name">TOGAF ADM</div>
-            <div class="fw-std">The Open Group · method &amp; governance</div>
-          </div>
-        </div>
-        <p class="fw-tagline">Marketed as a complete operating model for architecture. Used, in
-          practice, as a vocabulary and a spine.</p>
-        <div class="fw-cols">
-          <div class="fw-col dim">
-            <h4 class="dim">The ceremony</h4>
-            <ul>
-              <li>Running all ten phases sequentially with full deliverable sets</li>
-              <li>Exhaustive Architecture Repository &amp; Enterprise Continuum curation</li>
-              <li>Heavyweight document templates for every phase output</li>
-            </ul>
-          </div>
-          <div class="fw-col">
-            <h4>What survives contact</h4>
-            <ul>
-              <li><strong>ADM as a checklist</strong> — “have I forgotten anything?” when scoping an engagement, not a linear process</li>
-              <li><strong>Baseline → Target → Gap → Roadmap</strong> — the backbone of nearly every real transformation deck</li>
-              <li><strong>Governance vocabulary</strong> — ARBs, architecture principles, waivers; most large orgs run some version</li>
-              <li><strong>TIME portfolio scoring</strong> — Tolerate / Invest / Migrate / Eliminate per application</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">AM</div>
-          <div>
-            <div class="fw-name">ArchiMate 3.x</div>
-            <div class="fw-std">The Open Group · enterprise notation</div>
-          </div>
-        </div>
-        <p class="fw-tagline">A rich metamodel of ~60 element types. In practice, a small subset
-          carries nearly all the value.</p>
-        <div class="fw-cols">
-          <div class="fw-col dim">
-            <h4 class="dim">The ceremony</h4>
-            <ul>
-              <li>Modeling every element type across all six layers “for completeness”</li>
-              <li>Enterprise-wide models maintained by one team nobody consults</li>
-            </ul>
-          </div>
-          <div class="fw-col">
-            <h4>What survives contact</h4>
-            <ul>
-              <li><strong>Realization &amp; serving links</strong> — they answer the questions that matter: “what breaks if we retire this app?”, “which capability does this system realize?”</li>
-              <li><strong>Capability map + application landscape</strong> — the two views executives and PMs actually request</li>
-              <li><strong>Archi (free tooling)</strong> — a maintained model beats a wall of stale Visio every time</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">C4</div>
-          <div>
-            <div class="fw-name">C4 model + Structurizr</div>
-            <div class="fw-std">Simon Brown · system-level diagrams</div>
-          </div>
-        </div>
-        <p class="fw-tagline">The least ceremonial of the four — its risk is over-zooming, not
-          over-documenting.</p>
-        <div class="fw-cols">
-          <div class="fw-col dim">
-            <h4 class="dim">The ceremony</h4>
-            <ul>
-              <li>Component and Code diagrams for everything — the IDE renders code structure better than you can draw it</li>
-              <li>Diagrams as one-off pictures, redrawn (differently) for every meeting</li>
-            </ul>
-          </div>
-          <div class="fw-col">
-            <h4>What survives contact</h4>
-            <ul>
-              <li><strong>Context + Container</strong> — the two diagrams developers actually read; they answer 90% of questions</li>
-              <li><strong>Diagrams as code in the repo</strong> — Structurizr DSL / Mermaid, versioned next to the source they describe</li>
-              <li><strong>Hygiene rules</strong> — 5–20 elements per view, every external shown, every arrow labelled with intent + protocol</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="fw-block">
-        <div class="fw-top">
-          <div class="fw-mark">A4</div>
-          <div>
-            <div class="fw-name">arc42 + ADR / MADR</div>
-            <div class="fw-std">Open templates · docs &amp; decisions as code</div>
-          </div>
-        </div>
-        <p class="fw-tagline">The best value-to-ceremony ratio in the whole space — if you resist
-          the urge to fill every section.</p>
-        <div class="fw-cols">
-          <div class="fw-col dim">
-            <h4 class="dim">The ceremony</h4>
-            <ul>
-              <li>The 40-page arc42 document nobody reads — thoroughness as a failure mode</li>
-              <li>ADRs written retroactively in bulk, after the reasoning is forgotten</li>
-            </ul>
-          </div>
-          <div class="fw-col">
-            <h4>What survives contact</h4>
-            <ul>
-              <li><strong>ADRs written at decision time</strong> — context, options <em>with trade-offs</em>, consequences good and bad; the reasoning a future reader can't reconstruct</li>
-              <li><strong>arc42 at LEAN / ESSENTIAL detail</strong> — sections 1, 3, 4, 5, 9 carry most of the value for most systems</li>
-              <li><strong>Measurable quality goals</strong> — “fast” becomes “&lt;200 ms p95 at 1,000 concurrent users”</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WHERE FRAMEWORKS EARN THEIR KEEP -->
-<section class="reveal" id="scenarios">
+<!-- WHERE FRAMEWORKS EARN THEIR KEEP + CASE STUDIES -->
+<section class="reveal" id="cases">
   <div class="wrap">
     <div class="section-header">
       <div class="section-label">Where they pay off</div>
-      <h2 class="section-heading">Five situations where frameworks earn their keep.</h2>
+      <h2 class="section-heading">Five situations, four worked through.</h2>
       <p class="section-sub">EA doesn't pay off evenly. These are the recurring situations where
-        the artifacts genuinely change decisions — and justify the modeling effort.</p>
+        the artifacts genuinely change decisions — and for four of them, the full engagement is
+        worked through below: trigger, artifact pipeline, and what “done” looks like.</p>
     </div>
     <div class="step-list">
       <div class="step-item">
@@ -1505,7 +1643,7 @@ footer{background:#070e1a;padding:54px 0 34px}
           <div class="step-title">M&amp;A and post-merger integration</div>
           <div class="step-desc">You inherit two of everything. A capability map plus an application
             landscape with realization links tells you what to keep, merge, or kill — with evidence
-            instead of politics.</div>
+            instead of politics. <a href="#cs-ma" style="color:var(--accent);font-weight:600">Worked through below ↓</a></div>
         </div>
         <div class="step-badge">capability map · TIME</div>
       </div>
@@ -1514,7 +1652,8 @@ footer{background:#070e1a;padding:54px 0 34px}
         <div>
           <div class="step-title">Cloud migration &amp; modernization programs</div>
           <div class="step-desc">Multi-year programs drift without an anchor. Baseline → target → gap
-            → transition plateaus keeps the program coherent across budget cycles and re-orgs.</div>
+            → transition plateaus keeps the program coherent across budget cycles and re-orgs.
+            <a href="#cs-cloud" style="color:var(--accent);font-weight:600">Worked through below ↓</a></div>
         </div>
         <div class="step-badge">baseline/target · roadmap</div>
       </div>
@@ -1534,7 +1673,7 @@ footer{background:#070e1a;padding:54px 0 34px}
           <div class="step-title">Regulatory &amp; audit traceability</div>
           <div class="step-desc">Banks, healthcare, and government need a trace from business
             requirement to deployed system. Zachman-style thinking — even informal — is how you
-            provide it.</div>
+            provide it. <a href="#cs-audit" style="color:var(--accent);font-weight:600">Worked through below ↓</a></div>
         </div>
         <div class="step-badge">requirement → deployment trace</div>
       </div>
@@ -1548,21 +1687,10 @@ footer{background:#070e1a;padding:54px 0 34px}
         <div class="step-badge">application landscape</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- CASE STUDIES -->
-<section class="soft reveal" id="cases">
-  <div class="wrap">
-    <div class="section-header">
-      <div class="section-label">Case studies</div>
-      <h2 class="section-heading">Which artifacts, in which order — worked through.</h2>
-      <p class="section-sub">Four recurring engagements, each showing the trigger, the artifact
-        pipeline, and what “done” looks like. Every artifact named here is something this skill
-        produces.</p>
-    </div>
+    <div class="fw-h4" style="margin-top:52px">The worked case studies — every artifact named is something this skill produces</div>
 
-    <div class="case">
+    <div class="case" id="cs-cloud">
       <div class="case-head">
         <div class="kicker">Case study 01 · Cloud migration program</div>
         <h3>Moving a 60-app estate to the cloud over two years</h3>
@@ -1582,7 +1710,7 @@ footer{background:#070e1a;padding:54px 0 34px}
       </div>
     </div>
 
-    <div class="case">
+    <div class="case" id="cs-ma">
       <div class="case-head">
         <div class="kicker">Case study 02 · Post-M&amp;A portfolio rationalization</div>
         <h3>Two companies, two of everything</h3>
@@ -1601,7 +1729,7 @@ footer{background:#070e1a;padding:54px 0 34px}
       </div>
     </div>
 
-    <div class="case">
+    <div class="case" id="cs-greenfield">
       <div class="case-head">
         <div class="kicker">Case study 03 · Greenfield platform design</div>
         <h3>Designing a new payments platform</h3>
@@ -1619,7 +1747,7 @@ footer{background:#070e1a;padding:54px 0 34px}
       </div>
     </div>
 
-    <div class="case">
+    <div class="case" id="cs-audit">
       <div class="case-head">
         <div class="kicker">Case study 04 · Regulatory traceability</div>
         <h3>Surviving an audit with Zachman thinking</h3>
@@ -1643,7 +1771,7 @@ footer{background:#070e1a;padding:54px 0 34px}
 </section>
 
 <!-- ANTI-PATTERNS -->
-<section class="reveal" id="antipatterns">
+<section class="soft reveal" id="antipatterns">
   <div class="wrap">
     <div class="section-header">
       <div class="section-label">Anti-patterns</div>
@@ -1732,7 +1860,7 @@ footer{background:#070e1a;padding:54px 0 34px}
             <a href="index.html#modes">Modes</a>
             <a href="index.html#evals">Eval results</a>
             <a href="index.html#examples">Examples</a>
-            <a href="frameworks-in-practice.html">In practice</a>
+            <a href="frameworks-in-practice.html">In Practice</a>
           </div>
         </div>
         <div class="footer-col">
