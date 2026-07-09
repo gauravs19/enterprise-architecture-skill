@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EA frameworks in practice — TOGAF, Zachman, C4, ArchiMate | enterprise-architecture skill</title>
+<meta name="description" content="How enterprise-architecture frameworks are actually used in industry: TOGAF as a checklist, Zachman as a lens, capability maps that executives read — plus four worked case studies and the anti-patterns to avoid.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EA frameworks in practice — what architects actually use">
+<meta property="og:description" content="The honest gap between how TOGAF, Zachman & co. are marketed and how they're used — with worked case studies showing which artifacts get produced when.">
+<meta property="og:url" content="https://gauravs19.github.io/enterprise-architecture-skill/frameworks-in-practice.html">
+<meta property="og:image" content="https://gauravs19.github.io/enterprise-architecture-skill/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gauravs19.github.io/enterprise-architecture-skill/og-image.png">
+<link rel="canonical" href="https://gauravs19.github.io/enterprise-architecture-skill/frameworks-in-practice.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%}
+
+:root{
+  --accent:#1d4ed8; --accent-light:#2563eb; --accent-pale:#eff6ff;
+  --accent-border:#bfdbfe; --accent-text:#93c5fd;
+  --hero-bg:#0f172a; --dark-surface:#1e293b;
+  --ink:#0f172a; --ink-mid:#334155; --slate:#64748b; --slate-light:#94a3b8;
+  --border:#e2e8f0; --bg:#f8fafc; --white:#ffffff;
+  --green:#15803d; --green-pale:#f0fdf4; --green-border:#bbf7d0;
+  --red:#b91c1c; --red-pale:#fef2f2;
+  --crit:#b91c1c; --major:#c2410c; --minor:#a16207; --sug:#1d4ed8;
+  --wrap:1160px; --px:32px; --radius:6px; --radius-lg:12px; --radius-xl:18px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);
+  -webkit-font-smoothing:antialiased;line-height:1.65}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+
+/* NAV */
+#main-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px);height:60px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:9px;font-size:1.02rem;letter-spacing:.01em;color:var(--ink)}
+.logo b{font-weight:800}
+.logo span{color:var(--slate);font-weight:500;margin-left:6px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.81rem;font-weight:500;color:var(--slate);letter-spacing:.02em;
+  transition:color .12s;position:relative;padding-bottom:2px}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--accent);font-weight:600}
+.nav-links a.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;
+  background:var(--accent);border-radius:1px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-ghost{font-size:.78rem;font-weight:600;color:var(--slate);padding:6px 14px;border-radius:var(--radius);
+  border:1px solid var(--border);display:flex;align-items:center;gap:6px;transition:border-color .12s,color .12s}
+.btn-ghost:hover{color:var(--ink);border-color:var(--slate-light)}
+.btn-primary{background:var(--accent);color:#fff;font-size:.81rem;font-weight:700;padding:8px 20px;
+  border-radius:var(--radius);transition:background .15s}
+.btn-primary:hover{background:var(--accent-light)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px}
+.nav-mobile{display:none;position:fixed;inset:60px 0 0;background:var(--white);
+  border-top:1px solid var(--border);flex-direction:column;padding:24px var(--px);z-index:99}
+.nav-mobile a{display:block;padding:14px 0;font-size:1rem;font-weight:500;color:var(--slate);
+  border-bottom:1px solid var(--border)}
+.nav-mobile .btn-primary{margin-top:20px;text-align:center;padding:12px 24px;font-size:.9rem}
+.nav-mobile.open{display:flex}
+@media(max-width:760px){.nav-links,.btn-ghost{display:none}.nav-hamburger{display:flex}}
+
+/* HERO (compact article variant) */
+.hero{background:var(--hero-bg);color:#fff;padding:88px 0 72px;overflow:hidden;position:relative}
+@media(max-width:640px){.hero{padding:56px 0 46px}}
+.hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 70% at 78% 50%,rgba(37,99,235,.22),transparent 68%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:780px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.68rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin-bottom:26px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent-text)}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.2rem,4.4vw,3.6rem);
+  font-weight:800;line-height:1.1;color:#fff;margin-bottom:22px}
+.hero-title em{font-style:italic;color:var(--accent-text)}
+.hero-body{font-size:1.04rem;color:rgba(255,255,255,.55);max-width:640px;line-height:1.8}
+
+/* SECTION SCAFFOLD */
+section{padding:84px 0}
+section.dark{background:var(--hero-bg);color:#fff}
+section.soft{background:var(--bg)}
+.section-label{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.dark .section-label{color:var(--accent-text)}
+.section-heading{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,3.2vw,2.6rem);
+  font-weight:800;line-height:1.12;color:var(--ink);max-width:720px}
+.dark .section-heading{color:#fff}
+.section-sub{margin-top:16px;font-size:1rem;color:var(--slate);line-height:1.8;max-width:640px}
+.dark .section-sub{color:rgba(255,255,255,.5)}
+.section-header{margin-bottom:52px}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;background:var(--white)}
+.stat-item{padding:38px 34px;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;
+  color:var(--accent);line-height:1;margin-bottom:12px}
+.stat-label{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.stat-desc{font-size:.82rem;color:var(--slate);line-height:1.65}
+@media(max-width:720px){.stat-grid{grid-template-columns:1fr}.stat-item{border-right:none;border-bottom:1px solid var(--border)}.stat-item:last-child{border-bottom:none}}
+
+/* COMPARISON TABLE */
+.compare-wrap{overflow-x:auto}
+.compare-table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--white)}
+.compare-table th{padding:15px 22px;text-align:left;font-size:.71rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.75);background:var(--hero-bg)}
+.compare-table td{padding:15px 22px;font-size:.87rem;color:var(--slate);border-top:1px solid var(--border);vertical-align:top}
+.compare-table td:first-child{font-weight:600;color:var(--ink)}
+.compare-table tr:hover td{background:var(--bg)}
+.verdict{display:inline-block;font-weight:800;font-size:.72rem;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.verdict.keep{background:var(--green-pale);color:var(--green);border:1px solid var(--green-border)}
+.verdict.lens{background:var(--accent-pale);color:var(--accent);border:1px solid var(--accent-border)}
+.verdict.niche{background:#fffbeb;color:var(--minor);border:1px solid #fde68a}
+@media(max-width:640px){.compare-table th,.compare-table td{padding:12px 14px;font-size:.8rem}}
+
+/* STEP LIST */
+.step-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;background:var(--white)}
+.step-item{display:grid;grid-template-columns:72px 1fr auto;align-items:start;padding:26px 32px;
+  border-bottom:1px solid var(--border);gap:24px;transition:background .15s}
+.step-item:last-child{border-bottom:none}
+.step-item:hover{background:var(--bg)}
+.step-num{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:800;color:var(--accent-border);line-height:1;padding-top:2px}
+.step-title{font-size:.96rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.step-desc{font-size:.84rem;color:var(--slate);line-height:1.65}
+.step-badge{font-size:.69rem;font-weight:600;color:var(--slate-light);background:var(--bg);
+  border:1px solid var(--border);padding:4px 10px;border-radius:99px;white-space:nowrap;margin-top:3px}
+@media(max-width:620px){.step-item{grid-template-columns:48px 1fr;gap:16px}.step-badge{display:none}.step-num{font-size:1.4rem}}
+
+/* FRAMEWORK DEEP-DIVE (ceremony vs practice) */
+.fw-detail{display:flex;flex-direction:column;gap:20px}
+.fw-block{border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);padding:30px 32px;
+  transition:box-shadow .18s,border-color .18s}
+.fw-block:hover{box-shadow:0 6px 24px rgba(15,23,42,.06);border-color:var(--accent-border)}
+.fw-top{display:flex;align-items:center;gap:14px}
+.fw-mark{width:46px;height:46px;border-radius:10px;background:var(--accent-pale);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;flex-shrink:0}
+.fw-name{font-size:1.12rem;font-weight:800;color:var(--ink);line-height:1.2}
+.fw-std{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--slate-light);margin-top:3px}
+.fw-tagline{font-size:.92rem;color:var(--ink-mid);line-height:1.65;margin:14px 0 20px;max-width:780px}
+.fw-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;border-top:1px solid var(--border);padding-top:20px}
+.fw-col h4{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:11px}
+.fw-col h4.dim{color:var(--slate-light)}
+.fw-col ul{display:flex;flex-direction:column;gap:7px}
+.fw-col li{font-size:.83rem;color:var(--slate);line-height:1.55;padding-left:15px;position:relative}
+.fw-col li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent-border)}
+.fw-col.dim li::before{background:var(--border)}
+.fw-col code{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.78rem;color:var(--ink-mid);
+  background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0 4px}
+@media(max-width:760px){.fw-cols{grid-template-columns:1fr;gap:18px}.fw-block{padding:24px 22px}}
+
+/* CASE STUDIES */
+.case{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:26px}
+.case-head{padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
+.case-head .kicker{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.case-head h3{font-size:1.05rem;color:var(--ink);margin-bottom:8px;font-weight:700}
+.case-trigger{font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ink-mid);font-size:.95rem;line-height:1.6}
+.case-body{padding:22px 24px}
+.pipeline{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.pipeline li{counter-increment:step;display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;
+  font-size:.87rem;color:var(--ink-mid);line-height:1.6}
+.pipeline li::before{content:counter(step);width:26px;height:26px;border-radius:50%;background:var(--accent-pale);
+  border:1px solid var(--accent-border);color:var(--accent);font-size:.72rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pipeline .art{font-weight:700;color:var(--ink)}
+.case-done{font-size:.85rem;color:var(--slate);line-height:1.65;border-top:1px dashed var(--border);padding-top:14px}
+.case-done strong{color:var(--green)}
+
+/* ANTI-PATTERNS */
+.anti-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.anti-card{padding:26px 28px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--white);
+  transition:box-shadow .18s,border-color .18s}
+.anti-card:hover{box-shadow:0 6px 24px rgba(15,23,42,.06);border-color:#fecaca}
+.anti-name{font-size:.94rem;font-weight:700;color:var(--crit);margin-bottom:8px}
+.anti-desc{font-size:.84rem;color:var(--slate);line-height:1.65}
+.anti-desc strong{color:var(--ink)}
+.anti-fix{margin-top:10px;font-size:.8rem;color:var(--green);font-weight:600}
+.anti-fix::before{content:'→ ';font-weight:800}
+@media(max-width:720px){.anti-grid{grid-template-columns:1fr}}
+
+/* CTA */
+.cta-section{background:var(--hero-bg);color:#fff;padding:96px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.cta-section::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 85% at 50% 50%,rgba(37,99,235,.16),transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 var(--px)}
+.cta-heading{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;
+  line-height:1.12;color:#fff;margin-bottom:16px}
+.cta-heading em{font-style:italic;color:var(--accent-text)}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:28px}
+.cta-code{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;
+  padding:16px 18px;text-align:left;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;
+  color:var(--accent-text);overflow:auto;margin-bottom:28px;line-height:1.6}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-cta-primary{background:var(--accent);color:#fff;font-size:.9rem;font-weight:700;padding:14px 34px;border-radius:var(--radius);transition:background .15s}
+.btn-cta-primary:hover{background:var(--accent-light)}
+.btn-cta-ghost{font-size:.88rem;font-weight:600;color:rgba(255,255,255,.5);padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.2);transition:color .15s}
+.btn-cta-ghost:hover{color:#fff}
+
+/* FOOTER */
+footer{background:#070e1a;padding:54px 0 34px}
+.footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;padding-bottom:38px;
+  border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.footer-logo{display:flex;align-items:center;gap:9px;font-size:.96rem;letter-spacing:.01em;color:#fff;margin-bottom:10px}
+.footer-logo b{font-weight:800;color:#fff}
+.footer-logo span{color:rgba(255,255,255,.5);font-weight:500;margin-left:6px}
+.footer-tagline{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.6;max-width:260px}
+.footer-nav-group{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col-label{font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:14px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-size:.81rem;font-weight:500;color:rgba(255,255,255,.55);transition:color .12s}
+.footer-col-links a:hover{color:#fff}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:26px;flex-wrap:wrap}
+.footer-copy{font-size:.73rem;color:rgba(255,255,255,.3)}
+.footer-credit{font-size:.73rem;color:rgba(255,255,255,.25)}
+.footer-credit a{color:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.15);transition:color .12s}
+.footer-credit a:hover{color:rgba(255,255,255,.75)}
+@media(max-width:640px){.footer-top{flex-direction:column;gap:32px}.footer-nav-group{gap:32px}.footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <rect width="26" height="26" rx="7" fill="var(--accent)"/>
+        <rect x="6" y="6.5" width="14" height="3.4" rx="1.7" fill="#fff"/>
+        <rect x="6" y="11.3" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".6"/>
+        <rect x="6" y="16.1" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".32"/>
+      </svg>
+      <b>EA</b><span>skill</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="#landscape">Landscape</a>
+      <a href="#four">The four</a>
+      <a href="#cases">Case studies</a>
+      <a href="#antipatterns">Anti-patterns</a>
+      <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://github.com/gauravs19/enterprise-architecture-skill" class="btn-ghost" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+      <a href="index.html#install" class="btn-primary">Install →</a>
+    </div>
+    <div class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html">Overview</a>
+  <a href="#landscape">Landscape</a>
+  <a href="#four">The four</a>
+  <a href="#cases">Case studies</a>
+  <a href="#antipatterns">Anti-patterns</a>
+  <a href="https://github.com/gauravs19/enterprise-architecture-skill" target="_blank">GitHub</a>
+  <a href="index.html#install" class="btn-primary">Install →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow">Theory, grounded · Frameworks in practice</div>
+    <h1 class="hero-title">What architects <em>actually use</em> — and what they quietly skip.</h1>
+    <p class="hero-body">There's a large gap between how EA frameworks are marketed and how
+      they're used. Almost no organization runs TOGAF or Zachman by the book; what survives
+      contact with reality is selective borrowing. This page maps the landscape honestly —
+      which parts of each framework earn their keep, where frameworks pay off at all, and
+      four worked case studies showing which artifacts get produced when.</p>
+  </div>
+</section>
+
+<!-- THE HONEST REALITY -->
+<section class="soft reveal" id="reality">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">The honest reality</div>
+      <h2 class="section-heading">Frameworks are scaffolding, not the building.</h2>
+      <p class="section-sub">Full-ceremony adoption — every phase, every deliverable — is rare
+        and usually collapses under its own weight. The value is delivered through a handful of
+        living artifacts, not through framework compliance. Practitioners steal the useful parts
+        and quietly ignore the rest.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-number">36</div>
+        <div class="stat-label">Zachman cells almost nobody fills</div>
+        <div class="stat-desc">Attempting the full 6×6 grid is a classic EA anti-pattern. What
+          survives is the mental model: match the artifact to the audience.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10</div>
+        <div class="stat-label">ADM phases; one reusable backbone</div>
+        <div class="stat-desc">Nobody executes A–H linearly. What every real transformation deck
+          keeps is <em>Baseline → Target → Gaps → Roadmap</em>.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Page executives actually read</div>
+        <div class="stat-desc">The business-capability map is probably the most-used single EA
+          artifact in real life. It anchors portfolio decisions in language the board understands.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANDSCAPE -->
+<section class="reveal" id="landscape">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">The landscape</div>
+      <h2 class="section-heading">Every framework, one honest verdict.</h2>
+      <p class="section-sub">Beyond the four standards this skill is built on, you'll meet these
+        names in job specs, RFPs, and consulting decks. Here's what each is actually for.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead><tr><th>Framework</th><th>What it really is</th><th>Practical value</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Zachman</td>
+            <td>A <em>classification schema</em>, not a method — six questions (what / how / where / who / when / why) × six audiences (executive → developer). It says <em>what</em> to describe, never <em>how</em>.</td>
+            <td>The mental model. When a stakeholder says “this diagram doesn't help me,” you've usually given a row-1 audience a row-4 artifact. That insight alone is worth knowing.</td>
+            <td><span class="verdict lens">30-min lens</span></td>
+          </tr>
+          <tr>
+            <td>TOGAF ADM</td>
+            <td>A delivery <em>method</em> with governance — the closest thing EA has to a shared process vocabulary (ADM, ARB, principles, waivers).</td>
+            <td>ADM as a scoping checklist, Baseline→Target→Gap as the transformation backbone, and — bluntly — the certification as a hiring filter for EA roles.</td>
+            <td><span class="verdict keep">Borrow the spine</span></td>
+          </tr>
+          <tr>
+            <td>ArchiMate 3.x</td>
+            <td>A modeling <em>notation</em> for business → application → technology, with free tooling (Archi).</td>
+            <td>Arguably more useful day-to-day than TOGAF itself: realization links answer real questions like “which capabilities break if we retire this app?”</td>
+            <td><span class="verdict keep">Use in anger</span></td>
+          </tr>
+          <tr>
+            <td>C4 model</td>
+            <td>Four zoom levels for <em>one software system</em> — the pragmatic winner at solution level.</td>
+            <td>The diagrams developers actually read. Context + Container answer 90% of questions; stop there unless asked.</td>
+            <td><span class="verdict keep">Default choice</span></td>
+          </tr>
+          <tr>
+            <td>arc42 + ADRs</td>
+            <td>A 12-section documentation template plus one-decision-per-file records (MADR).</td>
+            <td>The best value-to-ceremony ratio in the whole space. ADRs make decisions defensible two years later when someone asks “why Kafka?”</td>
+            <td><span class="verdict keep">Highest ROI</span></td>
+          </tr>
+          <tr>
+            <td>FEAF / DoDAF / MODAF</td>
+            <td>Government & defense reference models and viewpoint catalogs, mandated in procurement.</td>
+            <td>Essential if you sell into government or defense — the RFP will name them. Otherwise you will likely never touch them.</td>
+            <td><span class="verdict niche">Niche / mandated</span></td>
+          </tr>
+          <tr>
+            <td>Gartner / “pragmatic EA”</td>
+            <td>Not a published framework — an advisory stance: EA as a business-outcome practice, not a documentation exercise.</td>
+            <td>The attitude is the takeaway: measure EA by decisions influenced and money saved, not by models produced.</td>
+            <td><span class="verdict lens">Attitude, not artifact</span></td>
+          </tr>
+          <tr>
+            <td>BIZBOK capability maps</td>
+            <td>Business-architecture practice centered on <em>what the business does</em> (capabilities), independent of org chart or systems.</td>
+            <td>The one-page capability map is the anchor artifact for portfolio rationalization: “we have four apps doing customer onboarding — why?”</td>
+            <td><span class="verdict keep">Steal the map</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:18px;max-width:760px">
+      <strong>Where this skill sits:</strong> it deliberately builds on the four with the highest
+      practical yield — <a href="index.html#frameworks" style="color:var(--accent);font-weight:600">C4, ArchiMate, TOGAF ADM, and arc42 + ADRs</a> —
+      and treats the rest as context you should recognize, not ceremony you should perform.</p>
+  </div>
+</section>
+
+<!-- THE FOUR IN PRACTICE -->
+<section class="soft reveal" id="four">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">The four, in practice</div>
+      <h2 class="section-heading">The ceremony vs. what survives contact.</h2>
+      <p class="section-sub">Each of the skill's four standards ships with more ritual than you
+        need. Here's the honest split — what the book says, and what practitioners actually keep.</p>
+    </div>
+    <div class="fw-detail">
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">TG</div>
+          <div>
+            <div class="fw-name">TOGAF ADM</div>
+            <div class="fw-std">The Open Group · method &amp; governance</div>
+          </div>
+        </div>
+        <p class="fw-tagline">Marketed as a complete operating model for architecture. Used, in
+          practice, as a vocabulary and a spine.</p>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony</h4>
+            <ul>
+              <li>Running all ten phases sequentially with full deliverable sets</li>
+              <li>Exhaustive Architecture Repository &amp; Enterprise Continuum curation</li>
+              <li>Heavyweight document templates for every phase output</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>ADM as a checklist</strong> — “have I forgotten anything?” when scoping an engagement, not a linear process</li>
+              <li><strong>Baseline → Target → Gap → Roadmap</strong> — the backbone of nearly every real transformation deck</li>
+              <li><strong>Governance vocabulary</strong> — ARBs, architecture principles, waivers; most large orgs run some version</li>
+              <li><strong>TIME portfolio scoring</strong> — Tolerate / Invest / Migrate / Eliminate per application</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">AM</div>
+          <div>
+            <div class="fw-name">ArchiMate 3.x</div>
+            <div class="fw-std">The Open Group · enterprise notation</div>
+          </div>
+        </div>
+        <p class="fw-tagline">A rich metamodel of ~60 element types. In practice, a small subset
+          carries nearly all the value.</p>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony</h4>
+            <ul>
+              <li>Modeling every element type across all six layers “for completeness”</li>
+              <li>Enterprise-wide models maintained by one team nobody consults</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>Realization &amp; serving links</strong> — they answer the questions that matter: “what breaks if we retire this app?”, “which capability does this system realize?”</li>
+              <li><strong>Capability map + application landscape</strong> — the two views executives and PMs actually request</li>
+              <li><strong>Archi (free tooling)</strong> — a maintained model beats a wall of stale Visio every time</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">C4</div>
+          <div>
+            <div class="fw-name">C4 model + Structurizr</div>
+            <div class="fw-std">Simon Brown · system-level diagrams</div>
+          </div>
+        </div>
+        <p class="fw-tagline">The least ceremonial of the four — its risk is over-zooming, not
+          over-documenting.</p>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony</h4>
+            <ul>
+              <li>Component and Code diagrams for everything — the IDE renders code structure better than you can draw it</li>
+              <li>Diagrams as one-off pictures, redrawn (differently) for every meeting</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>Context + Container</strong> — the two diagrams developers actually read; they answer 90% of questions</li>
+              <li><strong>Diagrams as code in the repo</strong> — Structurizr DSL / Mermaid, versioned next to the source they describe</li>
+              <li><strong>Hygiene rules</strong> — 5–20 elements per view, every external shown, every arrow labelled with intent + protocol</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-block">
+        <div class="fw-top">
+          <div class="fw-mark">A4</div>
+          <div>
+            <div class="fw-name">arc42 + ADR / MADR</div>
+            <div class="fw-std">Open templates · docs &amp; decisions as code</div>
+          </div>
+        </div>
+        <p class="fw-tagline">The best value-to-ceremony ratio in the whole space — if you resist
+          the urge to fill every section.</p>
+        <div class="fw-cols">
+          <div class="fw-col dim">
+            <h4 class="dim">The ceremony</h4>
+            <ul>
+              <li>The 40-page arc42 document nobody reads — thoroughness as a failure mode</li>
+              <li>ADRs written retroactively in bulk, after the reasoning is forgotten</li>
+            </ul>
+          </div>
+          <div class="fw-col">
+            <h4>What survives contact</h4>
+            <ul>
+              <li><strong>ADRs written at decision time</strong> — context, options <em>with trade-offs</em>, consequences good and bad; the reasoning a future reader can't reconstruct</li>
+              <li><strong>arc42 at LEAN / ESSENTIAL detail</strong> — sections 1, 3, 4, 5, 9 carry most of the value for most systems</li>
+              <li><strong>Measurable quality goals</strong> — “fast” becomes “&lt;200 ms p95 at 1,000 concurrent users”</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHERE FRAMEWORKS EARN THEIR KEEP -->
+<section class="reveal" id="scenarios">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Where they pay off</div>
+      <h2 class="section-heading">Five situations where frameworks earn their keep.</h2>
+      <p class="section-sub">EA doesn't pay off evenly. These are the recurring situations where
+        the artifacts genuinely change decisions — and justify the modeling effort.</p>
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">M&amp;A and post-merger integration</div>
+          <div class="step-desc">You inherit two of everything. A capability map plus an application
+            landscape with realization links tells you what to keep, merge, or kill — with evidence
+            instead of politics.</div>
+        </div>
+        <div class="step-badge">capability map · TIME</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Cloud migration &amp; modernization programs</div>
+          <div class="step-desc">Multi-year programs drift without an anchor. Baseline → target → gap
+            → transition plateaus keeps the program coherent across budget cycles and re-orgs.</div>
+        </div>
+        <div class="step-badge">baseline/target · roadmap</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Vendor &amp; platform decisions</div>
+          <div class="step-desc">An ADR with the options and trade-offs recorded makes the decision
+            defensible two years later — when the people who made it have left and someone asks
+            “why Kafka?”</div>
+        </div>
+        <div class="step-badge">ADR / MADR</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Regulatory &amp; audit traceability</div>
+          <div class="step-desc">Banks, healthcare, and government need a trace from business
+            requirement to deployed system. Zachman-style thinking — even informal — is how you
+            provide it.</div>
+        </div>
+        <div class="step-badge">requirement → deployment trace</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div>
+          <div class="step-title">Fighting shadow-IT sprawl</div>
+          <div class="step-desc">A maintained application landscape is the only way anyone knows what
+            exists. Without one, every audit, migration, and security review starts from archaeology.</div>
+        </div>
+        <div class="step-badge">application landscape</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="soft reveal" id="cases">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Case studies</div>
+      <h2 class="section-heading">Which artifacts, in which order — worked through.</h2>
+      <p class="section-sub">Four recurring engagements, each showing the trigger, the artifact
+        pipeline, and what “done” looks like. Every artifact named here is something this skill
+        produces.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div class="kicker">Case study 01 · Cloud migration program</div>
+        <h3>Moving a 60-app estate to the cloud over two years</h3>
+        <div class="case-trigger">“The data-center contract ends in 24 months. Leadership wants a credible plan, not a lift-and-shift bill shock.”</div>
+      </div>
+      <div class="case-body">
+        <ol class="pipeline">
+          <li><span><span class="art">Baseline architecture</span> (TOGAF) — inventory the current estate: apps, dependencies, data flows. Usually the most valuable and most skipped step.</span></li>
+          <li><span><span class="art">Target architecture + gap analysis</span> — per-app disposition (rehost / replatform / refactor / retire), grounded in a TIME assessment.</span></li>
+          <li><span><span class="art">Transition plateaus</span> (roadmap) — 3–4 intermediate states that each deliver value, so the program survives budget reviews.</span></li>
+          <li><span><span class="art">ADRs</span> for the platform choices — landing zone, container platform, data platform — with the options and trade-offs recorded.</span></li>
+          <li><span><span class="art">C4 Context + Container diagrams</span> for each system being refactored (not for the rehosted ones — don't model what you're not changing).</span></li>
+        </ol>
+        <p class="case-done"><strong>Done looks like:</strong> every app has a disposition and a
+          plateau; every platform choice has an ADR; the refactored systems have target-state C4
+          diagrams in their repos.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div class="kicker">Case study 02 · Post-M&amp;A portfolio rationalization</div>
+        <h3>Two companies, two of everything</h3>
+        <div class="case-trigger">“We acquired a competitor. Finance wants the duplicate-system cost out within 18 months; nobody can even list the duplicates.”</div>
+      </div>
+      <div class="case-body">
+        <ol class="pipeline">
+          <li><span><span class="art">Business capability map</span> — one page, org-chart-independent: what the combined business <em>does</em>. This is the neutral ground both sides can agree on.</span></li>
+          <li><span><span class="art">Application landscape</span> (ArchiMate) — map every app to the capability it realizes. Duplicates become visually undeniable: two apps realizing one capability.</span></li>
+          <li><span><span class="art">TIME scoring</span> per app — business value × technical fit → Tolerate / Invest / Migrate / Eliminate, so the keep/kill call is evidence, not politics.</span></li>
+          <li><span><span class="art">Kill/keep roadmap + ADRs</span> — sequence the eliminations around data migrations and contract end-dates; record each contested call as an ADR.</span></li>
+        </ol>
+        <p class="case-done"><strong>Done looks like:</strong> a capability map both CTOs sign,
+          every duplicate resolved to a disposition with a date, and the contested decisions
+          written down so they stay decided.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div class="kicker">Case study 03 · Greenfield platform design</div>
+        <h3>Designing a new payments platform</h3>
+        <div class="case-trigger">“New product line, new platform. We need the design communicated before the team scales from 4 to 20 engineers.”</div>
+      </div>
+      <div class="case-body">
+        <ol class="pipeline">
+          <li><span><span class="art">TOGAF-lite</span> — borrow only the vision and the architecture principles (5–7 of them, with consequences). Skip the rest of the ADM; the stakes don't justify it.</span></li>
+          <li><span><span class="art">C4 Context → Container</span> — the shared picture every new joiner sees first; kept as Structurizr DSL in the repo so it stays current.</span></li>
+          <li><span><span class="art">arc42 at ESSENTIAL detail</span> — goals, constraints, context, solution strategy, building blocks, and §9 decisions. Not the 40-page version.</span></li>
+          <li><span><span class="art">ADRs from day one</span> — every significant choice (event bus, datastore, sync vs. async boundaries) recorded while the reasoning is fresh.</span></li>
+        </ol>
+        <p class="case-done"><strong>Done looks like:</strong> a new engineer reaches productive
+          context in a day from the C4 diagrams and the decision log — without a single meeting.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div class="kicker">Case study 04 · Regulatory traceability</div>
+        <h3>Surviving an audit with Zachman thinking</h3>
+        <div class="case-trigger">“The regulator wants to see how the ‘right to erasure’ requirement is actually implemented — end to end, with evidence.”</div>
+      </div>
+      <div class="case-body">
+        <ol class="pipeline">
+          <li><span><span class="art">The trace, not the grid</span> — this is Zachman used in anger: one <em>column</em> (the “what”), traced down the rows from executive intent to running code. Not 36 cells.</span></li>
+          <li><span><span class="art">Requirement → capability</span> — which business capability owns erasure (e.g. Customer Data Management), stated in the capability map.</span></li>
+          <li><span><span class="art">Capability → applications</span> — the ArchiMate realization links list every app touching personal data; this <em>is</em> the audit scope.</span></li>
+          <li><span><span class="art">Application → deployment</span> — C4 container diagrams + deployment views show where the data lives and which component performs deletion.</span></li>
+          <li><span><span class="art">Decisions as evidence</span> — the ADRs for retention periods and deletion mechanics are the documented rationale auditors ask for.</span></li>
+        </ol>
+        <p class="case-done"><strong>Done looks like:</strong> one navigable chain from regulation
+          text to the component that deletes the data — each hop an artifact you already maintain,
+          not a document written for the audit.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ANTI-PATTERNS -->
+<section class="reveal" id="antipatterns">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Anti-patterns</div>
+      <h2 class="section-heading">The six ways EA work goes wrong.</h2>
+      <p class="section-sub">Each of these looks like diligence from the inside. From the outside,
+        it's why “enterprise architecture” has a reputation problem.</p>
+    </div>
+    <div class="anti-grid">
+      <div class="anti-card">
+        <div class="anti-name">The ivory tower</div>
+        <p class="anti-desc">An EA team producing models nobody asked for, disconnected from
+          delivery teams. The models are <strong>correct and irrelevant</strong>.</p>
+        <p class="anti-fix">Attach every artifact to a live decision: a migration, a purchase, a review.</p>
+      </div>
+      <div class="anti-card">
+        <div class="anti-name">The 36-cell grid</div>
+        <p class="anti-desc">Attempting to fill the full Zachman matrix. Completeness becomes the
+          goal; <strong>the map outgrows the territory</strong> and is stale before it's finished.</p>
+        <p class="anti-fix">Use Zachman as a lens — trace one column when a question demands it.</p>
+      </div>
+      <div class="anti-card">
+        <div class="anti-name">Ceremonial full-ADM</div>
+        <p class="anti-desc">Running all ten TOGAF phases with full deliverables for a change that
+          needed a two-page vision and three ADRs. <strong>Rigor should scale with stakes.</strong></p>
+        <p class="anti-fix">Tailor: pick the phases the risk justifies, skip the rest deliberately.</p>
+      </div>
+      <div class="anti-card">
+        <div class="anti-name">The 40-page document</div>
+        <p class="anti-desc">Thoroughness as a failure mode: an arc42 doc so complete that
+          <strong>nobody reads it</strong>, so it answers no one's questions and rots quietly.</p>
+        <p class="anti-fix">Write LEAN or ESSENTIAL; let the reader's questions pull detail in.</p>
+      </div>
+      <div class="anti-card">
+        <div class="anti-name">Two names, one thing</div>
+        <p class="anti-desc">The same system called “Billing Engine” in one diagram and “Invoice
+          Service” in another. The most common EA defect — it <strong>silently breaks traceability</strong>.</p>
+        <p class="anti-fix">Stable IDs, reused everywhere — one model under every diagram, doc, and ADR.</p>
+      </div>
+      <div class="anti-card">
+        <div class="anti-name">Diagrams as one-off pictures</div>
+        <p class="anti-desc">Architecture drawn in a slide tool, redrawn slightly differently for
+          every meeting. <strong>No source of truth</strong>, so every version is equally wrong.</p>
+        <p class="anti-fix">Diagrams as code, versioned in the repo next to what they describe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="install">
+  <div class="cta-inner">
+    <h2 class="cta-heading">Theory is the map.<br><em>The skill is the vehicle.</em></h2>
+    <p class="cta-sub">Everything named on this page — capability maps, TIME scoring, C4 diagrams,
+      arc42 docs, ADRs — is what the skill actually produces. Install it and ask in plain language.</p>
+    <pre class="cta-code">/plugin marketplace add gauravs19/enterprise-architecture-skill
+/plugin install enterprise-architecture@gauravs19-skills</pre>
+    <div class="cta-btns">
+      <a href="index.html" class="btn-cta-primary">Explore the skill →</a>
+      <a href="index.html#examples" class="btn-cta-ghost">See real outputs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- ATTRIBUTION — gs-theme credit kept per the theme's terms. -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+            <rect width="26" height="26" rx="7" fill="var(--accent)"/>
+            <rect x="6" y="6.5" width="14" height="3.4" rx="1.7" fill="#fff"/>
+            <rect x="6" y="11.3" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".6"/>
+            <rect x="6" y="16.1" width="14" height="3.4" rx="1.7" fill="#fff" opacity=".32"/>
+          </svg>
+          <b>EA</b><span>skill</span>
+        </a>
+        <p class="footer-tagline">A unified enterprise &amp; software architecture skill for Claude Code. Diagram, document, review, model — as code.</p>
+      </div>
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-label">Skill</div>
+          <div class="footer-col-links">
+            <a href="index.html#frameworks">Frameworks</a>
+            <a href="index.html#modes">Modes</a>
+            <a href="index.html#evals">Eval results</a>
+            <a href="index.html#examples">Examples</a>
+            <a href="frameworks-in-practice.html">In practice</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Author</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+            <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
+            <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">More tools</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/cortex/" target="_blank">CORTEX</a>
+            <a href="https://gauravs19.github.io/cadex/" target="_blank">CADEX</a>
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Gaurav Sharma · MIT License</span>
+      <span class="footer-credit">
+        Built with <a href="https://gauravs19.github.io/gs-theme/" target="_blank">gs-theme</a>
+        by <a href="https://gauravs19.github.io/portfolio/" target="_blank">Gaurav Sharma</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const btn=document.getElementById('hamburger'),drawer=document.getElementById('nav-mobile');
+  if(!btn||!drawer)return;
+  btn.addEventListener('click',()=>{const o=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));});
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+})();
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!els.length||!('IntersectionObserver'in window))return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+(function(){
+  const sections=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a[href^="#"]');
+  if(!sections.length||!links.length||!('IntersectionObserver'in window))return;
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(a)a.classList.add('active');});},{threshold:0.35});
+  sections.forEach(s=>io.observe(s));
+})();
+</script>
+
+</body>
+</html>

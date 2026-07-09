@@ -19,6 +19,7 @@ as records, and one traceable model underneath.**
 ## Contents
 
 - [Why this exists](#why-this-exists)
+- [The theory — frameworks in practice](#the-theory--frameworks-in-practice)
 - [The mental model — four frameworks, four altitudes](#the-mental-model--four-frameworks-four-altitudes)
 - [The four frameworks in depth](#the-four-frameworks-in-depth)
 - [The four modes](#the-four-modes)
@@ -39,6 +40,33 @@ arc42 toolkits, ADR generators — but **none unify all four frameworks, and non
 TOGAF or architecture *review*.** This skill fills that gap: one skill that picks the right
 framework at the right altitude, produces everything as code, and keeps a single traceable
 model under every diagram, doc, and decision.
+
+## The theory — frameworks in practice
+
+There's a large gap between how EA frameworks are marketed and how they're used. Almost no
+organization runs TOGAF or Zachman "by the book" — full-ceremony adoption usually collapses
+under its own weight. What survives contact with reality is **selective borrowing**:
+
+| Framework | What practitioners actually keep |
+|---|---|
+| **Zachman** | The mental model (what/how/where/who/when/why × audience), not the 36-cell grid. A 30-minute lens, not a study project. |
+| **TOGAF** | ADM as a scoping *checklist*; **Baseline → Target → Gap → Roadmap** as the transformation backbone; the governance vocabulary (ARB, principles, waivers). |
+| **FEAF / DoDAF** | Only if you sell into government/defense — the RFP will name them. |
+| **Capability maps** (BIZBOK) | Probably the most-used single EA artifact in real life — the one page executives actually read. |
+| **C4 / ArchiMate / arc42 + ADRs** | Where the hands-on value lives — this skill's four. arc42 + ADRs have the best value-to-ceremony ratio in the whole space. |
+
+Where frameworks genuinely earn their keep: **M&A integration** (two of everything — what to
+kill?), **cloud migration programs** (baseline/target/gap keeps multi-year work coherent),
+**vendor/platform decisions** (ADRs make them defensible two years later), **regulatory
+traceability** (requirement → capability → app → deployment), and **fighting shadow-IT
+sprawl** (a maintained app landscape is the only way anyone knows what exists).
+
+**Frameworks are scaffolding, not the building** — the value is a handful of living artifacts
+(a capability map, an application landscape, a decision log, a roadmap), not framework
+compliance.
+
+→ **Full write-up with four worked case studies and the six EA anti-patterns:**
+[Frameworks in practice](https://gauravs19.github.io/enterprise-architecture-skill/frameworks-in-practice.html)
 
 ## The mental model — four frameworks, four altitudes
 
