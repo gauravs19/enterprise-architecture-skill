@@ -9,7 +9,9 @@ description: >-
   principles; or model an enterprise (capabilities → applications → technology, app landscapes,
   portfolio rationalization). Trigger it even when no framework is named — e.g. "draw the
   architecture of this service", "give me a container diagram", "write an ADR for choosing
-  Kafka", "is this design sound?", "map our capabilities to apps". Do NOT trigger it for writing
+  Kafka", "is this design sound?", "map our capabilities to apps", "document my architecture
+  in arc42", "create an HLD or LLD", "assess this design against ISO 25010 / quality
+  attributes", "produce a solution design". Do NOT trigger it for writing
   application code or REST endpoints, IaC / cloud deployment (Terraform, Kubernetes), database
   or ER schema design, code-level UML or sequence diagrams, reviewing a pull request, or API
   reference docs.
