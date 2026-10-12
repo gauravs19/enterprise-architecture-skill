@@ -236,6 +236,21 @@ enterprise-architecture/
 └── docs/                          # GitHub Pages site + example outputs
 ```
 
+## Companion skills & ecosystem
+
+When moving from enterprise / system architecture down to backend implementation:
+
+- **[spring-boot-microservices-skill](https://github.com/gauravs19/spring-boot-microservices-skill)** ⭐  
+  Production-grade Spring Boot (Spring Boot 4.x / Java 25 LTS) microservice design, scaffolding, and review skill for AI coding assistants. Grounded in reproducible evals, strict version compatibility, and production checklists.
+  ```bash
+  # Install via skills.sh / agent CLI
+  npx skills add gauravs19/spring-boot-microservices-skill
+
+  # Or in Claude Code
+  /plugin marketplace add gauravs19/spring-boot-microservices-skill
+  /plugin install spring-boot-microservices@gauravs19-skills
+  ```
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
