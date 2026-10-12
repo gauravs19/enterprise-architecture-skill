@@ -3,6 +3,16 @@
 All notable changes to this skill are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] — 2026-10-12
+
+### Changed & Hardened
+- **Security & Distribution**: Resolved Snyk rule `E005` on `skills.sh`. Removed direct `.skill` package downloads and GitHub release download links from install instructions in favor of `npx skills add gauravs19/enterprise-architecture-skill` and transparent git source distribution.
+- **Discoverability**: Widened trigger phrasings in `SKILL.md` to reliably catch real-world prompts ("document in arc42", "create an HLD or LLD", "assess against ISO 25010", "produce a solution design").
+- **Added `llms.txt`**: Added standard `llms.txt` for clean, structured context citation by LLMs and agent aggregators.
+
+### Added (docs)
+- **Mode 4 Example**: Added Mode 4 capability-mapping example (`04-capability-map.with-skill.md`) across the repository and live docs site.
+
 ## [0.2.0] — 2026-07-09
 
 ### Added
@@ -50,5 +60,6 @@ First public release.
   review, ArchiMate capability-mapping, and TOGAF-engagement test cases. With-skill runs
   produced the correct artifact in the correct format in every case.
 
+[0.3.0]: https://github.com/gauravs19/enterprise-architecture-skill/releases/tag/v0.3.0
 [0.2.0]: https://github.com/gauravs19/enterprise-architecture-skill/releases/tag/v0.2.0
 [0.1.0]: https://github.com/gauravs19/enterprise-architecture-skill/releases/tag/v0.1.0
