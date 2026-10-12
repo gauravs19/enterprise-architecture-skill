@@ -138,24 +138,25 @@ diagrams, docs, and ADRs. This is what turns a pile of pictures into an actual m
 
 ## Install
 
-**Option A — clone** into your Claude Code skills directory:
+**Option A — skills.sh / agent CLI (recommended):**
 
 ```bash
-git clone https://github.com/<you>/enterprise-architecture-skill \
-  ~/.claude/skills/enterprise-architecture
+npx skills add gauravs19/enterprise-architecture-skill
 ```
 
-**Option B — plugin marketplace** (no clone needed). In Claude Code:
+**Option B — plugin marketplace** (Claude Code):
 
 ```
 /plugin marketplace add gauravs19/enterprise-architecture-skill
 /plugin install enterprise-architecture@gauravs19-skills
 ```
 
-**Option C — download the packaged skill:** grab
-[`enterprise-architecture.skill`](https://gauravs19.github.io/enterprise-architecture-skill/enterprise-architecture.skill)
-(or from the [latest release](https://github.com/gauravs19/enterprise-architecture-skill/releases))
-and install it through Claude Code.
+**Option C — clone** into your Claude Code skills directory:
+
+```bash
+git clone https://github.com/gauravs19/enterprise-architecture-skill \
+  ~/.claude/skills/enterprise-architecture
+```
 
 Claude Code discovers it automatically — the skill folder must be named
 `enterprise-architecture` (that's the skill's invocation name); the repo it comes from can
